@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cub_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 13:11:50 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/20 13:59:01 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ char    *_get_file(int fd)
     return (file);
 }
 
-char    **get_cub_file(t_data *data, char *filename)
-{
-    char    **file;
-    char    *get_file;
-    int     fd;
+// char    **get_cub_file(t_data *data, char *filename)
+// {
+//     char    **file;
+//     char    *get_file;
+//     int     fd;
     
-    fd = open(filename, fd);
-    get_file = _get_file(fd);
-    printf("%s", get_file);
-    return (0);
-}
+//     fd = open(filename, fd);
+//     get_file = _get_file(fd);
+//     printf("%s", get_file);
+//     return (0);
+// }

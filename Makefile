@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/20 12:59:19 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/20 13:39:10 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MLX		= mlx
 INCLUDES= ${addprefix -I, ${sort ${dir ${HEADER}}}}
 
 SRCS	=	main.c src/parsing/get_cub_file.c \
-
+					src/parsing/parsing_map.c
 OBJS	= ${SRCS:.c=.o}
 
 CC		= gcc

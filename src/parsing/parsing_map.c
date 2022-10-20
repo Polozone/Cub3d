@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 13:56:32 by pmulin           ###   ########.fr       */
+/*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
+/*   Updated: 2022/10/20 13:59:12 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int main(int argc, char **argv)
+static void		str_to_map(t_map *map, char *argv)
 {
-    t_data  data;
-    t_map	map;
+	int		fd;
+	char	*line;
 
-	(void)argc;
-	(void)argv;
-	init_parsing_map(&data, &map, argv[1]);
-    // get_cub_file(&data, argv[1]);
-    return (0);
+	(void)map;
+	fd = open(argv, O_RDWR);
+	line = _get_file(fd);
+	printf("%s", line);
+}
+
+// int		get_longest_line(t_data *data)
+// {
+// 	return (0);
+// }
+
+int		init_parsing_map(t_data *data, t_map *map, char *argv)
+{
+	data->maps = map;
+	str_to_map(map, argv);
+	// get_longest_line(data);
+	return (0);
 }
