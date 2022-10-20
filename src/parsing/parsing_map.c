@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/20 16:25:57 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:28:42 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void		str_to_map(t_data *data, char *argv)
 	line = ft_strtrim(line, "\n");
 	clear_endmap(line);
 	longest_line = get_longest_line(line);
-	printf("%d", longest_line);
 	nbr_line = count_nl(line);
 	data->maps->map = malloc(sizeof(char *) * (nbr_line + 1));
 	convert_to_map(data, line, longest_line, nbr_line);
