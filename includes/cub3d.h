@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 14:06:38 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/20 15:21:10 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,27 @@
 # include <fcntl.h>
 
 typedef struct	s_data t_data;
+typedef struct	s_params t_params;
 typedef struct	s_map t_map;
+typedef enum	s_bool t_bool;
+
+enum s_bool
+{
+	false,
+	true
+};
+
+struct s_params
+{
+	char	**param;
+	int		stop;
+};
 
 struct s_data
 {
-	char	**map;
-	t_map	*maps;
+	struct s_params	*params;
+	char			*map_line;
+	t_map			*maps;
 };
 
 struct s_map
@@ -37,6 +52,7 @@ struct s_map
 
 char    **get_cub_file(t_data *data, char *filename);
 char    *_get_file(int fd);
+t_bool  parse_map_params(t_data *data, char *filename);
 
 /*********PARSING_MAP*************/
 

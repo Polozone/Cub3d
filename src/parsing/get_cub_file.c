@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 14:03:06 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/20 15:21:29 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char    **get_cub_file(t_data *data, char *filename)
     file = NULL;
     fd = open(filename, O_RDONLY);
     get_file = _get_file(fd);
-    printf("%s", get_file);
-    return (0);
+    file = ft_split(get_file, '\n');
+    free(get_file);
+    return (file);
 }
