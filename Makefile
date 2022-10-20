@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/20 15:20:19 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/20 15:56:20 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ MLX		= mlx
 INCLUDES= ${addprefix -I, ${sort ${dir ${HEADER}}}}
 
 SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
-			src/parsing/parsing_map.c
+			src/parsing/parsing_map.c src/parsing/check_coordinate_params.c \
+			src/parsing/check_colors_params.c \
+
 OBJS	= ${SRCS:.c=.o}
 
 CC		= gcc

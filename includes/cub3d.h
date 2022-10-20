@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 15:19:20 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/20 15:59:43 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ struct s_map
 char    **get_cub_file(t_data *data, char *filename);
 char    *_get_file(int fd);
 t_bool  parse_map_params(t_data *data, char *filename);
+t_bool	check_coordinate_param(char *param, int *i);
+t_bool	check_color_param(char *param, int *i);
 
 /*********PARSING_MAP*************/
 
