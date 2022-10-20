@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 11:27:30 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/20 13:13:04 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int main(int argc, char **argv)
 {
-    printf("Hello! Cub\n");
+    t_data  data;
+
+    get_cub_file(&data, argv[1]);
     return (0);
 }
