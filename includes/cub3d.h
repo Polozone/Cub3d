@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 15:21:10 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:08:55 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,10 @@ t_bool  parse_map_params(t_data *data, char *filename);
 /*********PARSING_MAP*************/
 
 int		init_parsing_map(t_data *data, t_map *map, char *argv);
+int		get_longest_line(char *line);
+int		is_map(char c);
+void	clear_endmap(char	*line);
+int		count_nl(char *line);
+void	print_map(char **map);
 
 #endif

@@ -6,67 +6,49 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/20 15:16:00 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:25:57 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int		get_longest_line(char *line)
+static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_line)
 {
 	int		i;
-	int		longest;
-	int		tmp;
+	int		j;
+	int		x;
+	int		len_array;
 
 	i = 0;
-	longest = 0;
-	tmp = 0;
-	if (!line)
-		return (-1);
-	while (line[i])
+	j = 0;
+	x = 0;
+	len_array = count_nl(line);
+	while (i < len_array)
 	{
-		tmp = 0;
-		while (line[i] && line[i] != '\n')
-		{
-			tmp++;
-			i++;
-		}
-		if (tmp > longest)
-			longest = tmp;
+		data->maps->map[i] = malloc(sizeof(char) * (longest_line + 1));
 		i++;
 	}
-	return (longest);
-}
-
-// static int		nl_count(char	*line)
-// {
-	
-// }
-
-int				is_map(char c)
-{
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (true);
-	else
-		return (false);
-}
-
-static void		clear_endmap(char	*line)
-{
-	int		len;
-
-	len = ft_strlen(line);
-	if (line == 0)
-		return ;
-	while (len != 0)
+	data->maps->map[i] = 0;
+	i = 0;
+	while (i < nbr_line)
 	{
-		if (is_map(line[len]))
+		x = 0;
+		while (line[j] != '\n')
 		{
-			line[len + 1] = '\0';
-			return ;
+			data->maps->map[i][x] = line[j];
+			j++;
+			x++;
 		}
-		len--;
+		while (x < longest_line)
+		{
+			data->maps->map[i][x] = ' ';
+			x++;
+		}
+		data->maps->map[i][x] = 0;
+		j++;
+		i++;
 	}
+	// print_map(data->maps->map);
 }
 
 static void		str_to_map(t_data *data, char *argv)
@@ -74,15 +56,23 @@ static void		str_to_map(t_data *data, char *argv)
 	int		fd;
 	char	*line;
 	int		longest_line;
+	int		nbr_line;
 
-	(void)data;
 	fd = open(argv, O_RDWR);
+	if (fd < 0)
+	{
+		write(2, "Error opening map\n", 18);
+		return ;
+	}
 	line = _get_file(fd);
 	line = ft_strtrim(line, "\n");
 	clear_endmap(line);
-
-	printf("%s", line);
 	longest_line = get_longest_line(line);
+	printf("%d", longest_line);
+	nbr_line = count_nl(line);
+	data->maps->map = malloc(sizeof(char *) * (nbr_line + 1));
+	convert_to_map(data, line, longest_line, nbr_line);
+	close(fd);
 }
 
 
