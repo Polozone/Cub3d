@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 13:59:01 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:00:11 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ char    *_get_file(int fd)
     return (file);
 }
 
-// char    **get_cub_file(t_data *data, char *filename)
-// {
-//     char    **file;
-//     char    *get_file;
-//     int     fd;
+char    **get_cub_file(t_data *data, char *filename)
+{
+    char    **file;
+    char    *get_file;
+    int     fd;
     
-//     fd = open(filename, fd);
-//     get_file = _get_file(fd);
-//     printf("%s", get_file);
-//     return (0);
-// }
+    (void)data;
+    file = NULL;
+    fd = open(filename, O_RDONLY);
+    get_file = _get_file(fd);
+    printf("%s", get_file);
+    return (0);
+}
