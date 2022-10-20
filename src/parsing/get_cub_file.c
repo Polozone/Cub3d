@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 13:11:50 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/20 13:20:48 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ char    **get_cub_file(t_data *data, char *filename)
     char    *get_file;
     int     fd;
     
-    fd = open(filename, fd);
+    (void)data;
+    file = NULL;
+    fd = open(filename, O_RDONLY);
     get_file = _get_file(fd);
     printf("%s", get_file);
     return (0);

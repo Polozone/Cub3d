@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 13:51:24 by tdeville          #+#    #+#              #
-#    Updated: 2022/01/11 10:27:30 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/20 13:21:56 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ SRCS	= ft_strlen.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
+		get_next_line.c \
+		get_next_line_utils.c \
 
 SRCS_B =	ft_lstnew.c \
 			ft_lstadd_front.c \
@@ -64,7 +66,7 @@ OBJS_B	= ${SRCS_B:.c=.o}
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra
 
-all: ${NAME}
+all: ${NAME} bonus
 
 %.o : %.c	libft.h	Makefile
 			${CC} ${CFLAGS} -c $< -o $@
