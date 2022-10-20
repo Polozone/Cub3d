@@ -6,7 +6,7 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/20 16:08:06 by pmulin           ###   ########.fr        #
+#    Updated: 2022/10/20 16:30:22 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ INCLUDES= ${addprefix -I, ${sort ${dir ${HEADER}}}}
 SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/parsing_map.c \
 			src/parsing/utils_parsing_map.c \
+			src/parsing/check_colors_params.c \
 
 OBJS	= ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 15:15:29 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/20 16:15:56 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,47 +23,17 @@
 		(espaces possible mais virgule obligatoire)
 */
 
-static t_bool	check_path(char *param, int *i)
+static t_bool	check_param_type(char *param, int *i)
 {
-	if (param[(*i)] == '.')
-		if (param[(*i) + 1] != '/')
-			return (false);
-	(*i)++;
-	while (param[++(*i)])
+	if (param[*i] == 'N' || param[*i] == 'S'
+		|| param[*i] == 'E' || param[*i] == 'W')
 	{
-		if (param[(*i)] == ' ')
-		{
-			while (param[(*i)])
-			{
-				if (param[(*i)] != ' ')
-					return (false);
-				(*i)++;
-			}
-		}
-	}
-	return (true);
-}
-
-static t_bool  check_coordinate(char *param, int i)
-{
-	if (param[i] == 'N')
-	{
-		if (param[i + 1] == 'O')
-			return (true);	
-	}
-	else if (param[i] == 'S')
-	{
-		if (param[i + 1] == 'O')
+		if (check_coordinate_param(param, i) == true)
 			return (true);
 	}
-	else if (param[i] == 'E')
+	else if (param[*i] == 'F' || param[*i] == 'C')
 	{
-		if (param[i + 1] == 'A')
-			return (true);
-	}
-	else if (param[i] == 'W')
-	{
-		if (param[i + 1] == 'E')
+		if (check_color_param(param, i) == true)
 			return (true);
 	}
 	return (false);
@@ -80,14 +50,7 @@ static t_bool  check_param(char *param)
 	{
 		while (param[i] == ' ' && param[i])
 			i++;
-		if (check_coordinate(param, i) == false
-			&& param[i] && param[i] != ' ')
-			return (false);
-		i += 2;
-		while (param[i] == ' ' && param[i])
-			i++;
-		if (param[i] && param[i] != ' '
-			&& check_path(param, &i) == false)
+		if (check_param_type(param, &i) == false)
 			return (false);
 		if (!param[i])
 			break ;
@@ -124,14 +87,16 @@ t_bool  parse_map_params(t_data *data, char *filename)
 		if (skip_space_params(file[i]))
 		{
 			if (check_param(file[i]) == true)
+			{
 				params[++k] = ft_strdup(file[i]);
+				printf("%s\n", params[k]);
+			}
 			else
 			{
 				// free tout le bordel
 				return (false);
 			}
-		}	
-		printf("%s\n", params[i]);
+		}
 	}
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 15:21:15 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:29:59 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int main(int argc, char **argv)
     t_map	map;
 
     (void)argc;
+    (void)map;
     parse_map_params(&data, argv[1]);
 	(void)argc;
 	(void)argv;
