@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/06 13:41:19 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/20 12:59:19 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ LIBFT	= Libft
 MLX		= mlx
 INCLUDES= ${addprefix -I, ${sort ${dir ${HEADER}}}}
 
-SRCS	=	main.c src/init_mlx.c src/tests.c \
-			src/draws.c \
+SRCS	=	main.c src/parsing/get_cub_file.c \
 
 OBJS	= ${SRCS:.c=.o}
 
