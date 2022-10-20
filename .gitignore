@@ -2,6 +2,7 @@
 *.swo
 *.o
 map*
+*.cub
 ./a.out
 .DS_Store
 a.out
