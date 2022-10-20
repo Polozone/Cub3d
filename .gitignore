@@ -1,0 +1,8 @@
+*.swp
+*.swo
+*.o
+map*
+./a.out
+.DS_Store
+a.out
+./cub3D
