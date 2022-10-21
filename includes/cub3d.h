@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 11:43:26 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 11:49:00 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,14 @@ int		is_map(char c);
 char	*clear_endmap(char	*line);
 int		count_nl(char *line);
 void	print_map(char **map);
+
+/************UTILS****************/
+
+int		contains_digit(char *str);
+int		len_2d_array(char **arr);
 void	free_2d_array(char **array);
 static t_bool		row_checker(char *str, int col);
 t_bool	is_valid_map(t_data *data);
+char	*map_to_line(char **arr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 16:15:56 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/21 11:46:11 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,20 @@ t_bool  parse_map_params(t_data *data, char *filename)
 			}
 			else
 			{
-				// free tout le bordel
+				if (len_2d_array(params) == 6)
+					break ;
+				free_2d_array(params);
+				free_2d_array(file);
 				return (false);
 			}
 		}
 	}
+	data->map_line = map_to_line(&file[i]);
+	/* A faire avant de free: 
+			- mettre les params dans la structure param
+	*/
+	free_2d_array(params);
+	free_2d_array(file);
+	free(data->map_line);
 	return (true);
 }
