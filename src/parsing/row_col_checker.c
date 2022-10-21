@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/21 16:13:49 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 16:21:59 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ t_bool		is_charmap(char c)
 		|| c == 'S' || c == 'E'
 		|| c == 'W' || c == ' '
 		|| c == '1' || c == '	')
+	{
 		return (true);
-	else
-		return (false);
+	}
+	return (false);
 }
 
 static t_bool		is_not_wall(char c)
