@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_params.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 11:46:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/21 11:57:12 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ t_bool  parse_map_params(t_data *data, char *filename)
 			if (check_param(file[i]) == true)
 			{
 				params[++k] = ft_strdup(file[i]);
-				printf("%s\n", params[k]);
 			}
 			else
 			{
@@ -107,6 +106,5 @@ t_bool  parse_map_params(t_data *data, char *filename)
 	*/
 	free_2d_array(params);
 	free_2d_array(file);
-	free(data->map_line);
 	return (true);
 }

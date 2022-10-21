@@ -6,7 +6,7 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/21 11:48:43 by pmulin           ###   ########.fr        #
+#    Updated: 2022/10/21 11:53:31 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/check_colors_params.c \
 			src/parsing/check_coordinate_params.c \
 			src/parsing/row_col_checker.c \
-			src/utils/free_utils.c \
 			src/utils/free_utils.c src/utils/string_utils.c \
 
 OBJS	= ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/21 11:39:08 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 16:14:28 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,37 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 	free(line);
 }
 
+t_bool			check_charmap(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		printf("%c", line[i]);
+		if (is_charmap(line[i] == false))
+		{
+			write(2, "Invalid char in the map\n", 24);
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
 static void		str_to_map(t_data *data, int fd, char *tmp)
 {
-	char	*line;
-	int		longest_line;
 	int		nbr_line;
 	char	*line_clear;
 
-	line = _get_file(fd);
-	tmp = line;
-	line = ft_strtrim(line, "\n");
+	tmp = data->map_line;
+	data->map_line = ft_strtrim(data->map_line, "\n");
 	free(tmp);
-	line_clear = clear_endmap(line);
-	longest_line = get_longest_line(line_clear);
+	line_clear = clear_endmap(data->map_line);
+	data->maps->longest_line = get_longest_line(line_clear);
 	nbr_line = count_nl(line_clear);
 	data->maps->map = malloc(sizeof(char *) * (nbr_line + 1));
-	convert_to_map(data, line_clear, longest_line, nbr_line);
+	convert_to_map(data, line_clear, data->maps->longest_line, nbr_line);
 	close(fd);
 }
 
@@ -72,6 +87,9 @@ int		init_parsing_map(t_data *data, t_map *map, char *argv)
 		return (-1);
 	}
 	data->maps = map;
+	data->maps->map = NULL;
+	if (check_charmap(data->map_line) == false)
+		return (false);
 	str_to_map(data, fd, tmp);
 	if (is_valid_map(data) == false)
 		return (-1);
