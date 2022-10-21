@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 11:49:00 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 14:08:28 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,15 @@ enum s_bool
 	true
 };
 
+// Si type = 0 : coordonéees
+// Si type = 1 : couleurs
 struct s_params
 {
-	char	**param;
+	int		type;
+	char	*coord;
+	char	*path;
+	char	*color;
+	char	**rgb;
 	int		stop;
 };
 
@@ -50,7 +56,7 @@ struct s_map
 	int		longest_line;
 };
 
-char    **get_cub_file(t_data *data, char *filename);
+char    **get_cub_file(char *filename);
 char    *_get_file(int fd);
 t_bool  parse_map_params(t_data *data, char *filename);
 t_bool	check_coordinate_param(char *param, int *i);
@@ -70,7 +76,8 @@ void	print_map(char **map);
 int		contains_digit(char *str);
 int		len_2d_array(char **arr);
 void	free_2d_array(char **array);
-static t_bool		row_checker(char *str, int col);
+void	free_param_struct(t_data *data);
+t_bool	row_checker(char *str, int col);
 t_bool	is_valid_map(t_data *data);
 char	*map_to_line(char **arr);
 

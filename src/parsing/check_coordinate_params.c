@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:25:03 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 15:57:31 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/21 13:28:51 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static t_bool	check_path(char *param, int *i)
 {
 	if (param[(*i)] == '.')
 		if (param[(*i) + 1] != '/')
+			return (false);
+	if (param[(*i)] != '.')
 			return (false);
 	(*i)++;
 	while (param[++(*i)])
