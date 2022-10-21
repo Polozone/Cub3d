@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 10:55:13 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 11:43:26 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ char	*clear_endmap(char	*line);
 int		count_nl(char *line);
 void	print_map(char **map);
 void	free_2d_array(char **array);
+static t_bool		row_checker(char *str, int col);
+t_bool	is_valid_map(t_data *data);
 
 #endif

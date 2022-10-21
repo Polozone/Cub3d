@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/21 10:57:30 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 11:39:08 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ static void		str_to_map(t_data *data, int fd, char *tmp)
 	close(fd);
 }
 
-static t_bool	is_valid_map(t_data *data)
-{
-	
-	return (true);
-}
-
 int		init_parsing_map(t_data *data, t_map *map, char *argv)
 {
 	int		fd;
@@ -79,7 +73,8 @@ int		init_parsing_map(t_data *data, t_map *map, char *argv)
 	}
 	data->maps = map;
 	str_to_map(data, fd, tmp);
-	// is_valid_map(data);
-	print_map(data->maps->map);
+	if (is_valid_map(data) == false)
+		return (-1);
+	// print_map(data->maps->map);
 	return (0);
 }

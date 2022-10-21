@@ -6,7 +6,7 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/21 11:00:41 by pmulin           ###   ########.fr        #
+#    Updated: 2022/10/21 11:39:33 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/utils_parsing_map.c \
 			src/parsing/check_colors_params.c \
 			src/parsing/check_coordinate_params.c \
+			src/parsing/row_col_checker.c \
 			src/utils/free_utils.c \
 
 OBJS	= ${SRCS:.c=.o}
@@ -43,7 +44,7 @@ all: maker ${NAME}
 
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a
-		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a
+		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a -fsanitize=address -g3
 
 maker:
 		${MAKE} -C ${LIBFT}
