@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 16:30:39 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 10:55:13 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ t_bool	check_color_param(char *param, int *i);
 int		init_parsing_map(t_data *data, t_map *map, char *argv);
 int		get_longest_line(char *line);
 int		is_map(char c);
-void	clear_endmap(char	*line);
+char	*clear_endmap(char	*line);
 int		count_nl(char *line);
 void	print_map(char **map);
+void	free_2d_array(char **array);
 
 #endif

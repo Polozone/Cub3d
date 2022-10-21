@@ -6,7 +6,7 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/20 16:30:22 by pmulin           ###   ########.fr        #
+#    Updated: 2022/10/21 11:00:41 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/parsing_map.c \
 			src/parsing/utils_parsing_map.c \
 			src/parsing/check_colors_params.c \
+			src/parsing/check_coordinate_params.c \
+			src/utils/free_utils.c \
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -37,11 +39,11 @@ LIBFLAGS= -framework OpenGL -framework AppKit
 all: maker ${NAME}
 
 %.o : %.c	${HEADER}
-			${CC} ${CFLAGS} ${INCLUDES} -c $< -o $@
+			${CC} ${INCLUDES} -c $< -o $@
 
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a
-		${CC} ${CFLAGS} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a -fsanitize=address -g3
+		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a
 
 maker:
 		${MAKE} -C ${LIBFT}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors_params.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:54:31 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/20 16:27:56 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/21 09:41:37 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 static t_bool	check_color(char *param, int *i, int check)
 {
+	(void)param;
+	(void)check;
+	(void)i;
+	return false;
 	// UTILISER ATOI
 }
 

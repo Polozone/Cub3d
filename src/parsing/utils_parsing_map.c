@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/20 16:25:51 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 10:20:59 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,27 @@ int				is_map(char c)
 		return (false);
 }
 
-void		clear_endmap(char	*line)
+char		*clear_endmap(char	*line)
 {
+	int		sep;
 	int		len;
+	char	*newline;
 
-	len = ft_strlen(line);
+	sep = ft_strlen(line);
+	len = sep;
 	if (line == 0)
-		return ;
-	while (len > 0)
+		return (NULL);
+	while (sep > 0)
 	{
-		if (is_map(line[len]))
+		if (is_map(line[sep]))
 		{
-			line[len + 1] = 0;
-			return ;
+			newline = ft_substr(line, 0, sep);
+			free(line);
+			return (newline);
 		}
-		len--;
+		sep--;
 	}
+	return (NULL);
 }
 
 int		count_nl(char *line)
@@ -70,6 +75,8 @@ int		count_nl(char *line)
 
 	i = 0;
 	cmpt = 0;
+	if (!line)
+		return (0);
 	while (line[i])
 	{
 		if (line[i] == '\n')
