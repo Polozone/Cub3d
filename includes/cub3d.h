@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 10:55:13 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 11:34:45 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ int		is_map(char c);
 char	*clear_endmap(char	*line);
 int		count_nl(char *line);
 void	print_map(char **map);
+
+/************UTILS****************/
+
+int		contains_digit(char *str);
+int		len_2d_array(char **arr);
 void	free_2d_array(char **array);
+char	*map_to_line(char **arr);
 
 #endif

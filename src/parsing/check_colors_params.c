@@ -3,22 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors_params.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:54:31 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 09:41:37 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/21 11:20:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static t_bool	check_color(char *param, int *i, int check)
+static	void	trim_spaces(char **str)
 {
-	(void)param;
-	(void)check;
-	(void)i;
-	return false;
-	// UTILISER ATOI
+	char	*tmp;
+
+	tmp = *str;
+	*str = ft_strtrim(*str, " ");
+	free(tmp);
+}
+
+static t_bool	check_color(char *param, int *i)
+{
+	int		j;
+	char	**colors;
+
+	j = 0;
+	colors = ft_split(&param[*i], ',');
+	if (!colors)
+		return (false);
+	while (colors[j])
+	{
+		if (ft_strchr(colors[j], ' '))
+			trim_spaces(&colors[j]);
+		if (!contains_digit(colors[j]))
+			return (false);
+		if (ft_atoi(colors[j]) < 0 || ft_atoi(colors[j]) > 255)
+			return (false);
+		j++;
+	}
+	(*i) = ft_strlen(param);
+	free_2d_array(colors);
+	return (true);
 }
 
 static t_bool	check_letter(char *param, int i)
@@ -38,7 +62,7 @@ t_bool	check_color_param(char *param, int *i)
 	while (param[(*i)] == ' ' && param[(*i)])
 		(*i)++;
 	if (param[(*i)] && param[(*i)] != ' '
-		&& check_color(param, i, 0) == false)
+		&& check_color(param, i) == false)
 		return (false);
 	return (true);
 }
