@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:27:48 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/24 16:35:20 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/24 16:38:46 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,20 @@ int key_press(int keycode, t_render *program_struct)
 
 void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right)
 {
-	my_mlx_pixel_put(render, top_left.x, top_left.y, 0x00FF0000);
+	int		tmp;
+
+	tmp = top_left.y++;
+	while (top_left.x < bottom_right.x)
+	{
+		top_left.x = tmp;
+		while (top_left.y < bottom_right.y)
+		{
+			top_left.y++;
+			my_mlx_pixel_put(render, top_left.x, top_left.y, 0x00FF0000);
+		}
+	}
+	// my_mlx_pixel_put(render, top_left.x, top_left.y, 0x00FF0000);
+	mlx_put_image_to_window(render->mlx, render->mlx_win, render->img, 0, 0);
 }
 
 void	print_grid(t_render *data)
