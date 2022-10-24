@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/24 11:17:55 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/24 16:21:29 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ typedef struct	s_data t_data;
 typedef struct	s_params t_params;
 typedef struct	s_map t_map;
 typedef struct	s_render t_render;
+typedef struct 	s_vector t_vector2_d;
+typedef struct	s_prg t_prg;
 typedef enum	s_bool t_bool;
+
 
 enum s_bool
 {
@@ -40,10 +43,17 @@ struct s_params
 
 struct s_data
 {
-	struct s_params	*params;
+	t_params		*params;
 	char			*map_line;
 	t_map			*maps;
 	t_render		*render;
+	t_prg			*prg;
+};
+
+struct s_vector
+{
+	int		x;
+	int		y;
 };
 
 struct s_map
@@ -53,11 +63,25 @@ struct s_map
 };
 
 struct s_render {
+	void	*mlx;
+	void	*mlx_win;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		win_height;
+	int		win_width;
+	int		cell_size;
+
+	// Tab
+	int		**tab;
+	int		tab_width;
+	int		tab_height;
+};
+
+struct s_prg{
+	t_bool	*keyboard;
 };
 
 char    	**get_cub_file(t_data *data, char *filename);

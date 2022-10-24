@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/24 14:31:55 by pmulin           ###   ########.fr       */
+/*   Created: 2022/10/24 14:19:55 by pmulin            #+#    #+#             */
+/*   Updated: 2022/10/24 14:33:03 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int main(int argc, char **argv)
+int	key_press(int keycode, t_prg *prg)
 {
-    t_data  	data;
-    t_map		map;
-	t_render	render;
-	t_prg		prg;
+	if (keycode < 200)
+		prg->keyboard[keycode] = 1;
+	return (0);
+}
 
-    (void)argc;
-	data.prg = &prg;
-    // parse_map_params(&data, argv[1]);
-    parse_map_params(&data, argv[1]);
-	init_parsing_map(&data, &map, &render, argv[1]);
-	init_mlx(&data);
-	free_2d_array(map.map);
-    // get_cub_file(&data, argv[1]);
-    return (0);
+int	key_release(int keycode, t_prg *prg)
+{
+	if (keycode < 200)
+		prg->keyboard[keycode] = 0;
+	return (0);
 }
