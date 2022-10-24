@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/21 16:19:17 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/24 10:40:59 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ t_bool			check_charmap(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (is_charmap(line[i] == false))
+		if (is_charmap(line[i]) == false)
 		{
+			dprintf(2, "||%c||", line[i]);
 			write(2, "Invalid char in the map\n", 24);
 			return (false);
 		}
@@ -74,7 +75,7 @@ static void		str_to_map(t_data *data, int fd, char *tmp)
 	close(fd);
 }
 
-int		init_parsing_map(t_data *data, t_map *map, char *argv)
+int		init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 {
 	int		fd;
 	char	*tmp;
@@ -85,9 +86,12 @@ int		init_parsing_map(t_data *data, t_map *map, char *argv)
 		write(2, "Error opening map\n", 18);
 		return (-1);
 	}
+	data->render = render;
 	data->maps = map;
 	data->maps->map = NULL;
 	if (check_charmap(data->map_line) == false)
+		return (-1);
+	if (is_one_player(data->map_line) == false)
 		return (-1);
 	str_to_map(data, fd, tmp);
 	if (is_valid_map(data) == false)

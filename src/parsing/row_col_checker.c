@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/21 16:21:59 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/24 10:37:36 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_bool		is_charmap(char c)
 	if (c == '0' || c == 'N'
 		|| c == 'S' || c == 'E'
 		|| c == 'W' || c == ' '
-		|| c == '1' || c == '	')
+		|| c == '1' || c == '	' || c == '\n')
 	{
 		return (true);
 	}
@@ -39,10 +39,11 @@ static t_bool		row_checker(char *row, int col)
 	i = 0;
 	while (row[i])
 	{
-		if ((row[0] && row[0] != '1') || (row[i] != '1' && row[i + 1] == '\0'))
+		if ((row[0] && row[0] != '1') || (row[i] != '1' && row[i + 1] == '\0')
+		|| (row[i] == '0' && row[i + 1] == ' '))
 		{
 			free(row);
-			write(2, "Error\n", 7);
+			write(2, "Error\nInvalid map", 17);
 			return (false);
 		}
 		i++;
@@ -81,39 +82,6 @@ static t_bool	col_checker(t_data *data, char **map, char *str)
 	return (true);
 }
 
-static t_bool	is_player(t_data *data)
-{
-	int		i;
-	int		j;
-	char	cmpt;
-
-	cmpt = 0;
-	i = 0;
-	j = 0;
-	while (data->maps->map[i])
-	{
-		j = 0;
-		while (data->maps->map[i][j])
-		{
-			if (data->maps->map[i][j] == 'W' || data->maps->map[i][j] == 'N'
-			|| data->maps->map[i][j] == 'S' || data->maps->map[i][j] == 'E')
-			{
-				cmpt++;
-				if (cmpt > 1)
-					return (false);
-			}
-			j++;
-		}
-		i++;
-	}
-	if (cmpt != 1)
-	{
-		write(2, "Map need one player\n", 20);
-		return (false);
-	}
-	return (true);
-}
-
 t_bool	is_valid_map(t_data *data)
 {
 	int		i;
@@ -128,8 +96,6 @@ t_bool	is_valid_map(t_data *data)
 		i++;
 	}
 	if (col_checker(data, data->maps->map, NULL) == false)
-		return (false);
-	if (is_player(data) == false)
 		return (false);
 	return (true);
 }
