@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   row_col_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/21 11:46:53 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/24 09:22:35 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				is_not_wall(char c)
 		return (false);
 }
 
-static t_bool		row_checker(char *row, int col)
+t_bool		row_checker(char *row, int col)
 {
 	int		i;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 13:59:18 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/24 17:52:49 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int main(int argc, char **argv)
     (void)argc;
 	// init_parsing_map(&data, &map, argv[1]);
 	// free_2d_array(map.map);
-    parse_map_params(&data, argv[1]);
-    free(data.map_line);
-    free_param_struct(&data);
+    if (parse_map_params(&data, argv[1]) == true)
+    {
+        free(data.map_line);
+        free_param_struct(&data);
+    }
     return (0);
 }

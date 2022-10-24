@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   get_cub_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 13:05:18 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/24 17:51:40 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+t_bool  check_cub(char *file)
+{
+    int len;
+
+    len = ft_strlen(file) - 1;
+    if (file[len] == 'b')
+        if (file[--len] == 'u')
+            if (file[--len] == 'c')
+                if (file[--len] == '.')
+                    if (file[--len] != '.')
+                        return (true);
+    write(2, "Please, provide .cub file\n", 27);
+    return (false);
+}
 
 char    *_get_file(int fd)
 {
@@ -46,6 +61,8 @@ char    **get_cub_file(char *filename)
     int     fd;
     
     file = NULL;
+    if (check_cub(filename) == false)
+        return (NULL);
     fd = open(filename, O_RDONLY);
     get_file = _get_file(fd);
     file = ft_split(get_file, '\n');
