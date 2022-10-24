@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/24 17:51:40 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/24 18:03:25 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,23 @@ char    **get_cub_file(char *filename)
     char    *get_file;
     int     fd;
     
+    fd = 0;
     file = NULL;
     if (check_cub(filename) == false)
         return (NULL);
+    fd = open(filename, O_DIRECTORY);
+    if (fd != -1)
+    {
+        close(fd);
+        write(2, "Please, provide .cub FILE\n", 27);
+        return (false);
+    }
     fd = open(filename, O_RDONLY);
+    if (fd == -1)
+    {
+        perror(filename);
+        return (false);
+    }
     get_file = _get_file(fd);
     file = ft_split(get_file, '\n');
     free(get_file);
