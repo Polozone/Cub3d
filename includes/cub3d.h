@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/24 16:21:29 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/25 15:50:17 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include <stdio.h>
+# include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -23,6 +24,7 @@
 typedef struct	s_data t_data;
 typedef struct	s_params t_params;
 typedef struct	s_map t_map;
+typedef struct	s_rad t_rad;
 typedef struct	s_render t_render;
 typedef struct 	s_vector t_vector2_d;
 typedef struct	s_prg t_prg;
@@ -48,6 +50,7 @@ struct s_data
 	t_map			*maps;
 	t_render		*render;
 	t_prg			*prg;
+	t_rad			*rad;
 };
 
 struct s_vector
@@ -60,6 +63,7 @@ struct s_map
 {
 	char	**map;
 	int		longest_line;
+	int		height;
 };
 
 struct s_render {
@@ -73,11 +77,21 @@ struct s_render {
 	int		win_height;
 	int		win_width;
 	int		cell_size;
+	int		mouse_button;
 
 	// Tab
 	int		**tab;
 	int		tab_width;
 	int		tab_height;
+};
+
+struct s_rad{
+	int		center_x;
+	int		center_y;
+	int		last_x;
+	int		last_y;
+	int		rad;
+	int		degree;
 };
 
 struct s_prg{
@@ -110,6 +124,8 @@ t_bool		is_valid_map(t_data *data);
 char		*map_to_line(char **arr);
 
 /************RENDER****************/
+
+int		_bresenham(t_render *data, int x0, int y0, int x1, int y1);
 
 /************INIT_MLX****************/
 

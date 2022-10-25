@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/24 10:40:59 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/25 14:38:47 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 	str_to_map(data, fd, tmp);
 	if (is_valid_map(data) == false)
 		return (-1);
+	data->maps->height = len_2d_array(data->maps->map);
 	// print_map(data->maps->map);
 	return (0);
 }
