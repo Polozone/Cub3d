@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/25 15:50:17 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/26 15:43:03 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_map t_map;
 typedef struct	s_rad t_rad;
 typedef struct	s_render t_render;
 typedef struct 	s_vector t_vector2_d;
+typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
 typedef enum	s_bool t_bool;
 
@@ -51,6 +52,12 @@ struct s_data
 	t_render		*render;
 	t_prg			*prg;
 	t_rad			*rad;
+};
+
+struct s_vector_2f
+{
+	double		x;
+	double		y;
 };
 
 struct s_vector
@@ -78,6 +85,9 @@ struct s_render {
 	int		win_width;
 	int		cell_size;
 	int		mouse_button;
+	t_vector2_f dest;
+	t_vector2_d map;
+	t_vector2_d origin;
 
 	// Tab
 	int		**tab;
@@ -114,6 +124,8 @@ int			count_nl(char *line);
 void		print_map(char **map);
 t_bool		is_charmap(char c);
 t_bool		is_one_player(char	*map);
+int			get_x_player(t_data *data);
+int			get_y_player(t_data *data);
 
 /************UTILS****************/
 
@@ -126,6 +138,12 @@ char		*map_to_line(char **arr);
 /************RENDER****************/
 
 int		_bresenham(t_render *data, int x0, int y0, int x1, int y1);
+
+/************DDA****************/
+
+t_vector2_f	dda_init_values(t_data *data, t_vector2_f dest);
+double		get_dir_X(double dirX, double planeX, double w, int x);
+double		get_dir_Y(double dirY, double planeY, double w, int x);
 
 /************INIT_MLX****************/
 

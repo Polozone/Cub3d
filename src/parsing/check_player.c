@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 09:40:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/24 09:49:51 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/26 09:52:13 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,44 @@ t_bool	is_one_player(char	*map)
 		return (false);
 	}
 	return (true);
+}
+
+int		get_x_player(t_data *data)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (data->maps->map[i])
+	{
+		j = 0;
+		while (data->maps->map[i][j])
+		{
+			if (ft_strchr("NSWE", data->maps->map[i][j]))
+				return (j);
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
+
+int		get_y_player(t_data *data)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (data->maps->map[i])
+	{
+		j = 0;
+		while (data->maps->map[i][j])
+		{
+			if (ft_strchr("NSWE", data->maps->map[i][j]))
+				return (i);
+			j++;
+		}
+		i++;
+	}
+	return (-1);
 }

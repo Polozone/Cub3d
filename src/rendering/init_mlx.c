@@ -6,16 +6,11 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:27:48 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/25 16:28:31 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/26 15:44:29 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int render_next_frame(void *program_struct)
-{
-	return (0);
-}
 
 void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right)
 {
@@ -52,28 +47,14 @@ void	print_grid(t_data *dt, t_render *data)
 	 		top_left.y = y * data->cell_size;
 	 		bottom_right.x = top_left.x + data->cell_size;
 	 		bottom_right.y = top_left.y + data->cell_size;
-			// printf("%c", dt->maps->map[x][y]);
 			if (dt->maps->map[y][x] == '1') // If the cell is a wall
 	 		{
-				// printf("%c", dt->maps->map[x][y]);
 	 			draw_rect_color(data, top_left, bottom_right);
 	 		}
 			x++;
 		}
 		y++;
 	}
-}
-
-int	mouse_press_hook(int keycode, t_render *render)
-{
-	render->mouse_button = 1;
-	return (0);
-}
-
-int	mouse_release_hook(int keycode, t_render *render)
-{
-	//render->mouse_button = 0;
-	return (0);
 }
 
 void	init_win(t_data *data)
@@ -94,27 +75,6 @@ void	init_win(t_data *data)
 	print_grid(data, data->render);
 }
 
-// void	init_rad(t_rad *rad, t_data *data)
-// {
-// 	rad->center_x = (data->maps->longest_line * data->render->cell_size) / 2;
-// 	rad->center_y = (data->maps->height * data->render->cell_size) / 2;
-// 	return ;
-// }
-
-int key_press(int key)
-{
-	printf("right");
-	return (1);
-}
-
-int		move_up(t_data *data)
-{
-	// data->rad->last_x += 40;
-	// data->rad->last_y += 40;
-	// _bresenham(data->render, data->rad->center_x,  data->rad->center_y, data->rad->last_x, data->rad->last_y);
-	printf("up\n");
-	return (0);
-}
 
 void	display_radius(t_data *data, unsigned int px, unsigned int py, unsigned int ox, unsigned int oy)
 {
@@ -134,17 +94,23 @@ void	display_radius(t_data *data, unsigned int px, unsigned int py, unsigned int
 	_bresenham(data->render, data->rad->center_x, data->rad->center_y, dx, dy);
 }
 
+int		move_up(t_data *data)
+{
+	printf("up\n");
+	return (0);
+}
+
 int		move_left(t_data *data)
 {
-	display_radius(data, 0, 0, 0, 0);
-	data->rad->rad -= 1;
+	printf("left\n");
 	return (0);
 }
 
 int		move_right(t_data *data)
 {
-	display_radius(data, 0, 0, 0, 0);
-	data->rad->rad += 1;
+	dda_init_values(data, data->render->dest);
+	data->render->dest.y += 5;
+	printf("right\n");
 	return (0);
 }
 
@@ -156,6 +122,8 @@ int		move_down(t_data *data)
 
 int	deal_key(int key, t_data *data)
 {
+	// print_grid(data, data->render);
+	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	if (key == 13)
 		move_up(data);
 	if (key == 0)
@@ -179,9 +147,12 @@ void	init_mlx(t_data *data)
 	init_rad(data);
 	data->rad->degree = 0;
 	data->rad->rad = 0;
-	data->rad->last_x = 100;
-	data->rad->last_y = 100;
-	// mlx_key_hook(data->render->mlx_win, deal_key, data);
+	data->render->dest.x = (get_x_player(data) + 20) * data->render->cell_size;
+	data->render->dest.y = get_x_player(data) * data->render->cell_size;
+	// data->render->origin.x = get_x_player(data) * data->render->cell_size;
+	// data->render->origin.y = get_y_player(data) * data->render->cell_size;	
+	// data->render->map.x = data->render->origin.x;
+	// data->render->map.y = data->render->origin.y;
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }

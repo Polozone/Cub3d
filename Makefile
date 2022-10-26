@@ -6,7 +6,7 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/25 11:03:33 by pmulin           ###   ########.fr        #
+#    Updated: 2022/10/26 09:54:19 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/check_coordinate_params.c \
 			src/parsing/row_col_checker.c \
 			src/parsing/check_player.c \
+			src/rendering/dda.c \
 			src/utils/free_utils.c src/utils/string_utils.c \
 			src/rendering/init_mlx.c \
 			src/rendering/utils.c \
