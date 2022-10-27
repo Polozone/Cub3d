@@ -6,13 +6,13 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:27:48 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/26 15:44:29 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/27 15:41:44 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right)
+void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right, int color)
 {
 	int		tmp;
 
@@ -22,12 +22,11 @@ void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_
 		top_left.x = tmp;
 		while (top_left.x < bottom_right.x)
 		{
-			my_mlx_pixel_put(render, top_left.x, top_left.y, 0x00FF0000);
+			my_mlx_pixel_put(render, top_left.x, top_left.y, color);
 			top_left.x++;
 		}
 		top_left.y++;
 	}
-	mlx_put_image_to_window(render->mlx, render->mlx_win, render->img, 0, 0);
 }
 
 void	print_grid(t_data *dt, t_render *data)
@@ -48,13 +47,14 @@ void	print_grid(t_data *dt, t_render *data)
 	 		bottom_right.x = top_left.x + data->cell_size;
 	 		bottom_right.y = top_left.y + data->cell_size;
 			if (dt->maps->map[y][x] == '1') // If the cell is a wall
-	 		{
-	 			draw_rect_color(data, top_left, bottom_right);
-	 		}
+	 			draw_rect_color(data, top_left, bottom_right, 16711680);
+			else if (ft_strchr("NSWE0", dt->maps->map[y][x]))
+				draw_rect_color(data, top_left, bottom_right, 0);
 			x++;
 		}
 		y++;
 	}
+	// mlx_put_image_to_window(dt->render->mlx, dt->render->mlx_win, dt->render->img, 0, 0);
 }
 
 void	init_win(t_data *data)
@@ -102,15 +102,21 @@ int		move_up(t_data *data)
 
 int		move_left(t_data *data)
 {
+	data->render->dest.y -= 5;
+	dda_init_values(data, data->render->dest);
+	_bresenham_c(data->render, data->render->origin.x, data->render->origin.y, data->render->dest.x, data->render->dest.y, 9910101);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	printf("left\n");
 	return (0);
 }
 
 int		move_right(t_data *data)
 {
-	dda_init_values(data, data->render->dest);
-	data->render->dest.y += 5;
 	printf("right\n");
+	data->render->dest.y += 5;
+	dda_init_values(data, data->render->dest);
+	_bresenham_c(data->render, data->render->origin.x, data->render->origin.y, data->render->dest.x, data->render->dest.y, 9910101);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	return (0);
 }
 
@@ -122,8 +128,7 @@ int		move_down(t_data *data)
 
 int	deal_key(int key, t_data *data)
 {
-	// print_grid(data, data->render);
-	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	print_grid(data, data->render);
 	if (key == 13)
 		move_up(data);
 	if (key == 0)
@@ -144,15 +149,21 @@ void	init_rad(t_data *data)
 void	init_mlx(t_data *data)
 {
 	init_win(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	init_rad(data);
 	data->rad->degree = 0;
 	data->rad->rad = 0;
-	data->render->dest.x = (get_x_player(data) + 20) * data->render->cell_size;
-	data->render->dest.y = get_x_player(data) * data->render->cell_size;
-	// data->render->origin.x = get_x_player(data) * data->render->cell_size;
-	// data->render->origin.y = get_y_player(data) * data->render->cell_size;	
-	// data->render->map.x = data->render->origin.x;
-	// data->render->map.y = data->render->origin.y;
+	data->render->view_dst = 100;
+	t_vector2_d a;
+	a.x = 2;
+	a.y = 2;
+	t_vector2_d b;
+	b.x = 0;
+	b.y = 0;
+	data->render->origin.x = get_x_player(data) * data->render->cell_size;
+	data->render->origin.y = get_y_player(data) * data->render->cell_size;
+	data->render->dest.x = (get_x_player(data) + 2) * data->render->cell_size;
+	data->render->dest.y = get_y_player(data) * data->render->cell_size;
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }

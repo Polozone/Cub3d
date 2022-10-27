@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/26 15:43:03 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/10/27 15:09:29 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ struct s_render {
 	int		win_height;
 	int		win_width;
 	int		cell_size;
-	int		mouse_button;
+	int		view_dst;
+	
 	t_vector2_f dest;
 	t_vector2_d map;
 	t_vector2_d origin;
@@ -107,6 +108,14 @@ struct s_rad{
 struct s_prg{
 	t_bool	*keyboard;
 };
+
+typedef struct t_ray {
+	t_vector2_f hit_point;
+	t_vector2_d cell;
+	double 		length;
+	int 		side_hit;
+	double		angle;
+} t_ray;
 
 char    	**get_cub_file(t_data *data, char *filename);
 char    	*_get_file(int fd);
@@ -138,6 +147,7 @@ char		*map_to_line(char **arr);
 /************RENDER****************/
 
 int		_bresenham(t_render *data, int x0, int y0, int x1, int y1);
+int _bresenham_c(t_render *data, int x0, int y0, int x1, int y1, int color);
 
 /************DDA****************/
 
@@ -152,5 +162,6 @@ void	init_mlx(t_data *data);
 /************UTILS****************/
 
 void my_mlx_pixel_put(t_render *render, int x, int y, int color);
+double	get_angle(t_vector2_d start, t_vector2_d end);
 
 #endif
