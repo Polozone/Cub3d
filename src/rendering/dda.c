@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:41:21 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/27 15:41:51 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/01 10:11:02 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,23 @@ t_vector2_d		vector_f_to_d(t_vector2_f vector)
 	cast.x = (int)vector.x;
 	cast.y = (int)vector.y;
 	return (cast);
+}
+
+double	get_angle(t_vector2_d start, t_vector2_d end)
+{
+	double	dx;
+	double	dy;
+
+	dx = (double)(end.x - start.x);
+	dy = (double)(end.y - start.y);
+	if (dx >= 0 && dy < 0)
+		return (atan(-dy / dx));
+	else if (dx < 0 && dy < 0)
+		return (atan(dx / dy) + 3.14f / 2.0f);
+	else if (dx < 0 && dy > 0)
+		return (atan(-dy / dx) + 3.14f);
+	else
+		return (atan(dx / dy) + 3.14 + 1.57f);
 }
 
 t_vector2_f	dda_init_values(t_data *data, t_vector2_f dest)

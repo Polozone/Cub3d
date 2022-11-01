@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/27 15:09:29 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/01 10:55:43 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ char		*map_to_line(char **arr);
 
 int		_bresenham(t_render *data, int x0, int y0, int x1, int y1);
 int _bresenham_c(t_render *data, int x0, int y0, int x1, int y1, int color);
+double	get_angle(t_vector2_d start, t_vector2_d end);
+t_vector2_d		vector_f_to_d(t_vector2_f vector);
 
 /************DDA****************/
 
