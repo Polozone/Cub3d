@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/21 13:54:26 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/01 11:08:22 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,11 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/check_colors_params.c \
 			src/parsing/check_coordinate_params.c \
 			src/parsing/row_col_checker.c \
+			src/parsing/check_player.c \
+			src/rendering/dda.c \
 			src/utils/free_utils.c src/utils/string_utils.c \
+			src/rendering/init_mlx.c \
+			src/rendering/utils.c \
 
 OBJS	= ${SRCS:.c=.o}
 

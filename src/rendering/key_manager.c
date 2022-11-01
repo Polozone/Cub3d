@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   key_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 13:51:20 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 13:11:00 by pmulin           ###   ########.fr       */
+/*   Created: 2022/10/24 14:19:55 by pmulin            #+#    #+#             */
+/*   Updated: 2022/10/24 14:33:03 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../../includes/cub3d.h"
 
-size_t	ft_strlen(const char *str)
+int	key_press(int keycode, t_prg *prg)
 {
-	size_t	i;
+	if (keycode < 200)
+		prg->keyboard[keycode] = 1;
+	return (0);
+}
 
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
+int	key_release(int keycode, t_prg *prg)
+{
+	if (keycode < 200)
+		prg->keyboard[keycode] = 0;
+	return (0);
 }

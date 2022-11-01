@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:54:08 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/21 14:00:02 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/01 11:06:36 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	free_2d_array(char **array)
 	int		i;
 
 	i = 0;
-	while (array[i])
+	if (array)
 	{
-		free(array[i]);
-		i++;
+		while (array[i])
+		{
+			free(array[i]);
+			i++;
+		}
 	}
 	free(array);
 	return ;

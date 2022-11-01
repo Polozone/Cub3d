@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   row_col_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/24 09:22:35 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/11/01 11:06:40 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int				is_not_wall(char c)
+t_bool		is_charmap(char c)
+{
+	if (c == '0' || c == 'N'
+		|| c == 'S' || c == 'E'
+		|| c == 'W' || c == ' '
+		|| c == '1' || c == '	' || c == '\n')
+	{
+		return (true);
+	}
+	return (false);
+}
+
+static t_bool		is_not_wall(char c)
 {
 	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ')
 		return (true);
@@ -27,35 +39,45 @@ t_bool		row_checker(char *row, int col)
 	i = 0;
 	while (row[i])
 	{
-		if ((row[0] && row[0] != '1') || (row[i] != '1' && row[i + 1] == '\0'))
+		if ((row[0] && row[0] != '1') || (row[i] != '1' && row[i + 1] == '\0')
+		|| (row[i] == '0' && row[i + 1] == ' '))
 		{
 			free(row);
-			printf("Error line %d at index %d of the map\n", col, i);
+			write(2, "Error\nInvalid map", 17);
 			return (false);
 		}
-		// if (row[i] != '1' && row[i + 1] == '\0')
-		// {
-		// 	free(row);
-		// 	return (false);
-		// }
-		// if ((row[i] == '0' && row[i + 1] == '\0') 
-		// 	|| row[i] == '0' && row[i + 1] == '\0')
 		i++;
 	}
 	return (true);
 }
 
-static t_bool	col_checker(char **map)
+static t_bool	col_checker(t_data *data, char **map, char *str)
 {
 	int		i;
 	int		j;
+	int		len;
+	char	*tmp;
 
-	i = 0;
 	j = 0;
-	while (map[i][j])
+	i = 0;
+	len = len_2d_array(map);
+	while (i < data->maps->longest_line)
 	{
-		printf("%c", map[i][j]);
-		j++;
+		j = 0;
+		str = malloc(sizeof(char) * (len + 1));
+		if (!str)
+			exit (-1);
+		while (map[j])
+		{
+			str[j] = map[j][i];
+			j++;
+		}
+		str[j] = '\0';
+		tmp = ft_strtrim(str, " 	");
+		if (row_checker(tmp, i) == false)
+			return (false);
+		free(str);
+		i++;
 	}
 	return (true);
 }
@@ -73,7 +95,7 @@ t_bool	is_valid_map(t_data *data)
 			return (false);
 		i++;
 	}
-	if (col_checker(data->maps->map) == false)
+	if (col_checker(data, data->maps->map, NULL) == false)
 		return (false);
 	return (true);
 }
