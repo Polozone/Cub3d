@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:41:21 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/01 10:11:02 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/01 12:37:18 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,36 @@ double	get_angle(t_vector2_d start, t_vector2_d end)
 		return (atan(-dy / dx) + 3.14f);
 	else
 		return (atan(dx / dy) + 3.14 + 1.57f);
+}
+
+float		degree_to_radian(float degree)
+{
+	return (degree * 0.0174533);
+}
+
+float		radian_to_degree(float radian)
+{
+	return (radian * 0.572958);
+}
+
+t_vector2_d	create_vect_d_from_origin(t_vector2_d origin, double radian, \
+				double length)
+{
+	t_vector2_d	vector;
+
+	vector.x = cos(-radian) * length + origin.x;
+	vector.y = sin(-radian) * length + origin.y;
+	return (vector);
+}
+
+t_vector2_f	create_vect_f_from_origin(t_vector2_f origin, double radian, \
+				double length)
+{
+	t_vector2_f	vector;
+
+	vector.x = cos(-radian) * length + origin.x;
+	vector.y = sin(-radian) * length + origin.y;
+	return (vector);
 }
 
 t_vector2_f	dda_init_values(t_data *data, t_vector2_f dest)

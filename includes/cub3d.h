@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/01 10:55:43 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/01 12:39:29 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct 	s_vector t_vector2_d;
 typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
 typedef enum	s_bool t_bool;
+
 
 
 enum s_bool
@@ -85,6 +86,7 @@ struct s_render {
 	int		win_width;
 	int		cell_size;
 	int		view_dst;
+	int		fov;
 	
 	t_vector2_f dest;
 	t_vector2_d map;
@@ -150,12 +152,19 @@ int		_bresenham(t_render *data, int x0, int y0, int x1, int y1);
 int _bresenham_c(t_render *data, int x0, int y0, int x1, int y1, int color);
 double	get_angle(t_vector2_d start, t_vector2_d end);
 t_vector2_d		vector_f_to_d(t_vector2_f vector);
+t_vector2_f		vector_d_to_f(t_vector2_d vector);
+t_vector2_d	create_vect_d_from_origin(t_vector2_d origin, double radian, \
+				double length);
+t_vector2_f	create_vect_f_from_origin(t_vector2_f origin, double radian, \
+				double length);
 
 /************DDA****************/
 
 t_vector2_f	dda_init_values(t_data *data, t_vector2_f dest);
 double		get_dir_X(double dirX, double planeX, double w, int x);
 double		get_dir_Y(double dirY, double planeY, double w, int x);
+float		degree_to_radian(float degree);
+float		radian_to_degree(float radian);
 
 /************INIT_MLX****************/
 

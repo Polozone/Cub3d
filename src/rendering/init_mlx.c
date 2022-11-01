@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 10:27:48 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/01 10:56:05 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/01 12:51:09 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,12 @@ void	init_win(t_data *data)
 	print_grid(data, data->render);
 }
 
-
 void	display_radius(t_data *data, unsigned int px, unsigned int py, unsigned int ox, unsigned int oy)
 {
-	px = 1200;
-	py = 280;
-	ox = 840;
-	oy = 280;
+	px = data->render->origin.x + 40;
+	py = data->render->origin.x + 40;
+	ox = data->render->origin.x;
+	oy = data->render->origin.y;
 	int dx;
 	int dy;
 
@@ -90,19 +89,33 @@ void	display_radius(t_data *data, unsigned int px, unsigned int py, unsigned int
 	float radi = data->rad->rad * M_PI / 180;
 	dx =  (cos(radi) * (px - ox)) - (sin(radi) * (py - oy)) + ox;
 	dy =  (sin(radi) * (px - ox)) + (cos(radi) * (py - oy)) + oy;
-	dprintf(2, "rad = %d\n", data->rad->rad);
+	dprintf(2, "rad = %d\n %d\n", data->rad->center_x, data->rad->center_y);
 	_bresenham(data->render, data->rad->center_x, data->rad->center_y, dx, dy);
 }
 
 int		move_up(t_data *data)
 {
+	display_radius(data, 400, 400, data->render->origin.x, data->render->origin.y);
 	printf("up\n");
 	return (0);
+}
+
+void	print_fov(t_data *data)
+{
+	double angle = get_angle(data->render->origin, vector_f_to_d(data->render->dest));
+	t_vector2_d view_dst_pos = create_vect_d_from_origin(data->render->origin, angle, data->render->view_dst);
+	int opposite_length = tan(degree_to_radian(data->render->fov / 2)) * data->render->view_dst;
+	t_vector2_f opposite_vect[2] = {
+		create_vect_f_from_origin(vector_d_to_f(view_dst_pos), angle + 3.14159265359 / 2, opposite_length),
+		create_vect_f_from_origin(vector_d_to_f(view_dst_pos), angle - 3.14159265359 / 2, opposite_length)
+	};
+	_bresenham_c(data->render, opposite_vect[0].x, opposite_vect[0].y, opposite_vect[1].x, opposite_vect[1].y, 125125);
 }
 
 int		move_left(t_data *data)
 {
 	data->render->dest.y -= 5;
+	print_fov(data);
 	dda_init_values(data, data->render->dest);
 	_bresenham_c(data->render, data->render->origin.x, data->render->origin.y, data->render->dest.x, data->render->dest.y, 9910101);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
@@ -114,6 +127,7 @@ int		move_right(t_data *data)
 {
 	printf("right\n");
 	data->render->dest.y += 5;
+	print_fov(data);
 	dda_init_values(data, data->render->dest);
 	_bresenham_c(data->render, data->render->origin.x, data->render->origin.y, data->render->dest.x, data->render->dest.y, 9910101);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
@@ -128,6 +142,14 @@ int		move_down(t_data *data)
 
 int	deal_key(int key, t_data *data)
 {
+	// double angle = get_angle(data->render->origin, vector_f_to_d(data->render->dest));
+	// t_vector2_d view_dst_pos = create_vect_d_from_origin(data->render->origin, angle, data->render->view_dst);
+	// int opposite_length = tan(degree_to_radian(data->render->fov / 2)) * data->render->view_dst;
+	// t_vector2_f opposite_vect[2] = {
+	// 	create_vect_f_from_origin(vector_d_to_f(view_dst_pos), angle + 3.141592 / 2, opposite_length),
+	// 	create_vect_f_from_origin(vector_d_to_f(view_dst_pos), angle - 3.141592 / 2, opposite_length)
+	// };
+	// _bresenham_c(data->render, opposite_vect[0].x, opposite_vect[0].y, opposite_vect[1].x, opposite_vect[1].y, 125125);
 	print_grid(data, data->render);
 	if (key == 13)
 		move_up(data);
@@ -153,14 +175,24 @@ void	init_mlx(t_data *data)
 	init_rad(data);
 	data->rad->degree = 0;
 	data->rad->rad = 0;
-	data->render->view_dst = 100;
+	data->render->view_dst = 35;
+	data->render->fov = 90;
 	data->render->origin.x = get_x_player(data) * data->render->cell_size;
 	data->render->origin.y = get_y_player(data) * data->render->cell_size;
 	data->render->dest.x = (get_x_player(data) + 3) * data->render->cell_size;
-	data->render->dest.y = get_y_player(data) - 1 * data->render->cell_size;
-	// dprintf(2, "angle == %f (y == %f)", get_angle(data->render->origin, vector_f_to_d(data->render->dest)), data->render->dest.y);
-	_bresenham_c(data->render, data->render->origin.x, data->render->origin.y, data->render->dest.x, data->render->dest.y, 9910101);
-	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	data->render->dest.y = (get_y_player(data) + 3) * data->render->cell_size;
+	// _bresenham_c(data->render, data->render->origin.x, data->render->origin.y, data->render->dest.x, data->render->dest.y, 9910101);
+	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	// double angle = get_angle(data->render->origin, vector_f_to_d(data->render->dest));
+	// t_vector2_d view_dst_pos = create_vect_d_from_origin(data->render->origin, angle, data->render->view_dst);
+	// int opposite_length = tan(degree_to_radian(data->render->fov / 2)) * data->render->view_dst;
+	// t_vector2_f opposite_vect[2] = {
+	// 	create_vect_f_from_origin(vector_d_to_f(view_dst_pos), angle + 3.141592 / 2, opposite_length),
+	// 	create_vect_f_from_origin(vector_d_to_f(view_dst_pos), angle - 3.141592 / 2, opposite_length)
+	// };
+	// my_mlx_pixel_put(data->render, opposite_vect[0].x, opposite_vect[0].y, 125125);
+	// my_mlx_pixel_put(data->render, opposite_vect[1].x, opposite_vect[1].y, 125125);
+	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }
