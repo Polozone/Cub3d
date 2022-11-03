@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/01 12:39:29 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/03 14:57:05 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ typedef struct 	s_vector t_vector2_d;
 typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
 typedef enum	s_bool t_bool;
-
-
 
 enum s_bool
 {
@@ -82,20 +80,23 @@ struct s_render {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		win_height;
-	int		win_width;
+	// int		win_height;
+	// int		win_width;
 	int		cell_size;
-	int		view_dst;
-	int		fov;
+	// int		view_dst;
+	// int		fov;
+	// int		rays_nbr;
+	// t_ray	*rays;
 	
-	t_vector2_f dest;
-	t_vector2_d map;
+	t_vector2_f dir;
+	t_vector2_f plane;
+	// t_vector2_d map;
 	t_vector2_d origin;
 
-	// Tab
-	int		**tab;
-	int		tab_width;
-	int		tab_height;
+	// // Tab
+	// int		**tab;
+	// int		tab_width;
+	// int		tab_height;
 };
 
 struct s_rad{
@@ -110,14 +111,6 @@ struct s_rad{
 struct s_prg{
 	t_bool	*keyboard;
 };
-
-typedef struct t_ray {
-	t_vector2_f hit_point;
-	t_vector2_d cell;
-	double 		length;
-	int 		side_hit;
-	double		angle;
-} t_ray;
 
 char    	**get_cub_file(t_data *data, char *filename);
 char    	*_get_file(int fd);
@@ -148,23 +141,11 @@ char		*map_to_line(char **arr);
 
 /************RENDER****************/
 
-int		_bresenham(t_render *data, int x0, int y0, int x1, int y1);
-int _bresenham_c(t_render *data, int x0, int y0, int x1, int y1, int color);
-double	get_angle(t_vector2_d start, t_vector2_d end);
-t_vector2_d		vector_f_to_d(t_vector2_f vector);
-t_vector2_f		vector_d_to_f(t_vector2_d vector);
-t_vector2_d	create_vect_d_from_origin(t_vector2_d origin, double radian, \
-				double length);
-t_vector2_f	create_vect_f_from_origin(t_vector2_f origin, double radian, \
-				double length);
+int _bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
 
 /************DDA****************/
 
-t_vector2_f	dda_init_values(t_data *data, t_vector2_f dest);
-double		get_dir_X(double dirX, double planeX, double w, int x);
-double		get_dir_Y(double dirY, double planeY, double w, int x);
-float		degree_to_radian(float degree);
-float		radian_to_degree(float radian);
+int dda(t_data *data, t_vector2_d origin, t_vector2_f dir);
 
 /************INIT_MLX****************/
 
@@ -173,6 +154,25 @@ void	init_mlx(t_data *data);
 /************UTILS****************/
 
 void my_mlx_pixel_put(t_render *render, int x, int y, int color);
-double	get_angle(t_vector2_d start, t_vector2_d end);
+
+/************MOVE.C****************/
+
+int		move_left(t_data *data);
+int		move_right(t_data *data);
+int		move_up(t_data *data);
+int		move_down(t_data *data);
+
+/************CONVERT_VECT.C****************/
+
+t_vector2_f vect_d_to_f(t_vector2_d vect);
+t_vector2_d vect_f_to_d(t_vector2_f vect);
+
+/************INIT_STRUCT_RENDERING.C****************/
+
+void	init_data(t_data *data);
+
+/************UTILS_MATH.C****************/
+
+float	ft_abs(float number);
 
 #endif

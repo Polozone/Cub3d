@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/27 09:43:04 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/03 10:57:09 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int main(int argc, char **argv)
     t_map		map;
 	t_render	render;
 	t_prg		prg;
-	t_rad		rad;
+	// t_rad		rad;
 
     (void)argc;
 	data.prg = &prg;
-	data.rad = &rad;
+	// data.rad = &rad;
     // parse_map_params(&data, argv[1]);
     parse_map_params(&data, argv[1]);
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
