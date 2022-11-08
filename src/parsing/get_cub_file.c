@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cub_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/24 18:03:25 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/11/01 11:11:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char    *_get_file(int fd)
     return (file);
 }
 
-char    **get_cub_file(char *filename)
+char    **get_cub_file(t_data *data, char *filename)
 {
     char    **file;
     char    *get_file;

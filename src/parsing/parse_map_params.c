@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/01 11:08:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/01 11:13:24 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ t_bool  parse_map_params(t_data *data, char *filename)
 
 	i = -1;
 	k = -1;
-	file = get_cub_file(filename);
+	file = get_cub_file(data, filename);
 	if (!file)
 		return (false);
 	params = ft_calloc(7, sizeof(char *));

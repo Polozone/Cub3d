@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/01 11:08:22 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/01 11:22:36 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ LIBFLAGS= -framework OpenGL -framework AppKit
 all: maker ${NAME}
 
 %.o : %.c	${HEADER}
-			${CC} ${INCLUDES} -c $< -o $@
+			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@
 
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a
