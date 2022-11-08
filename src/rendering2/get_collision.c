@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/03 15:13:05 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/08 09:38:23 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int dda(t_data *data, t_vector2_d origin, t_vector2_f dir)
 	double rayDirX = dir.x + data->render->plane.x * 0 /* this 0 is normally get_camera_X*/;
     double rayDirY = dir.y + data->render->plane.y * 0 /* this 0 is normally get_camera_X*/;
 
-	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1 / rayDirX);
-    double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1 / rayDirY);
-	
+	double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+    double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+
 	// double deltaDistX = fabs(1 / rayDirX);
 	// double deltaDistY = fabs(1 / rayDirY);
 	printf("%f\n", deltaDistX);
