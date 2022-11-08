@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/03 14:57:05 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/08 11:18:16 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ struct s_render {
 	t_vector2_f dir;
 	t_vector2_f plane;
 	// t_vector2_d map;
-	t_vector2_d origin;
+	t_vector2_f origin;
 
 	// // Tab
 	// int		**tab;
@@ -145,7 +145,7 @@ int _bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
 
 /************DDA****************/
 
-int dda(t_data *data, t_vector2_d origin, t_vector2_f dir);
+int dda(t_data *data, t_vector2_f origin, t_vector2_f dir);
 
 /************INIT_MLX****************/
 
