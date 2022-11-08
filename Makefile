@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/01 11:22:36 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/08 09:55:37 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,13 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/utils/free_utils.c src/utils/string_utils.c \
 			src/rendering/init_mlx.c \
 			src/rendering/utils.c \
+			src/rendering2/init_map.c \
+			src/rendering2/move.c \
+			src/rendering2/init_struct_rendering.c \
+			src/rendering2/convert_vect.c \
+			src/rendering2/breshenam.c \
+			src/rendering2/utils_math.c \
+			src/rendering2/get_collision.c \
 
 OBJS	= ${SRCS:.c=.o}
 
