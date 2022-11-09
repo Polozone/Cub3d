@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/08 12:30:52 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/09 15:12:42 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
-	//print_grid(data, data->render);
+	print_grid(data, data->render);
 	//_bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
 	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
-	dda(data, data->render->origin, data->render->dir);
-	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	dda(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }

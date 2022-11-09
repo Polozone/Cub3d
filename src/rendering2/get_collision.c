@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/08 15:44:35 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/09 15:22:55 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,65 @@ double	get_camera_X(int width, int x)
 	return (resultat);
 }
 
-int dda(t_data *data, t_vector2_f origin, t_vector2_f dir)
+int dda(t_data *data)
 {
 	double rayDirX = data->render->dir.x + (data->render->plane.x * 0); /* this 0 is normally get_camera_X*/
     double rayDirY = data->render->dir.y + (data->render->plane.y * 0); /* this 0 is normally get_camera_X*/
 
-	// t_vector2_f dir = {data->render->dest.x - data->render->origin.x, data->render->dest.y - data->render->origin.y};
+	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0f / rayDirX);
+    double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0f / rayDirY);
 
-	double diffX = data->render->dir.x - data->render->origin.x;
-	double diffY = data->render->dir.y - data->render->origin.y;
+ 	int stepX;
+    int stepY;
 
-	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0f / diffX);
-    double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0f / diffY);
+    int hit = 0; //was there a wall hit?
+    int side; //was a NS or a EW wall hit?
 
-	printf("%f\n", deltaDistX);
-	printf("%f\n", deltaDistY);
+	int mapX = (int)data->render->origin.x;
+    int mapY = (int)data->render->origin.y;
+	double sideDistX;
+	double sideDistY;
+	if (rayDirX < 0)
+    {
+    	stepX = -1;
+    	sideDistX = (data->render->origin.x - mapX) * deltaDistX;
+    }
+    else
+    {
+        stepX = 1;
+        sideDistX = (mapX + 1.0 - data->render->origin.x) * deltaDistX;
+    }
+    if (rayDirY < 0)
+    {
+        stepY = -1;
+        sideDistY = (data->render->origin.y - mapY) * deltaDistY;
+    }
+    else
+    {
+        stepY = 1;
+        sideDistY = (mapY + 1.0 - data->render->origin.y) * deltaDistY;
+	}
+	while (hit == 0)
+    {
+        //jump to next map square, either in x-direction, or in y-direction
+        if (sideDistX < sideDistY)
+        {
+          sideDistX += deltaDistX;
+          mapX += stepX;
+          side = 0;
+        }
+        else
+        {
+          sideDistY += deltaDistY;
+          mapY += stepY;
+          side = 1;
+        }
+        if (data->maps->map[mapY / 40][mapX / 40] == '1')
+		{
+			_bresenham(data->render, data->render->origin.x, data->render->origin.y, mapX, mapY);
+			mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+			hit = 1;
+		}
+    } 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/08 11:18:16 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/09 15:12:50 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_render t_render;
 typedef struct 	s_vector t_vector2_d;
 typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
+typedef struct	s_math t_math;
 typedef enum	s_bool t_bool;
 
 enum s_bool
@@ -43,6 +44,11 @@ struct s_params
 	int		stop;
 };
 
+struct s_math
+{
+	float	H_PI;
+};
+
 struct s_data
 {
 	t_params		*params;
@@ -51,6 +57,7 @@ struct s_data
 	t_render		*render;
 	t_prg			*prg;
 	t_rad			*rad;
+	t_math			*math;
 };
 
 struct s_vector_2f
@@ -80,6 +87,7 @@ struct s_render {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		angle;
 	// int		win_height;
 	// int		win_width;
 	int		cell_size;
@@ -145,7 +153,7 @@ int _bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
 
 /************DDA****************/
 
-int dda(t_data *data, t_vector2_f origin, t_vector2_f dir);
+int dda(t_data *data);
 
 /************INIT_MLX****************/
 
@@ -174,5 +182,8 @@ void	init_data(t_data *data);
 /************UTILS_MATH.C****************/
 
 float	ft_abs(float number);
+void draw_circle(t_data *data, t_vector2_d center, int color);
+
+int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
 
 #endif
