@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/08 13:19:45 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 10:56:34 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_render t_render;
 typedef struct 	s_vector t_vector2_d;
 typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
+typedef struct	s_math t_math;
 typedef enum	s_bool t_bool;
 
 enum s_bool
@@ -49,6 +50,11 @@ struct s_params
 	int		stop;
 };
 
+struct s_math
+{
+	float	H_PI;
+};
+
 struct s_data
 {
 	t_params		*params;
@@ -57,6 +63,7 @@ struct s_data
 	t_render		*render;
 	t_prg			*prg;
 	t_rad			*rad;
+	t_math			*math;
 };
 
 struct s_vector_2f
@@ -86,6 +93,7 @@ struct s_render {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		angle;
 	// int		win_height;
 	// int		win_width;
 	int		cell_size;
@@ -97,7 +105,7 @@ struct s_render {
 	t_vector2_f dir;
 	t_vector2_f plane;
 	// t_vector2_d map;
-	t_vector2_d origin;
+	t_vector2_f origin;
 
 	// // Tab
 	// int		**tab;
@@ -152,11 +160,12 @@ char		*map_to_line(char **arr);
 
 /************RENDER****************/
 
-int _bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
+int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
+void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY);
 
 /************DDA****************/
 
-int dda(t_data *data, t_vector2_d origin, t_vector2_f dir);
+int dda(t_data *data);
 
 /************INIT_MLX****************/
 
@@ -194,6 +203,9 @@ void	init_data(t_data *data);
 /************UTILS_MATH.C****************/
 
 float	ft_abs(float number);
+void draw_circle(t_data *data, t_vector2_d center, int color);
+
+int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
 
 
 

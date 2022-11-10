@@ -6,11 +6,17 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/08 09:55:22 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 10:56:10 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+
+void	init_math(t_data *data)
+{
+	data->math->H_PI = M_PI / 180;
+}
+
 
 int main(int argc, char **argv)
 {
@@ -19,6 +25,8 @@ int main(int argc, char **argv)
 	t_render	render;
 	t_prg		prg;
 	t_rad		rad;
+	t_math		math;
+	// t_rad		rad;
 
     (void)argc;
 	// init_parsing_map(&data, &map, argv[1]);
@@ -30,6 +38,11 @@ int main(int argc, char **argv)
     }
 	data.prg = &prg;
 	data.rad = &rad;
+	data.math = &math;
+	init_math(&data);
+	// data.rad = &rad;
+    // parse_map_params(&data, argv[1]);
+    parse_map_params(&data, argv[1]);
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
 	{
 		// free

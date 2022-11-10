@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:41:21 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/03 11:36:21 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/09 12:07:39 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@
 // 		};
 // 		if (data->maps->map[cell.y][cell.x] == '1') // Is a wall
 // 		{
-// 			_bresenham(data->render, data->render->origin.x, data->render->origin.y, map.x, map.y);
+//			_bresenham(data->render, data->render->origin.x, data->render->origin.y, map.x, map.y);
 // 			mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 // 			return (vector_d_to_f(map));
 // 		}
