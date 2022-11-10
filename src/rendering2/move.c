@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:53:50 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/09 15:36:10 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/10 10:42:11 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	rotate_left(t_data *data)
 	data->render->dir.x = center.x;
 	data->render->dir.y = center.y;
 	dda(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 }
 
 void	rotate_right(t_data *data)
@@ -35,6 +36,7 @@ void	rotate_right(t_data *data)
 	data->render->dir.x = center.x;
 	data->render->dir.y = center.y;
 	dda(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 }
 
 int		move_left(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/09 15:12:50 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/10 10:11:00 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,8 @@ char		*map_to_line(char **arr);
 
 /************RENDER****************/
 
-int _bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
+int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
+void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY);
 
 /************DDA****************/
 
