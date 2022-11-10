@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/08 09:56:13 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/08 13:19:45 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,13 @@ void	init_data(t_data *data);
 /************UTILS_MATH.C****************/
 
 float	ft_abs(float number);
+
+
+
+
+// THEO
+
+int 	draw_player_1(t_data *data);
+void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right, int color);
 
 #endif
