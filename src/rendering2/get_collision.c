@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 14:44:14 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:18:02 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,22 @@ double	get_camera_X(int width, int x)
 
 void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x)
 {
+	int i = 0;
+
+	while (i < drawStart)
+	{
+		my_mlx_pixel_put(data->render, x, i, 458963);
+		i++;
+	}
 	while (drawStart < drawEnd)
 	{
 		my_mlx_pixel_put(data->render, x, drawStart, color);
 		drawStart++;
+	}
+	while (drawEnd < 900)
+	{
+		my_mlx_pixel_put(data->render, x, drawEnd, 147852);
+		drawEnd++;
 	}
 	return ;
 }
@@ -50,21 +62,15 @@ void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, dou
     if(drawEnd >= h)
 		drawEnd = h - 1;
 	if (side == 0)
-	{
 		render_line(data, 125125, drawStart, drawEnd, x);
-		// printf("EW");
-	}
 	else
-	{
 		render_line(data, 654564654, drawStart, drawEnd, x);
-		// printf("NS");
-	}
 	return ;
 }
 
 int dda(t_data *data)
 {
-	for (int x = 0; x < 1200 ; x++)
+	for (int x = 0; x < 1200 ; x += 1)
 	{
 		double	delta = get_camera_X(1200, x);
 		double rayDirX = data->render->dir.x + (data->render->plane.x * delta); /* this 0 is normally get_camera_X*/
@@ -105,7 +111,6 @@ int dda(t_data *data)
 		}
 		while (hit == 0)
 		{
-			//jump to next map square, either in x-direction, or in y-direction
 			if (sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
@@ -123,7 +128,7 @@ int dda(t_data *data)
 				render_wall(data, sideDistX, sideDistY, side, deltaDistX, deltaDistY, mapX, mapY, x);
 				hit = 1;
 			}
-		} 
+		}
 	}
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	return (0);

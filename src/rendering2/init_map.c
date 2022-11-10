@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 14:52:26 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:14:50 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_
 		top_left.y++;
 	}
 }
+
 void	print_grid(t_data *dt, t_render *data)
 {
 	int		x;
@@ -71,6 +72,7 @@ void	print_grid(t_data *dt, t_render *data)
 		y++;
 	}
 }
+
 void	init_win(t_data *data)
 {
 	void	*mlx;
@@ -91,7 +93,6 @@ void	init_win(t_data *data)
 
 int	deal_key(int key, t_data *data)
 {
-	// print_grid(data, data->render);
 	if (key == 13)
 		move_up(data);
 	if (key == 0)
@@ -100,8 +101,9 @@ int	deal_key(int key, t_data *data)
 		move_down(data);
 	if (key == 2)
 		move_right(data);
-	dda(data);
 	clear_img(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	dda(data);
 	return (0);
 }
 
@@ -111,6 +113,7 @@ void	init_mlx(t_data *data)
 	init_data(data);
 	// print_grid(data, data->render);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	dda(data);
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }
