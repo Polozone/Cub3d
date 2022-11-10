@@ -6,12 +6,28 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 10:57:06 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 15:11:24 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/cub3d.h"
+
+void	clear_img(t_data *data)
+{
+	int		i;
+	int		total = 1200 * 900;
+	int		size = data->render->bits_per_pixel / 8;
+
+	i = 0;
+	while (i < total)
+	{
+		char *dst = data->render->addr + (i * size);
+		*(unsigned int*)dst = 0x000000;
+		i++;
+	}
+	return ;
+}
 
 void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right, int color)
 {
@@ -69,13 +85,13 @@ void	init_win(t_data *data)
 	}
 	// data->render->mlx_win = mlx_new_window(data->render->mlx, (data->maps->longest_line * data->render->cell_size), (data->maps->height * data->render->cell_size), "My window");
 	data->render->mlx_win = mlx_new_window(data->render->mlx, 1200, 900, "My window");
-	data->render->img = mlx_new_image(data->render->mlx, (data->maps->longest_line * data->render->cell_size), (data->maps->height * data->render->cell_size));
+	data->render->img = mlx_new_image(data->render->mlx, 1200, 900);
 	data->render->addr = mlx_get_data_addr(data->render->img, &data->render->bits_per_pixel, &data->render->line_length, &data->render->endian);
 }
 
 int	deal_key(int key, t_data *data)
 {
-	print_grid(data, data->render);
+	// print_grid(data, data->render);
 	if (key == 13)
 		move_up(data);
 	if (key == 0)
@@ -84,22 +100,24 @@ int	deal_key(int key, t_data *data)
 		move_down(data);
 	if (key == 2)
 		move_right(data);
+	clear_img(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	dda(data);
 	return (0);
 }
-
-// int _bresenham_test(t_render *data, int x0, int y0, int x1, int y1);
 
 void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
-	print_grid(data, data->render);
+	// print_grid(data, data->render);
 	// _bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
 	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
 	// dda(data, data->render->origin, data->render->dir);
 	//_bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
 	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
-	// dda(data);
+	// print_grid(data, data->render);
+	dda(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);

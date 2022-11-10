@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/10 10:56:34 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 15:00:41 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+
+# define MOV_SPD 15
+# define ROT_SPD 0.1
 
 typedef struct	s_data t_data;
 typedef struct	s_params t_params;
@@ -161,7 +164,8 @@ char		*map_to_line(char **arr);
 /************RENDER****************/
 
 int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
-void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY);
+void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x);
+void	clear_img(t_data *data);
 
 /************DDA****************/
 
@@ -204,6 +208,7 @@ void	init_data(t_data *data);
 
 float	ft_abs(float number);
 void draw_circle(t_data *data, t_vector2_d center, int color);
+t_vector2_f	add_vect(t_vector2_f start, t_vector2_f end);
 
 int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
 
