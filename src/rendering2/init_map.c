@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 13:19:31 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 16:02:40 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,46 @@ int	exit_program_from_escape(t_data *data)
 
 int	deal_key(int key, t_data *data)
 {
-	if (key == 53)
+	if (key > 200)
+		return (0);
+	data->keytab[key] = 1;
+	return (0);
+}
+
+int	key_release(int	key, t_data *data)
+{
+	if (key > 200)
+		return (0);
+	data->keytab[key] = 0;
+	return (0);
+}
+
+void	player_input(t_data *data)
+{
+	if (data->keytab[KEY_ESC])
 		exit_program_from_escape(data);
-	if (key == 13)
+	if (data->keytab[KEY_W])
 		move_up(data);
-	if (key == 0)
-		move_left(data);
-	if (key == 1)
+	if (data->keytab[KEY_Q] || data->keytab[KEY_LEFT])
+		rotate_left(data);
+	if (data->keytab[KEY_S])
 		move_down(data);
-	if (key == 2)
+	if (data->keytab[KEY_E] || data->keytab[KEY_RIGHT])
+		rotate_right(data);
+	if (data->keytab[KEY_D])
 		move_right(data);
+	if (data->keytab[KEY_A])
+		move_left(data);
+}
+
+int	update(t_data *data)
+{
+	player_input(data);
+
 	clear_img(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	print_minimap(data);
 	dda(data);
-	
 	return (0);
 }
 
@@ -131,6 +156,4 @@ void	init_mlx(t_data *data)
 	// print_grid(data, data->render);
 	dda(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
-	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
-	mlx_loop(data->render->mlx);
 }

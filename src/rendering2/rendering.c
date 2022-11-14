@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 13:17:02 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:00:16 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	render_floor(t_data *data, int drawStart, int x, char *name)
 	i = 0;
 	while (i < drawStart)
 	{
-		my_mlx_pixel_put(data->render, x, i, 0xb3bcf5);
+		if (x <= data->maps->longest_line * (data->render->cell_size / 5)
+			&& i <= (data->maps->height * data->render->cell_size / 5))
+			;
+		else
+			my_mlx_pixel_put(data->render, x, i, 0xb3bcf5);
 		i++;
 	}
 }
@@ -34,6 +38,9 @@ void	render_walls(t_data *data, int drawStart, int drawEnd, int x, int color, ch
 	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, img, x, drawEnd);
 	while (drawStart < drawEnd)
 	{
+		if (drawStart <= (data->maps->height * data->render->cell_size / 5)
+			&& x <= data->maps->longest_line * (data->render->cell_size / 5))
+			drawStart = (data->maps->height * data->render->cell_size / 5);
 		my_mlx_pixel_put(data->render, x, drawStart, color);
 		drawStart++;
 	}
@@ -42,7 +49,7 @@ void	render_walls(t_data *data, int drawStart, int drawEnd, int x, int color, ch
 void	render_ceil(t_data *data, int drawEnd, int x, int color, char *name)
 {
 	while (drawEnd < 900)
-	{
+	{	
 		my_mlx_pixel_put(data->render, x, drawEnd, 0x242222);
 		drawEnd++;
 	}
