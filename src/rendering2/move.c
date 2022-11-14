@@ -6,13 +6,13 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:53:50 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 14:58:38 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 09:40:48 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	rotate_left(t_data *data)
+void rotate_left(t_data *data)
 {
 	double oldDirX = data->render->dir.x;
 	data->render->dir.x = data->render->dir.x * cos(-ROT_SPD) - data->render->dir.y * sin(-ROT_SPD);
@@ -23,7 +23,7 @@ void	rotate_left(t_data *data)
 	return ;
 }
 
-void	rotate_right(t_data *data)
+void rotate_right(t_data *data)
 {
 	double oldDirX = data->render->dir.x;
 	data->render->dir.x = data->render->dir.x * cos(ROT_SPD) - data->render->dir.y * sin(ROT_SPD);
@@ -41,20 +41,20 @@ int		move_left(t_data *data)
 	return (0);
 }
 
-int		move_right(t_data *data)
+int move_right(t_data *data)
 {
 	rotate_right(data);
 	return (0);
 }
 
-int		move_up(t_data *data)
+int move_up(t_data *data)
 {
 	data->render->origin.x += data->render->dir.x * MOV_SPD;
 	data->render->origin.y += data->render->dir.y * MOV_SPD;
 	return (0);
 }
 
-int		move_down(t_data *data)
+int move_down(t_data *data)
 {
 	data->render->origin.x -= data->render->dir.x * MOV_SPD;
 	data->render->origin.y -= data->render->dir.y * MOV_SPD;

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 09:38:39 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 09:39:46 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ double	get_camera_X(int width, int x)
 
 void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < drawStart)
 	{
-		my_mlx_pixel_put(data->render, x, i, 458963);
+		my_mlx_pixel_put(data->render, x, i, 0xb3bcf5);
 		i++;
 	}
 	while (drawStart < drawEnd)
@@ -36,7 +37,7 @@ void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x)
 	}
 	while (drawEnd < 900)
 	{
-		my_mlx_pixel_put(data->render, x, drawEnd, 147852);
+		my_mlx_pixel_put(data->render, x, drawEnd, 0x242222);
 		drawEnd++;
 	}
 	return ;
@@ -62,9 +63,15 @@ void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, dou
     if(drawEnd >= h)
 		drawEnd = h - 1;
 	if (side == 0)
-		render_line(data, 125125, drawStart, drawEnd, x);
+	{
+		render_line(data, 0xFFFFFF, drawStart, drawEnd, x);
+		// printf("EW");
+	}
 	else
-		render_line(data, 654564654, drawStart, drawEnd, x);
+	{
+		render_line(data, 0x000000, drawStart, drawEnd, x);
+		// printf("NS");
+	}
 	return ;
 }
 

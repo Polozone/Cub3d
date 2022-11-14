@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/10/25 14:38:47 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/01 11:23:04 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void		str_to_map(t_data *data, int fd, char *tmp)
 
 	tmp = data->map_line;
 	data->map_line = ft_strtrim(data->map_line, "\n");
-	free(tmp);
+	// free(tmp);
 	line_clear = clear_endmap(data->map_line);
 	data->maps->longest_line = get_longest_line(line_clear);
 	nbr_line = count_nl(line_clear);

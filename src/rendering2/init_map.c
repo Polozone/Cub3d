@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 15:14:50 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 09:40:39 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ void	print_grid(t_data *dt, t_render *data)
 	}
 }
 
+t_minimap	init_minimap(t_data *data)
+{
+	t_minimap	minimap;
+
+	minimap.minimap = mlx_new_image(data->render->mlx, 240, 180);
+	minimap.addr = mlx_get_data_addr(data->render->minimap.minimap, &data->render->minimap.bits_per_pixel, &data->render->minimap.line_length, &data->render->minimap.endian);
+	return (minimap);
+}
+
 void	init_win(t_data *data)
 {
 	void	*mlx;
@@ -86,9 +95,11 @@ void	init_win(t_data *data)
 		exit (-1);
 	}
 	// data->render->mlx_win = mlx_new_window(data->render->mlx, (data->maps->longest_line * data->render->cell_size), (data->maps->height * data->render->cell_size), "My window");
+	
 	data->render->mlx_win = mlx_new_window(data->render->mlx, 1200, 900, "My window");
 	data->render->img = mlx_new_image(data->render->mlx, 1200, 900);
 	data->render->addr = mlx_get_data_addr(data->render->img, &data->render->bits_per_pixel, &data->render->line_length, &data->render->endian);
+	data->render->minimap = init_minimap(data);
 }
 
 int	deal_key(int key, t_data *data)
@@ -112,8 +123,14 @@ void	init_mlx(t_data *data)
 	init_win(data);
 	init_data(data);
 	// print_grid(data, data->render);
-	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	// _bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
+	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
+	// dda(data, data->render->origin, data->render->dir);
+	//_bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
+	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
+	// print_grid(data, data->render);
 	dda(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }
