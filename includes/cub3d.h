@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 12:32:50 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:11:44 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
 typedef struct	s_math t_math;
 typedef struct	s_minimap t_minimap;
+typedef struct	s_img t_img;
 typedef enum	s_bool t_bool;
 
 enum s_bool
@@ -68,6 +69,17 @@ struct s_data
 	t_prg			*prg;
 	t_rad			*rad;
 	t_math			*math;
+	t_img			*wall;
+};
+
+struct s_img
+{
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	int		height;
+	int		width;
 };
 
 struct s_vector_2f
@@ -108,6 +120,9 @@ struct s_render {
 	int		line_length;
 	int		endian;
 	int		angle;
+	void	*walls;
+	int		height;
+	int		width;
 	// int		win_height;
 	// int		win_width;
 	int		cell_size;

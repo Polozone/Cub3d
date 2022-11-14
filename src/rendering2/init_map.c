@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 13:02:43 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:55:22 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,17 @@ int	deal_key(int key, t_data *data)
 	return (0);
 }
 
+int		init_imgs(t_data *data)
+{
+	data->render->walls = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->render->width, &data->render->height);
+	data->wall->addr = mlx_get_data_addr(data->render->walls, &data->wall->bits_per_pixel, &data->wall->size_line, &data->wall->endian);
+}
+
 void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
+	init_imgs(data);
 	dda(data);
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
