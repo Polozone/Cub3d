@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 09:28:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 13:17:03 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_
 		top_left.y++;
 	}
 }
+
 void	print_grid(t_data *dt, t_render *data)
 {
 	int		x;
@@ -58,10 +59,10 @@ void	print_grid(t_data *dt, t_render *data)
 		{
 			t_vector2_d top_left;
 	 		t_vector2_d bottom_right;
-	 		top_left.x = x * data->cell_size;
-	 		top_left.y = y * data->cell_size;
-	 		bottom_right.x = top_left.x + data->cell_size;
-	 		bottom_right.y = top_left.y + data->cell_size;
+	 		top_left.x = x * (dt->render->cell_size / 5);
+	 		top_left.y = y * (dt->render->cell_size / 5);
+	 		bottom_right.x = top_left.x + (dt->render->cell_size / 5);
+	 		bottom_right.y = top_left.y + (dt->render->cell_size / 5);
 			if (dt->maps->map[y][x] == '1') // If the cell is a wall
 	 			draw_rect_color(data, top_left, bottom_right, 16711680);
 			else if (ft_strchr("NSWE0", dt->maps->map[y][x]))
@@ -70,15 +71,6 @@ void	print_grid(t_data *dt, t_render *data)
 		}
 		y++;
 	}
-}
-
-t_minimap	init_minimap(t_data *data)
-{
-	t_minimap	minimap;
-
-	minimap.minimap = mlx_new_image(data->render->mlx, 240, 180);
-	minimap.addr = mlx_get_data_addr(data->render->minimap.minimap, &data->render->minimap.bits_per_pixel, &data->render->minimap.line_length, &data->render->minimap.endian);
-	return (minimap);
 }
 
 void	init_win(t_data *data)
@@ -98,12 +90,10 @@ void	init_win(t_data *data)
 	data->render->mlx_win = mlx_new_window(data->render->mlx, 1200, 900, "My window");
 	data->render->img = mlx_new_image(data->render->mlx, 1200, 900);
 	data->render->addr = mlx_get_data_addr(data->render->img, &data->render->bits_per_pixel, &data->render->line_length, &data->render->endian);
-	data->render->minimap = init_minimap(data);
 }
 
 int	deal_key(int key, t_data *data)
 {
-	// print_grid(data, data->render);
 	if (key == 13)
 		move_up(data);
 	if (key == 0)
@@ -114,7 +104,9 @@ int	deal_key(int key, t_data *data)
 		move_right(data);
 	clear_img(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	print_minimap(data);
 	dda(data);
+	
 	return (0);
 }
 
@@ -122,6 +114,7 @@ void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
+	print_minimap(data);
 	// print_grid(data, data->render);
 	// _bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
 	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
@@ -131,7 +124,6 @@ void	init_mlx(t_data *data)
 	// print_grid(data, data->render);
 	dda(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
-	
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }

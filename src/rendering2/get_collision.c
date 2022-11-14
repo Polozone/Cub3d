@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 09:30:55 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 13:13:14 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int dda(t_data *data)
 			if (data->maps->map[mapY / 40][mapX / 40] == '1')
 			{
 				render_wall(data, sideDistX, sideDistY, side, deltaDistX, deltaDistY, mapX, mapY, x);
+				_bresenham(data->render, (data->render->origin.x / 5), data->render->origin.y / 5, mapX / 5, mapY / 5);
 				hit = 1;
 			}
 		} 

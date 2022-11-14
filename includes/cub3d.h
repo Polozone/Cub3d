@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 09:26:14 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 13:17:27 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct 	s_vector t_vector2_d;
 typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
 typedef struct	s_math t_math;
-typedef struct	s_minimap t_minimap;
 typedef enum	s_bool t_bool;
 
 enum s_bool
@@ -89,16 +88,6 @@ struct s_map
 	int		height;
 };
 
-struct s_minimap
-{
-	void	*minimap;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-};
-
-
 struct s_render {
 	void	*mlx;
 	void	*mlx_win;
@@ -120,7 +109,6 @@ struct s_render {
 	t_vector2_f plane;
 	// t_vector2_d map;
 	t_vector2_f origin;
-	t_minimap	minimap;
 
 	// // Tab
 	// int		**tab;
@@ -218,8 +206,8 @@ void	init_data(t_data *data);
 
 /************UTILS_MATH.C****************/
 
-float	ft_abs(float number);
-void draw_circle(t_data *data, t_vector2_d center, int color);
+float		ft_abs(float number);
+void		draw_circle(t_data *data, t_vector2_d center, int color);
 t_vector2_f	add_vect(t_vector2_f start, t_vector2_f end);
 
 int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
@@ -231,5 +219,10 @@ int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
 
 int 	draw_player_1(t_data *data);
 void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right, int color);
+
+void	print_grid(t_data *dt, t_render *data);
+
+int		print_minimap(t_data *data);
+
 
 #endif
