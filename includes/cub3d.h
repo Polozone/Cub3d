@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/10 15:00:41 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 09:26:14 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct 	s_vector t_vector2_d;
 typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
 typedef struct	s_math t_math;
+typedef struct	s_minimap t_minimap;
 typedef enum	s_bool t_bool;
 
 enum s_bool
@@ -88,6 +89,16 @@ struct s_map
 	int		height;
 };
 
+struct s_minimap
+{
+	void	*minimap;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+};
+
+
 struct s_render {
 	void	*mlx;
 	void	*mlx_win;
@@ -109,6 +120,7 @@ struct s_render {
 	t_vector2_f plane;
 	// t_vector2_d map;
 	t_vector2_f origin;
+	t_minimap	minimap;
 
 	// // Tab
 	// int		**tab;

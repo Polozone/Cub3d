@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 15:11:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 09:28:47 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,16 @@ void	print_grid(t_data *dt, t_render *data)
 		y++;
 	}
 }
+
+t_minimap	init_minimap(t_data *data)
+{
+	t_minimap	minimap;
+
+	minimap.minimap = mlx_new_image(data->render->mlx, 240, 180);
+	minimap.addr = mlx_get_data_addr(data->render->minimap.minimap, &data->render->minimap.bits_per_pixel, &data->render->minimap.line_length, &data->render->minimap.endian);
+	return (minimap);
+}
+
 void	init_win(t_data *data)
 {
 	void	*mlx;
@@ -84,9 +94,11 @@ void	init_win(t_data *data)
 		exit (-1);
 	}
 	// data->render->mlx_win = mlx_new_window(data->render->mlx, (data->maps->longest_line * data->render->cell_size), (data->maps->height * data->render->cell_size), "My window");
+	
 	data->render->mlx_win = mlx_new_window(data->render->mlx, 1200, 900, "My window");
 	data->render->img = mlx_new_image(data->render->mlx, 1200, 900);
 	data->render->addr = mlx_get_data_addr(data->render->img, &data->render->bits_per_pixel, &data->render->line_length, &data->render->endian);
+	data->render->minimap = init_minimap(data);
 }
 
 int	deal_key(int key, t_data *data)
