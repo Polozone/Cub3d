@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 09:39:46 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:10:57 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,61 +18,6 @@ double	get_camera_X(int width, int x)
 
 	resultat = (2 * x / (double)width) - 1;
 	return (resultat);
-}
-
-void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x)
-{
-	int	i;
-
-	i = 0;
-	while (i < drawStart)
-	{
-		my_mlx_pixel_put(data->render, x, i, 0xb3bcf5);
-		i++;
-	}
-	while (drawStart < drawEnd)
-	{
-		my_mlx_pixel_put(data->render, x, drawStart, color);
-		drawStart++;
-	}
-	while (drawEnd < 900)
-	{
-		my_mlx_pixel_put(data->render, x, drawEnd, 0x242222);
-		drawEnd++;
-	}
-	return ;
-}
-
-void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x)
-{
-	double	perpWallDist;
-	int		lineHeight;
-	int		h = 900;
-	int		drawStart;
-	int		drawEnd;
-
-	if (side == 0)
-		perpWallDist = (sideDistX - deltaDistX);
-	else
-		perpWallDist = (sideDistY - deltaDistY);
-	lineHeight = (h / perpWallDist) * 40;
-	drawStart = -lineHeight * 0.5 + h * 0.5;
-    if(drawStart < 0)
-		drawStart = 0;
-    drawEnd = lineHeight * 0.5 + h * 0.5;
-    if(drawEnd >= h)
-		drawEnd = h - 1;
-	if (side == 0)
-	{
-		render_line(data, 0xFFFFFF, drawStart, drawEnd, x);
-		// printf("EW");
-	}
-	else
-	{
-		render_line(data, 0x000000, drawStart, drawEnd, x);
-		// printf("NS");
-	}
-	return ;
 }
 
 int dda(t_data *data)
@@ -132,7 +77,7 @@ int dda(t_data *data)
 			}
 			if (data->maps->map[mapY / 40][mapX / 40] == '1')
 			{
-				render_wall(data, sideDistX, sideDistY, side, deltaDistX, deltaDistY, mapX, mapY, x);
+				render_wall(data, sideDistX, sideDistY, side, deltaDistX, deltaDistY, mapX, mapY, x, stepX, stepY);
 				hit = 1;
 			}
 		}

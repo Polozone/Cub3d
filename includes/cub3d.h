@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 09:40:10 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:32:50 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ enum s_bool
 struct s_params
 {
 	int		type;
-	char	*coord;
-	char	*path;
-	char	*color;
-	char	**rgb;
-	int		stop;
+	char	*coord; // orientation of the texture
+	char	*path; // path of the texture
+	char	*color; // F or C
+	char	**rgb; // rgc color of the "color" variable
+	int		stop; // to while
 };
 
 struct s_math
@@ -176,8 +176,9 @@ char		*map_to_line(char **arr);
 /************RENDER****************/
 
 int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
-void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x);
+void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x, int stepX, int stepY);
 void	clear_img(t_data *data);
+void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, char *name);
 
 /************DDA****************/
 

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 09:40:39 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:02:43 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,22 @@ void	init_win(t_data *data)
 		exit (-1);
 	}
 	// data->render->mlx_win = mlx_new_window(data->render->mlx, (data->maps->longest_line * data->render->cell_size), (data->maps->height * data->render->cell_size), "My window");
-	
 	data->render->mlx_win = mlx_new_window(data->render->mlx, 1200, 900, "My window");
 	data->render->img = mlx_new_image(data->render->mlx, 1200, 900);
 	data->render->addr = mlx_get_data_addr(data->render->img, &data->render->bits_per_pixel, &data->render->line_length, &data->render->endian);
 	data->render->minimap = init_minimap(data);
 }
 
+int	exit_program_from_escape(t_data *data)
+{
+	mlx_destroy_window(data->render->mlx, data->render->mlx_win);
+	exit(0);
+}
+
 int	deal_key(int key, t_data *data)
 {
+	if (key == 53)
+		exit_program_from_escape(data);
 	if (key == 13)
 		move_up(data);
 	if (key == 0)
@@ -113,7 +120,7 @@ int	deal_key(int key, t_data *data)
 	if (key == 2)
 		move_right(data);
 	clear_img(data);
-	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	dda(data);
 	return (0);
 }
@@ -122,15 +129,7 @@ void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
-	// print_grid(data, data->render);
-	// _bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
-	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
-	// dda(data, data->render->origin, data->render->dir);
-	//_bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
-	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
-	// print_grid(data, data->render);
 	dda(data);
-	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	mlx_hook(data->render->mlx_win, 2, 0, deal_key, data);
 	mlx_loop(data->render->mlx);
 }
