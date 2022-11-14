@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 09:46:32 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:09:16 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 	t_prg		prg;
 	t_rad		rad;
 	t_math		math;
+	t_img		img;
 	// t_rad		rad;
 
     (void)argc;
@@ -39,6 +40,7 @@ int main(int argc, char **argv)
 	data.prg = &prg;
 	data.rad = &rad;
 	data.math = &math;
+	data.wall = &img;
 	init_math(&data);
 	// data.rad = &rad;
     // parse_map_params(&data, argv[1]);
