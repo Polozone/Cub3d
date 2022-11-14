@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 15:22:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 16:12:23 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int main(int argc, char **argv)
 	t_prg		prg;
 	t_rad		rad;
 	t_math		math;
+	t_img		img;
 	// t_rad		rad;
 
     (void)argc;
@@ -47,6 +48,7 @@ int main(int argc, char **argv)
 	data.prg = &prg;
 	data.rad = &rad;
 	data.math = &math;
+	data.wall = &img;
 	init_math(&data);
 	// data.rad = &rad;
     // parse_map_params(&data, argv[1]);

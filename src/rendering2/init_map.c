@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 16:02:40 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 16:13:01 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,18 +142,17 @@ int	update(t_data *data)
 	return (0);
 }
 
+int		init_imgs(t_data *data)
+{
+	data->render->walls = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->render->width, &data->render->height);
+	data->wall->addr = mlx_get_data_addr(data->render->walls, &data->wall->bits_per_pixel, &data->wall->size_line, &data->wall->endian);
+}
+
 void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
-	print_minimap(data);
-	// print_grid(data, data->render);
-	// _bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
-	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
-	// dda(data, data->render->origin, data->render->dir);
-	//_bresenham_test(data->render, data->render->origin.x, data->render->origin.y, data->render->dir.x, data->render->dir.y);
-	// _bresenham_c(data->render, data->render->origin, vect_f_to_d(data->render->dest), 152152152);
-	// print_grid(data, data->render);
+	init_imgs(data);
 	dda(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 }

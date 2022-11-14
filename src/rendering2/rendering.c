@@ -6,13 +6,13 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 14:00:16 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 16:13:42 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	render_floor(t_data *data, int drawStart, int x, char *name)
+void	render_ceil(t_data *data, int drawStart, int x, char *name)
 {
 	int		i;
 
@@ -28,25 +28,39 @@ void	render_floor(t_data *data, int drawStart, int x, char *name)
 	}
 }
 
+int get_color_from_xpm(t_data *data, int x, int y)
+{
+	// int		size = data->wall->bits_per_pixel / 8;
+
+	// int pos = (y * data->wall->size_line + x * (data->wall->bits_per_pixel / 8));
+	// char *dst = data->wall->addr + (pos);
+	// return ((unsigned int*)dst);
+	//printf("%d %d\n", x, y);
+	return (*(unsigned int *)(data->wall->addr
+        + (y * data->wall->size_line + x * data->wall->bits_per_pixel / 8))
+    );
+}
+
 void	render_walls(t_data *data, int drawStart, int drawEnd, int x, int color, char *name)
 {
-	// void	*img;
-	// int width;
-	// int height;
-
-	// img = mlx_xpm_file_to_image(data->render->mlx, name, &width, &height);
-	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, img, x, drawEnd);
+	int sizeWall = drawEnd - drawStart;
+	float ratio = 64 / (float)sizeWall;
+	// printf("wall = %f\n", ratio);
 	while (drawStart < drawEnd)
 	{
 		if (drawStart <= (data->maps->height * data->render->cell_size / 5)
 			&& x <= data->maps->longest_line * (data->render->cell_size / 5))
 			drawStart = (data->maps->height * data->render->cell_size / 5);
 		my_mlx_pixel_put(data->render, x, drawStart, color);
+		int color2;
+		// printf("%f %f\n", x * ratio, (drawEnd - drawStart) * ratio);
+		color2 = get_color_from_xpm(data, x * ratio, (drawEnd - drawStart) * ratio);
+		my_mlx_pixel_put(data->render, x, drawStart, color2);
 		drawStart++;
 	}
 }
 
-void	render_ceil(t_data *data, int drawEnd, int x, int color, char *name)
+void	render_floor(t_data *data, int drawEnd, int x, int color, char *name)
 {
 	while (drawEnd < 900)
 	{	
@@ -57,9 +71,9 @@ void	render_ceil(t_data *data, int drawEnd, int x, int color, char *name)
 
 void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, char *name)
 {
-	render_floor(data, drawStart, x, name);
+	// render_ceil(data, drawStart, x, name);
 	render_walls(data, drawStart, drawEnd, x, color, name);
-	render_ceil(data, drawEnd, x, 0x242222, name);
+	render_floor(data, drawEnd, x, 0x242222, name);
 	return ;
 }
 
