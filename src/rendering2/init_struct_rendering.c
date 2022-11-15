@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_rendering.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 11:27:42 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 13:33:15 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:53:16 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	init_data(t_data *data)
 	data->render->plane.x = (0);
 	data->render->plane.y = (0.66);
 	data->render->angle = 0;
+	ft_bzero(&data->keytab, 200);
 	return ;
 }

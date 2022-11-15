@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/01 11:13:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/15 13:54:45 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,10 +225,8 @@ t_bool  parse_map_params(t_data *data, char *filename)
 		}
 	}
 	data->map_line = map_to_line(&file[i]);
-	/* A faire avant de free: 
-			- mettre les params dans la structure param
-	*/
 	init_params(data, params);
+	createRGB(data);
 	free_2d_array(params);
 	free_2d_array(file);
 	return (true);

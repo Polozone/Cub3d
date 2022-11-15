@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/15 14:43:48 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:45:43 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,41 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define MOV_SPD 15
-# define ROT_SPD 0.1
+# define MOV_SPD 5
+# define ROT_SPD 0.05
+
+// Keycode
+	# define MOUSE_UP 4
+	# define MOUSE_DOWN 5
+	# define MOUSE_WHELL 3
+	# define LMB 1
+	# define RMB 2
+	# define KEY_C 8
+	# define KEY_V 9
+	# define KEY_B 11
+	# define KEY_Q 12
+	# define KEY_R 15
+	# define KEY_O 31
+	# define KEY_P 35
+	# define KEY_TAB 48
+	# define KEY_ESC 53
+	# define KEY_UP 126
+	# define KEY_DOWN 125
+	# define KEY_LEFT 123
+	# define KEY_RIGHT 124
+	# define KEY_W 13
+	# define KEY_E 14
+	# define KEY_S 1
+	# define KEY_A 0
+	# define KEY_D 2
+	# define KEY_1 83
+	# define KEY_2 84
+	# define KEY_4 86
+	# define KEY_5 87
+	# define KEY_7 89
+	# define KEY_8 91
+	# define KEY_PLUS 69
+	# define KEY_MINUS 78
 
 typedef struct	s_data t_data;
 typedef struct	s_params t_params;
@@ -47,12 +80,13 @@ enum s_bool
 // Si type = 1 : couleurs
 struct s_params
 {
-	int		type;
-	char	*coord; // orientation of the texture
-	char	*path; // path of the texture
-	char	*color; // F or C
-	char	**rgb; // rgc color of the "color" variable
-	int		stop; // to while
+	int				type;
+	char			*coord; // orientation of the texture
+	char			*path; // path of the texture
+	char			*color; // F or C
+	char			**rgb; // rgc color of the "color" variable
+	unsigned long	hexa_rgb;
+	int				stop; // to while
 };
 
 struct s_math
@@ -69,6 +103,7 @@ struct s_data
 	t_prg			*prg;
 	t_rad			*rad;
 	t_math			*math;
+	int				keytab[200];
 	t_img			*wall;
 };
 
@@ -230,7 +265,13 @@ int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
 
 
 
+/************EVENTS****************/
+int		update(t_data *data);
+int		key_release(int	key, t_data *data);
+int		deal_key(int key, t_data *data);
 
+void	rotate_left(t_data *data);
+void	rotate_right(t_data *data);
 // THEO
 
 int 	draw_player_1(t_data *data);
@@ -239,6 +280,11 @@ void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_
 void	print_grid(t_data *dt, t_render *data);
 
 int		print_minimap(t_data *data);
+
+unsigned long	createRGB(t_data *data);
+
+int				ft_atoi_base(char *str, char *base);
+char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
 
 #endif

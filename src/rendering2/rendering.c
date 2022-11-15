@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/15 14:03:22 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:47:39 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	render_ceil(t_data *data, int drawStart, int x, char *name)
 	i = 0;
 	while (i < drawStart)
 	{
-		my_mlx_pixel_put(data->render, x, i, 0xb3bcf5);
+		if (x <= data->maps->longest_line * (data->render->cell_size / 5)
+			&& i <= (data->maps->height * data->render->cell_size / 5))
+			;
+		else
+			my_mlx_pixel_put(data->render, x, i, 0xb3bcf5);
 		i++;
 	}
 }
@@ -42,6 +46,9 @@ void	render_walls(t_data *data, t_img *img, int drawStart, int drawEnd, int x, i
 	float ratioY = (hitY - (int)hitY);
 	while (drawStart < drawEnd)
 	{
+		if (drawStart <= (data->maps->height * data->render->cell_size / 5)
+			&& x <= data->maps->longest_line * (data->render->cell_size / 5))
+			drawStart = (data->maps->height * data->render->cell_size / 5);
 		if (side == 2)
 			color2 = get_color_from_xpm(img, ratioX * 64, (drawEnd - drawStart) * ratio);
 		if (side == 1)
@@ -54,8 +61,8 @@ void	render_walls(t_data *data, t_img *img, int drawStart, int drawEnd, int x, i
 void	render_floor(t_data *data, int drawEnd, int x, int color)
 {
 	while (drawEnd < 900)
-	{
-		my_mlx_pixel_put(data->render, x, drawEnd, 0x242222);
+	{	
+		my_mlx_pixel_put(data->render, x, drawEnd, color);
 		drawEnd++;
 	}
 }
