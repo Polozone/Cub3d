@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 16:12:49 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/15 13:07:40 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ enum s_bool
 // Si type = 1 : couleurs
 struct s_params
 {
-	int		type;
-	char	*coord; // orientation of the texture
-	char	*path; // path of the texture
-	char	*color; // F or C
-	char	**rgb; // rgc color of the "color" variable
-	int		stop; // to while
+	int				type;
+	char			*coord; // orientation of the texture
+	char			*path; // path of the texture
+	char			*color; // F or C
+	char			**rgb; // rgc color of the "color" variable
+	unsigned long	hexa_rgb;
+	int				stop; // to while
 };
 
 struct s_math
@@ -216,7 +217,7 @@ char		*map_to_line(char **arr);
 int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
 void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x, int stepX, int stepY);
 void	clear_img(t_data *data);
-void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, char *name);
+void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, char *name, int mapX);
 
 /************DDA****************/
 
@@ -280,6 +281,11 @@ void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_
 void	print_grid(t_data *dt, t_render *data);
 
 int		print_minimap(t_data *data);
+
+unsigned long	createRGB(t_data *data);
+
+int				ft_atoi_base(char *str, char *base);
+char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
 
 #endif

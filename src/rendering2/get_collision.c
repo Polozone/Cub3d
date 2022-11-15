@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 16:12:57 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/15 13:02:50 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int dda(t_data *data)
 		int mapY = (int)data->render->origin.y;
 		double sideDistX;
 		double sideDistY;
+
+
 		if (rayDirX < 0)
 		{
 			stepX = -1;
