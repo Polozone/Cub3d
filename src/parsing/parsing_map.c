@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/15 14:42:54 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:48:12 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 		data->maps->map[i][x] = 0;
 		j++;
 	}
+	i = 0;
+	while (data->maps->map[i])
+	{
+		printf("%s\n", data->maps->map[i]);
+		i++;
+	}
 	free(line);
 }
 
@@ -67,6 +73,7 @@ static void		str_to_map(t_data *data, int fd, char *tmp)
 	tmp = data->map_line;
 	data->map_line = ft_strtrim(data->map_line, "\n");
 	// free(tmp);
+	// printf("%s", data->map_line);
 	line_clear = clear_endmap(data->map_line);
 	data->maps->longest_line = get_longest_line(line_clear);
 	nbr_line = count_nl(line_clear);

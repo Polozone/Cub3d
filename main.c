@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/15 14:45:29 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:47:08 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	init_math(t_data *data)
 {
 	data->math->H_PI = M_PI / 180;
 }
-
 
 void	loops_and_hooks(t_data *data)
 {
@@ -40,7 +39,7 @@ int main(int argc, char **argv)
     (void)argc;
 	// init_parsing_map(&data, &map, argv[1]);
 	// free_2d_array(map.map);
-    if (parse_map_params(&data, argv[1]) == true)
+    if (parse_map_params(&data, argv[1]) == false)
     {
         free(data.map_line);
         free_param_struct(&data);
@@ -50,8 +49,6 @@ int main(int argc, char **argv)
 	data.math = &math;
 	data.wall = &img;
 	init_math(&data);
-	// data.rad = &rad;
-    // parse_map_params(&data, argv[1]);
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
 	{
 		// free
@@ -60,6 +57,6 @@ int main(int argc, char **argv)
 	init_mlx(&data);
 	loops_and_hooks(&data);
 	free_2d_array(map.map);
-    // get_cub_file(&data, argv[1]);
+    get_cub_file(&data, argv[1]);
     return (0);
 }

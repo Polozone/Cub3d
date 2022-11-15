@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/15 14:41:15 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/15 15:44:31 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,12 @@ unsigned long createRGB(t_data *data)
 			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[2]), 0);
 			tmp = ft_strjoin(tmp, tmp1);
 			
-			printf("%s\n", ft_convert_base(tmp, "0123456789abcdef", "0123456789"));
-			printf("ic  = %s\n", tmp);
+			// printf("%s\n", ft_convert_base(tmp, "0123456789abcdef", "0123456789"));
+			// printf("ic  = %s\n", tmp);
 		}
 		tmp = NULL;
 		i++;
 	}
-
 	return (0);
 }
 
@@ -166,13 +165,13 @@ int		get_longest_line(char *line)
 	while (line[i])
 	{
 		tmp = 0;
-		while (line[i] && line[i] != '\n')
-		{
-			tmp++;
-			i++;
-		}
-		if (tmp > longest)
-			longest = tmp;
+		// while (line[i] && line[i] != '\n')
+		// {
+		// 	tmp++;
+		// 	i++;
+		// }
+		// if (tmp > longest)
+		// 	longest = tmp;
 		i++;
 	}
 	return (longest);

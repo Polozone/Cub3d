@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/15 14:45:43 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:20:29 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,10 @@ struct s_render {
 	int		line_length;
 	int		endian;
 	int		angle;
-	int		height;
-	int		width;
-	void	*walls;
 	int		cell_size;
+	void	*walls;
+	int		width;
+	int		height;
 	t_img	*east;
 	t_img	*west;
 	t_img	*north;
