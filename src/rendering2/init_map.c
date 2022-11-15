@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/14 14:55:22 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:42:33 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,28 @@ int	deal_key(int key, t_data *data)
 
 int		init_imgs(t_data *data)
 {
-	data->render->walls = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->render->width, &data->render->height);
-	data->wall->addr = mlx_get_data_addr(data->render->walls, &data->wall->bits_per_pixel, &data->wall->size_line, &data->wall->endian);
+	data->render->east->img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->render->width, &data->render->height);
+	data->render->east->addr = mlx_get_data_addr(data->render->east->img, &data->render->east->bits_per_pixel, &data->render->east->size_line, &data->render->east->endian);
+
+	data->render->west->img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_west_texture.xpm", &data->render->width, &data->render->height);
+	data->render->west->addr = mlx_get_data_addr(data->render->west->img, &data->render->west->bits_per_pixel, &data->render->west->size_line, &data->render->west->endian);
+
+	data->render->south->img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_south_texture.xpm", &data->render->width, &data->render->height);
+	data->render->south->addr = mlx_get_data_addr(data->render->south->img, &data->render->south->bits_per_pixel, &data->render->south->size_line, &data->render->south->endian);
+
+	data->render->north->img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_north_texture.xpm", &data->render->width, &data->render->height);
+	data->render->north->addr = mlx_get_data_addr(data->render->north->img, &data->render->north->bits_per_pixel, &data->render->north->size_line, &data->render->north->endian);
+	if (data->wall->addr == NULL)
+	{
+		// free and exit; 
+	}
+	// data->render->walls = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->render->width, &data->render->height);
+	// data->wall->addr = mlx_get_data_addr(data->render->walls, &data->wall->bits_per_pixel, &data->wall->size_line, &data->wall->endian);
+	// if (data->wall->addr == NULL)
+	// {
+	// 	// free and exit; 
+	// }
+	return (0);
 }
 
 void	init_mlx(t_data *data)
