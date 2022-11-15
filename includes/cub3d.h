@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 16:11:03 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:43:48 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ struct s_data
 
 struct s_img
 {
+	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		size_line;
@@ -110,16 +111,14 @@ struct s_render {
 	int		line_length;
 	int		endian;
 	int		angle;
-	void	*walls;
 	int		height;
 	int		width;
-	// int		win_height;
-	// int		win_width;
+	void	*walls;
 	int		cell_size;
-	// int		view_dst;
-	// int		fov;
-	// int		rays_nbr;
-	// t_ray	*rays;
+	t_img	*east;
+	t_img	*west;
+	t_img	*north;
+	t_img	*south;
 	
 	t_vector2_f dir;
 	t_vector2_f plane;
@@ -182,7 +181,7 @@ char		*map_to_line(char **arr);
 int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
 void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x, int stepX, int stepY);
 void	clear_img(t_data *data);
-void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, char *name);
+void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side);
 
 /************DDA****************/
 
