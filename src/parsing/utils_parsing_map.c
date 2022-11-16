@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/15 15:44:31 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 09:26:56 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,21 +157,25 @@ int		get_longest_line(char *line)
 	int		i;
 	int		longest;
 	int		tmp;
+	int		max;
 
 	i = 0;
 	longest = 0;
+	max = ft_strlen(line);
 	if (!line)
 		return (-1);
 	while (line[i])
 	{
 		tmp = 0;
-		// while (line[i] && line[i] != '\n')
-		// {
-		// 	tmp++;
-		// 	i++;
-		// }
-		// if (tmp > longest)
-		// 	longest = tmp;
+		while (line[i] && line[i] != '\n')
+		{
+			tmp++;
+			i++;
+		}
+		if (i >= max)
+		 	return (longest);
+		if (tmp > longest)
+			longest = tmp;
 		i++;
 	}
 	return (longest);

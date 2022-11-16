@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/15 15:20:29 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 09:56:38 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,7 @@ struct s_render {
 	
 	t_vector2_f dir;
 	t_vector2_f plane;
-	// t_vector2_d map;
 	t_vector2_f origin;
-
-	// // Tab
-	// int		**tab;
-	// int		tab_width;
-	// int		tab_height;
 };
 
 struct s_rad{

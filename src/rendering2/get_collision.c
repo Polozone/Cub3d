@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/15 15:19:01 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 10:07:07 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int dda(t_data *data)
 
 		int mapX = (int)data->render->origin.x;
 		int mapY = (int)data->render->origin.y;
-		// printf("%d et %d\n", mapX / 40, mapY / 40);
 		double sideDistX;
 		double sideDistY;
 
@@ -78,7 +77,6 @@ int dda(t_data *data)
 				mapY += stepY;
 				side = 1;
 			}
-			// printf("%d et %d\n", mapX / 40, mapY / 40);
 			if (data->maps->map[mapY / 40][mapX / 40] == '1')
 			{
 				_bresenham(data->render, (data->render->origin.x / 5), data->render->origin.y / 5, mapX / 5, mapY / 5);
