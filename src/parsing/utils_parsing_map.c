@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 10:25:21 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 13:54:53 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,14 @@ unsigned long createRGB(t_data *data)
 				free(tmp0);
 			}
 			tmp = ft_strjoin(tmp, tmp1);
+			tmp0 = ft_convert_base(tmp, "0123456789abcdef", "0123456789");
+			if (!ft_strncmp("F", data->params[i].color, ft_strlen(data->params[i].color)))
+			{
+				data->floor_color = ft_atoi(tmp0);
+			}
+			else if (!ft_strncmp("C", data->params[i].color, ft_strlen(data->params[i].color)))
+				data->ceil_color = ft_atoi(tmp0);
+			free(tmp0); 
 		}
 		tmp = NULL;
 		i++;

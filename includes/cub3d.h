@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 10:26:05 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 15:38:22 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,26 @@ struct s_params
 	char			*path; // path of the texture
 	char			*color; // F or C
 	char			**rgb; // rgc color of the "color" variable
-	unsigned long	hexa_rgb;
+	int				hexa_rgb;
 	int				stop; // to while
 };
 
 struct s_math
 {
 	float	H_PI;
+};
+
+struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	int		height;
+	int		width;
+
+	int		test;
 };
 
 struct s_data
@@ -105,18 +118,18 @@ struct s_data
 	t_math			*math;
 	int				keytab[200];
 	t_img			*wall;
+	
+	
+	t_img	east;
+	t_img	west;
+	t_img	north;
+	t_img	south;
+
+	int		ceil_color;
+	int		floor_color;
 };
 
-struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	int		height;
-	int		width;
-};
+
 
 struct s_vector_2f
 {
@@ -150,6 +163,7 @@ struct s_render {
 	void	*walls;
 	int		width;
 	int		height;
+
 	t_img	*east;
 	t_img	*west;
 	t_img	*north;
@@ -280,5 +294,7 @@ unsigned long	createRGB(t_data *data);
 int				ft_atoi_base(char *str, char *base);
 char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
+
+int		init_imgs(t_data *data);
 
 #endif

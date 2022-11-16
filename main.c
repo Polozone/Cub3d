@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 10:26:15 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 14:09:37 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int main(int argc, char **argv)
     (void)argc;
 	// init_parsing_map(&data, &map, argv[1]);
 	// free_2d_array(map.map);
+	data.ceil_color = 0;
+	data.floor_color = 0;
     if (parse_map_params(&data, argv[1]) == false)
     {
         free(data.map_line);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 10:25:57 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 10:40:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int		init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 	data->render = render;
 	data->maps = map;
 	data->maps->map = NULL;
-	// if (check_charmap(data->map_line) == false)
-	// 	return (-1);
-	// if (is_one_player(data->map_line) == false)
-	// 	return (-1);
+	if (check_charmap(data->map_line) == false)
+		return (-1);
+	if (is_one_player(data->map_line) == false)
+		return (-1);
 	str_to_map(data, fd, tmp);
 	if (is_valid_map(data) == false)
 		return (-1);

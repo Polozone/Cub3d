@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/16 10:26:11 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/16 15:50:59 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,11 @@ LIBFLAGS= -framework OpenGL -framework AppKit
 all: maker ${NAME}
 
 %.o : %.c	${HEADER}
-			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ -fsanitize=address -g3
+			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ 
 
 
-${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a
-		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a -fsanitize=address -g3
+${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
+		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a 
 
 maker:
 		${MAKE} -C ${LIBFT}
