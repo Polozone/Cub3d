@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/15 14:42:54 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:57:50 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 
 t_bool			check_charmap(char *line)
 {
-	int		i;
+	// int		i;
 
-	i = 0;
-	while (line[i])
-	{
-		if (is_charmap(line[i]) == false)
-		{
-			dprintf(2, "||%c||", line[i]);
-			write(2, "Invalid char in the map\n", 24);
-			return (false);
-		}
-		i++;
-	}
+	// i = 0;
+	// while (line[i])
+	// {
+	// 	if (is_charmap(line[i]) == false)
+	// 	{
+	// 		dprintf(2, "||%c||", line[i]);
+	// 		write(2, "Invalid char in the map\n", 24);
+	// 		return (false);
+	// 	}
+	// 	i++;
+	// }
 	return (true);
 }
 
@@ -89,10 +89,10 @@ int		init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 	data->render = render;
 	data->maps = map;
 	data->maps->map = NULL;
-	if (check_charmap(data->map_line) == false)
-		return (-1);
-	if (is_one_player(data->map_line) == false)
-		return (-1);
+	// if (check_charmap(data->map_line) == false)
+	// 	return (-1);
+	// if (is_one_player(data->map_line) == false)
+	// 	return (-1);
 	str_to_map(data, fd, tmp);
 	if (is_valid_map(data) == false)
 		return (-1);
