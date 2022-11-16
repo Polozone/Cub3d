@@ -6,7 +6,7 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/16 08:52:06 by pmulin           ###   ########.fr        #
+#    Updated: 2022/11/16 16:08:21 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,10 @@ LIBFLAGS= -framework OpenGL -framework AppKit
 all: maker ${NAME}
 
 %.o : %.c	${HEADER}
-			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ -fsanitize=address -g3
+			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ -fsanitize=address -g3 
 
 
-${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a
+${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
 		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a -fsanitize=address -g3
 
 maker:

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 09:26:56 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 13:50:17 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,10 +172,10 @@ int		get_longest_line(char *line)
 			tmp++;
 			i++;
 		}
-		if (i >= max)
-		 	return (longest);
 		if (tmp > longest)
 			longest = tmp;
+		if (i >= max)
+		 	return (longest);
 		i++;
 	}
 	return (longest);

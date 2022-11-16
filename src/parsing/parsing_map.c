@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 09:26:58 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 13:36:28 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 	i = -1;
 	j = 0;
 	x = 0;
+	// printf("LL == %d\n\n\n\n", longest_line);
 	while (++i < nbr_line)
 		data->maps->map[i] = malloc(sizeof(char) * (longest_line + 1));
-	data->maps->map[i] = 0;
-	i = -1;
-	while (++i < nbr_line)
+	i = 0;
+	while (i < nbr_line)
 	{
 		x = 0;
 		while (line[j] && line[j] != '\n')
 		{
+			// printf("test%d\n", x);
 			data->maps->map[i][x++] = line[j];
 			j++;
 		}
@@ -37,7 +38,10 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 			data->maps->map[i][x++] = ' ';
 		data->maps->map[i][x] = 0;
 		j++;
+		i++;
 	}
+	// dprintf(2, "%s", data->maps->map[0]);
+	data->maps->map[i] = 0;
 	free(line);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 08:39:40 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 15:54:07 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ int main(int argc, char **argv)
 	t_rad		rad;
 	t_math		math;
 	t_img		img;
-	// t_rad		rad;
 
     (void)argc;
-	// init_parsing_map(&data, &map, argv[1]);
-	// free_2d_array(map.map);
     if (parse_map_params(&data, argv[1]) == false)
     {
         free(data.map_line);

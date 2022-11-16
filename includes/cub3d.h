@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 09:56:38 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 15:41:52 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,13 @@ struct s_data
 
 struct s_img
 {
-	void	*img;
-	char	*addr;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
 	int		height;
 	int		width;
+	char	*addr;
+	void	*img;
 };
 
 struct s_vector_2f
@@ -150,6 +150,7 @@ struct s_render {
 	void	*walls;
 	int		width;
 	int		height;
+	int		bits_per_px;
 	t_img	*east;
 	t_img	*west;
 	t_img	*north;
@@ -210,7 +211,7 @@ char		*map_to_line(char **arr);
 int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
 void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x, int stepX, int stepY);
 void	clear_img(t_data *data);
-void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side);
+void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side, int h);
 
 /************DDA****************/
 
