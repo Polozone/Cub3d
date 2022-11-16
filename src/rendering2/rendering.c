@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 16:29:48 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:34:53 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, t_i
 {
 	render_ceil(data, drawStart, x);
 	render_walls(data, img, drawStart, drawEnd, x, color, mapX, mapY, side);
-	render_floor(data, drawEnd, x, data->floor_color);
+	render_floor(data, drawEnd, x, data->floor_color, h);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 16:31:03 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:34:30 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,25 +118,14 @@ struct s_data
 	t_math			*math;
 	int				keytab[200];
 	t_img			*wall;
-	
+	int				ceil_color;
+	int				floor_color;
 	
 	t_img	east;
 	t_img	west;
 	t_img	north;
 	t_img	south;
-
-struct s_img
-{
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	int		height;
-	int		width;
-	char	*addr;
-	void	*img;
 };
-
-
 
 struct s_vector_2f
 {
