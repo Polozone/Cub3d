@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 10:20:40 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 10:25:21 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ unsigned long createRGB(t_data *data)
 		tmp = NULL;
 		i++;
 	}
-
 	return (0);
 }
 
@@ -170,9 +169,11 @@ int		get_longest_line(char *line)
 	int		i;
 	int		longest;
 	int		tmp;
+	int		max;
 
 	i = 0;
 	longest = 0;
+	max = ft_strlen(line);
 	if (!line)
 		return (-1);
 	while (line[i])
@@ -183,6 +184,8 @@ int		get_longest_line(char *line)
 			tmp++;
 			i++;
 		}
+		if (i >= max)
+		 	return (longest);
 		if (tmp > longest)
 			longest = tmp;
 		i++;

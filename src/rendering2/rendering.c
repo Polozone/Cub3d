@@ -6,13 +6,13 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/15 14:47:39 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 10:22:35 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	render_ceil(t_data *data, int drawStart, int x, char *name)
+void	render_ceil(t_data *data, int drawStart, int x)
 {
 	int		i;
 
@@ -28,10 +28,16 @@ void	render_ceil(t_data *data, int drawStart, int x, char *name)
 	}
 }
 
-int get_color_from_xpm(t_img *img, int x, int y)
+int get_color_from_xpm(t_data *data, int x, int y)
 {
-	char *color = (y * img->size_line + x * (img->bits_per_pixel / 8)) +img->addr;
+	// printf("%p\n", data->wall->addr);
+	// return (*(int *)(data->wall->addr
+    //     + (y * data->wall->size_line + x * data->wall->bits_per_pixel / 8)));
+
+	char *color = (y * data->wall->size_line + x * (data->wall->bits_per_pixel / 8)) + data->wall->addr;
 	return (*(int*)color);
+	// char *color = (y * img->size_line + x * (img->bits_per_pixel / 8)) + img->addr;
+	// return (*(int*)color);
 }
 
 void	render_walls(t_data *data, t_img *img, int drawStart, int drawEnd, int x, int color, int mapX, int mapY, int side)
@@ -46,14 +52,14 @@ void	render_walls(t_data *data, t_img *img, int drawStart, int drawEnd, int x, i
 	float ratioY = (hitY - (int)hitY);
 	while (drawStart < drawEnd)
 	{
-		if (drawStart <= (data->maps->height * data->render->cell_size / 5)
-			&& x <= data->maps->longest_line * (data->render->cell_size / 5))
-			drawStart = (data->maps->height * data->render->cell_size / 5);
+		// if (drawStart <= (data->maps->height * data->render->cell_size / 5)
+		// 	&& x <= data->maps->longest_line * (data->render->cell_size / 5))
+		// 	drawStart = (data->maps->height * data->render->cell_size / 5);
 		if (side == 2)
-			color2 = get_color_from_xpm(img, ratioX * 64, (drawEnd - drawStart) * ratio);
+			color2 = get_color_from_xpm(data, ratioX * 64, (drawEnd - drawStart) * ratio);
 		if (side == 1)
-			color2 = get_color_from_xpm(img, ratioY * 64, (drawEnd - drawStart) * ratio);
-		my_mlx_pixel_put(data->render, x, drawStart, color2);
+			color2 = get_color_from_xpm(data, ratioY * 64, (drawEnd - drawStart) * ratio);
+		my_mlx_pixel_put(data->render, x, drawStart, color);
 		drawStart++;
 	}
 }
@@ -69,7 +75,7 @@ void	render_floor(t_data *data, int drawEnd, int x, int color)
 
 void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side)
 {
-	// render_ceil(data, drawStart, x, name);
+	render_ceil(data, drawStart, x);
 	render_walls(data, img, drawStart, drawEnd, x, color, mapX, mapY, side);
 	render_floor(data, drawEnd, x, 0x242222);
 	return ;

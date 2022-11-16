@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/15 15:11:32 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/16 10:26:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,10 @@ struct s_render {
 	int		line_length;
 	int		endian;
 	int		angle;
-	int		height;
-	int		width;
-	void	*walls;
 	int		cell_size;
+	void	*walls;
+	int		width;
+	int		height;
 	t_img	*east;
 	t_img	*west;
 	t_img	*north;
@@ -157,13 +157,7 @@ struct s_render {
 	
 	t_vector2_f dir;
 	t_vector2_f plane;
-	// t_vector2_d map;
 	t_vector2_f origin;
-
-	// // Tab
-	// int		**tab;
-	// int		tab_width;
-	// int		tab_height;
 };
 
 struct s_rad{
