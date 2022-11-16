@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 13:36:28 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:31:30 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 
 t_bool			check_charmap(char *line)
 {
-	int		i;
+	// int		i;
 
-	i = 0;
-	while (line[i])
-	{
-		if (is_charmap(line[i]) == false)
-		{
-			dprintf(2, "||%c||", line[i]);
-			write(2, "Invalid char in the map\n", 24);
-			return (false);
-		}
-		i++;
-	}
+	// i = 0;
+	// while (line[i])
+	// {
+	// 	if (is_charmap(line[i]) == false)
+	// 	{
+	// 		dprintf(2, "||%c||", line[i]);
+	// 		write(2, "Invalid char in the map\n", 24);
+	// 		return (false);
+	// 	}
+	// 	i++;
+	// }
 	return (true);
 }
 

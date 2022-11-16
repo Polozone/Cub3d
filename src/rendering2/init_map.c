@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 15:54:09 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:31:59 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,19 @@ int	update(t_data *data)
 }
 
 int		init_imgs(t_data *data)
-{
-	// data->render->east->img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->render->east->width, &data->render->east->height);
-	// data->render->east->addr = mlx_get_data_addr(data->render->east->img, &data->render->east->bits_per_pixel, &data->render->east->size_line, &data->render->east->endian);
+{	
+	data->east.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->east.width, &data->east.height);
+	data->east.addr = mlx_get_data_addr(data->east.img, &data->east.bits_per_pixel, &data->east.size_line, &data->east.endian);
 	
-	data->wall->img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->render->width, &data->render->height);
-	data->wall->addr = mlx_get_data_addr(data->wall->img, &data->wall->bits_per_pixel, &data->wall->size_line, &data->wall->endian);
+	data->west.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_west_texture.xpm", &data->west.width, &data->west.height);
+	data->west.addr = mlx_get_data_addr(data->west.img, &data->west.bits_per_pixel, &data->west.size_line, &data->west.endian);
+	
+	data->north.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_north_texture.xpm", &data->north.width, &data->north.height);
+	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bits_per_pixel, &data->north.size_line, &data->east.endian);
+	
+	data->south.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_south_texture.xpm", &data->south.width, &data->south.height);
+	data->south.addr = mlx_get_data_addr(data->south.img, &data->south.bits_per_pixel, &data->south.size_line, &data->south.endian);
+
 	return (0);
 }
 
@@ -156,9 +163,9 @@ void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
-	// printf("%f et %f\n",  data->render->origin.x, data->render->origin.y);
 	init_imgs(data);
-	data->render->bits_per_px = data->wall->bits_per_pixel / 8;
+	// printf("%f et %f\n",  data->render->origin.x, data->render->origin.y);
+	
 	// dda(data);
 	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 }

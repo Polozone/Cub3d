@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 15:54:07 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:30:15 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int main(int argc, char **argv)
 	t_img		img;
 
     (void)argc;
+	// init_parsing_map(&data, &map, argv[1]);
+	// free_2d_array(map.map);
+	data.ceil_color = 0;
+	data.floor_color = 0;
     if (parse_map_params(&data, argv[1]) == false)
     {
         free(data.map_line);

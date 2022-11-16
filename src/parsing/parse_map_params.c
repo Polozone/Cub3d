@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_params.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/15 15:35:42 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 13:50:36 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ int	init_params(t_data *data, char **params)
 		data->params[i].color = NULL;
 		data->params[i].rgb = NULL;
 		data->params[i].stop = 0;
+		data->params[i].hexa_rgb = 0;
 	}
 	data->params[6].stop = 1;
 	fill_params(data, params);

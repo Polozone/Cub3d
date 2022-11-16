@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 13:50:17 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:31:37 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ unsigned long createRGB(t_data *data)
 	unsigned long	rgb;
 	char			*tmp;
 	char			*tmp1;
+	char			*tmp0;
 	char			*tmpmem;
 
 	i = 0;
@@ -128,23 +129,42 @@ unsigned long createRGB(t_data *data)
 	{
 		if (data->params[i].color != NULL)
 		{
-			if (int_len(ft_atoi(data->params[i].rgb[0])) != 3)
-				data->params[i].rgb[0] = fill_color(data->params[i].rgb[0]);
 			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[0]), 0);
+			if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
+			{
+				tmp0 = tmp1;
+				tmp1 = ft_strjoin(tmp1, "0");
+				free(tmp0);
+			}
 			tmp = ft_strjoin(tmp, tmp1);
-
-			if (int_len(ft_atoi(data->params[i].rgb[1])) != 3)
-				data->params[i].rgb[1] = fill_color(data->params[i].rgb[1]);
-			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[1]), 0);
-			tmp = ft_strjoin(tmp, tmp1);
-
-			if (int_len(ft_atoi(data->params[i].rgb[2])) != 3)
-				data->params[i].rgb[2] = fill_color(data->params[i].rgb[2]);
-			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[2]), 0);
-			tmp = ft_strjoin(tmp, tmp1);
+			free(tmp1);
 			
-			// printf("%s\n", ft_convert_base(tmp, "0123456789abcdef", "0123456789"));
-			// printf("ic  = %s\n", tmp);
+			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[1]), 0);
+			if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
+			{
+				tmp0 = tmp1;
+				tmp1 = ft_strjoin(tmp1, "0");
+				free(tmp0);
+			}
+			tmp = ft_strjoin(tmp, tmp1);
+			free(tmp1);
+
+			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[2]), 0);
+			if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
+			{
+				tmp0 = tmp1;
+				tmp1 = ft_strjoin(tmp1, "0");
+				free(tmp0);
+			}
+			tmp = ft_strjoin(tmp, tmp1);
+			tmp0 = ft_convert_base(tmp, "0123456789abcdef", "0123456789");
+			if (!ft_strncmp("F", data->params[i].color, ft_strlen(data->params[i].color)))
+			{
+				data->floor_color = ft_atoi(tmp0);
+			}
+			else if (!ft_strncmp("C", data->params[i].color, ft_strlen(data->params[i].color)))
+				data->ceil_color = ft_atoi(tmp0);
+			free(tmp0); 
 		}
 		tmp = NULL;
 		i++;
