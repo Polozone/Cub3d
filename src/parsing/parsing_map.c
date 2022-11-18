@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 13:41:09 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:54:37 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void		str_to_map(t_data *data, int fd, char *tmp)
 	tmp = data->map_line;
 	data->map_line = ft_strtrim(data->map_line, "\n 	");
 	// free(tmp);
-	printf("%s", line_clear);
 	line_clear = clear_endmap(data->map_line);
 	data->maps->longest_line = get_longest_line(line_clear);
 	nbr_line = count_nl(line_clear);
@@ -97,12 +96,11 @@ int		init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 	if (is_one_player(data->map_line) == false)
 		return (-1);
 	str_to_map(data, fd, tmp);
-	// if (is_valid_map(data->maps->map) == false)
-	// {
-	// 	// write(2, "Error\nInvalid map", 17);
-	// 	return (-1);
-	// }
-	// data->maps->height = len_2d_array(data->maps->map);
-	// print_map(data->maps->map);
+	if (is_valid_map(data->maps->map) == false)
+	{
+		write(2, "Error\nInvalid map", 17);
+		return (-1);
+	}
+	data->maps->height = len_2d_array(data->maps->map);
 	return (0);
 }

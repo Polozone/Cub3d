@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 13:22:56 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:52:30 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	get_first_char_y(char **array, int j)
 	int i = 0;
 	while (array[i])
 	{
-		printf("%s\n", array[i]);
+		// printf("%s\n", array[i]);
 		i++;
 	}
 	if (array[0][j] != '1')
@@ -172,23 +172,23 @@ t_bool	is_valid_map(char **map)
 	while (map[i])
 	{
 		j = 0;
-		printf("%s\n", map[i]);
-		// while (map[i][j])
-		// {
-		// 	if (map[i][j] == '0')
-		// 	{
-		// 		if (get_last_char_x(map[i]) != '1' || get_first_char_x(map[i]) != '1')
-		// 		{
-		// 			return (false);
-		// 		}
-		// 		if (get_first_char_y(map, j) || get_last_char_y(map, i, j))
-		// 		{
-		// 			// printf("line (%d) first char == %c last char == %c\n", i, get_first_char_y(map, j),  get_last_char_y(map, i, j));
-		// 			return (false);
-		// 		}
-		// 	}
-		// 	j++;
-		// }
+		// printf("%s\n", map[i]);
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+			{
+				if (get_last_char_x(map[i]) != '1' || get_first_char_x(map[i]) != '1')
+				{
+					return (false);
+				}
+				if (get_first_char_y(map, j) || get_last_char_y(map, i, j))
+				{
+					// printf("line (%d) first char == %c last char == %c\n", i, get_first_char_y(map, j),  get_last_char_y(map, i, j));
+					return (false);
+				}
+			}
+			j++;
+		}
 		i++;
 	}
 	return (true);
