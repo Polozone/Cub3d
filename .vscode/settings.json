@@ -11,6 +11,7 @@
 		"bitset": "c",
 		"initializer_list": "c",
 		"unordered_map": "c",
-		"utility": "c"
+		"utility": "c",
+		"cstdlib": "c"
 	}
 }
