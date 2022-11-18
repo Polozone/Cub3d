@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
+#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/16 16:30:01 by pmulin           ###   ########.fr        #
+#    Updated: 2022/11/18 10:12:28 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/rendering2/get_collision.c \
 			src/rendering2/rendering.c \
 			src/rendering2/minimap.c \
+			src/rendering2/hitbox.c \
 
 OBJS	= ${SRCS:.c=.o}
 
