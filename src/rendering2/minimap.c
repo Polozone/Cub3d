@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:49:58 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 13:17:32 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/18 09:09:50 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 int print_minimap(t_data *data)
 {
     print_grid(data, data->render);
-
     return (0);
 }

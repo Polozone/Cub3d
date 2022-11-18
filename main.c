@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 16:30:15 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:31:39 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int main(int argc, char **argv)
 	t_img		img;
 
     (void)argc;
-	// init_parsing_map(&data, &map, argv[1]);
-	// free_2d_array(map.map);
 	data.ceil_color = 0;
 	data.floor_color = 0;
     if (parse_map_params(&data, argv[1]) == false)
@@ -55,9 +53,15 @@ int main(int argc, char **argv)
 		// free
 		return (-1);
 	}
-	init_mlx(&data);
-	loops_and_hooks(&data);
-	free_2d_array(map.map);
-    get_cub_file(&data, argv[1]);
+	// int i = 0;
+	// while (data.maps->map[i])
+	// {
+	// 	printf("%s\n", data.maps->map[i]);
+	// 	i++;
+	// }
+	// init_mlx(&data);
+	// loops_and_hooks(&data);
+	// free_2d_array(map.map);
+    // get_cub_file(&data, argv[1]);
     return (0);
 }

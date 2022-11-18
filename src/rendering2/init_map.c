@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 16:31:59 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 11:03:19 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,30 @@ void	print_grid(t_data *dt, t_render *data)
 		}
 		y++;
 	}
+	t_vector2_d hit_left_d;
+	t_vector2_d hit_right_d;
+
+	t_vector2_f tmp;
+	t_vector2_d tmp2;
+	t_vector2_f hit_left;
+	t_vector2_f hit_right;
+
+	tmp = add_vect(dt->render->origin, dt->render->dir);
+	tmp2 = vect_f_to_d(tmp);
+	hit_left = sub_vect(tmp, dt->render->plane);
+	hit_right = add_vect(tmp, dt->render->plane);
+	hit_left_d = vect_f_to_d(hit_left);
+	hit_right_d = vect_f_to_d(hit_right);
+	hit_left_d.x /= 5;
+	hit_left_d.y /= 5;
+	hit_right_d.x /= 5;
+	hit_right_d.y /= 5;
+	draw_circle(dt, tmp2, 16521738);
+	// draw_circle(dt, hit_right_d, 0xFFFFFF);
+	// tmp2.x=  200;
+	// tmp2.y=  150;
+	// draw_circle(dt, tmp2, 125125);
+	mlx_put_image_to_window(dt->render->mlx, dt->render->mlx_win, dt->render->img, 0, 0);
 }
 
 void	init_win(t_data *data)
@@ -134,7 +158,6 @@ void	player_input(t_data *data)
 int	update(t_data *data)
 {
 	player_input(data);
-
 	clear_img(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	print_minimap(data);
@@ -146,15 +169,19 @@ int		init_imgs(t_data *data)
 {	
 	data->east.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->east.width, &data->east.height);
 	data->east.addr = mlx_get_data_addr(data->east.img, &data->east.bits_per_pixel, &data->east.size_line, &data->east.endian);
+	data->east.precompute_bits_p_px = data->east.bits_per_pixel / 8;
 	
 	data->west.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_west_texture.xpm", &data->west.width, &data->west.height);
 	data->west.addr = mlx_get_data_addr(data->west.img, &data->west.bits_per_pixel, &data->west.size_line, &data->west.endian);
+	data->west.precompute_bits_p_px = data->west.bits_per_pixel / 8;
 	
 	data->north.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_north_texture.xpm", &data->north.width, &data->north.height);
 	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bits_per_pixel, &data->north.size_line, &data->east.endian);
+	data->north.precompute_bits_p_px = data->north.bits_per_pixel / 8;
 	
 	data->south.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_south_texture.xpm", &data->south.width, &data->south.height);
 	data->south.addr = mlx_get_data_addr(data->south.img, &data->south.bits_per_pixel, &data->south.size_line, &data->south.endian);
+	data->south.precompute_bits_p_px = data->south.bits_per_pixel / 8;
 
 	return (0);
 }
@@ -163,9 +190,7 @@ void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
-	init_imgs(data);
-	// printf("%f et %f\n",  data->render->origin.x, data->render->origin.y);
-	
+	init_imgs(data);	
 	// dda(data);
 	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 }

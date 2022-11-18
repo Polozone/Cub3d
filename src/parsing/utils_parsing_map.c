@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 16:31:37 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:40:12 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ char		*clear_endmap(char	*line)
 	{
 		if (is_map(line[sep]))
 		{
-			newline = ft_substr(line, 0, sep);
+			newline = ft_substr(line, 0, sep + 1);
 			free(line);
 			return (newline);
 		}

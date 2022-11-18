@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   row_col_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/01 11:06:40 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/18 13:22:56 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,114 @@ static t_bool	col_checker(t_data *data, char **map, char *str)
 	return (true);
 }
 
-t_bool	is_valid_map(t_data *data)
+// t_bool	is_valid_map(t_data *data)
+// {
+// 	// int		i;
+// 	// char	*tmp;
+
+// 	// i = 0;
+// 	// while (data->maps->map[i])
+// 	// {
+// 	// 	tmp = ft_strtrim(data->maps->map[i], " 	");
+// 	// 	if (row_checker(tmp, i) == false)
+// 	// 		return (false);
+// 	// 	i++;
+// 	// }
+// 	// if (col_checker(data, data->maps->map, NULL) == false)
+// 	// 	return (false);
+// 	return (true);
+// }
+
+
+char	get_first_char_x(char *line)
 {
 	int		i;
-	char	*tmp;
 
 	i = 0;
-	while (data->maps->map[i])
+	while (line[i])
 	{
-		tmp = ft_strtrim(data->maps->map[i], " 	");
-		if (row_checker(tmp, i) == false)
-			return (false);
+		if (line[i] != ' ' && line[i] != '	')
+			return (line[i]);
 		i++;
 	}
-	if (col_checker(data, data->maps->map, NULL) == false)
-		return (false);
+	return (-1);
+}
+
+char	get_last_char_x(char *line)
+{
+	int		i;
+	char	buf;
+
+	buf = -1;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '	')
+			buf = line[i];
+		i++;
+	}
+	return (buf);
+}
+
+int	get_first_char_y(char **array, int j)
+{
+	int i = 0;
+	while (array[i])
+	{
+		printf("%s\n", array[i]);
+		i++;
+	}
+	if (array[0][j] != '1')
+	{
+		//printf("array[0][%d] ==%c||",j , array[0][j]);
+		return (1);
+	}
+	else
+		return (0);
+}
+
+int	get_last_char_y(char **array, int i, int j)
+{
+	while (array[i])
+	{
+		i++;
+	}
+	if (array[--i][j] != '1')
+	{
+		//printf("char == %c", array[--i][j]);
+		return (1);
+	}
+	else
+		return (0);
+}
+
+t_bool	is_valid_map(char **map)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		printf("%s\n", map[i]);
+		// while (map[i][j])
+		// {
+		// 	if (map[i][j] == '0')
+		// 	{
+		// 		if (get_last_char_x(map[i]) != '1' || get_first_char_x(map[i]) != '1')
+		// 		{
+		// 			return (false);
+		// 		}
+		// 		if (get_first_char_y(map, j) || get_last_char_y(map, i, j))
+		// 		{
+		// 			// printf("line (%d) first char == %c last char == %c\n", i, get_first_char_y(map, j),  get_last_char_y(map, i, j));
+		// 			return (false);
+		// 		}
+		// 	}
+		// 	j++;
+		// }
+		i++;
+	}
 	return (true);
 }

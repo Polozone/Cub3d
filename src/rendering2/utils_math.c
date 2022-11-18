@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:07:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/10 11:33:34 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 09:44:30 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ float	ft_abs(float number)
 		return (number * -1);
 	else
 		return (number);
+}
+
+t_vector2_f sub_vect(t_vector2_f start, t_vector2_f end)
+{
+	t_vector2_f		result;
+
+	result.x = start.x - end.x;
+	result.y = start.y - start.y;
+	return (result);
 }
 
 t_vector2_f add_vect(t_vector2_f start, t_vector2_f end)
@@ -32,7 +41,7 @@ t_vector2_f add_vect(t_vector2_f start, t_vector2_f end)
 void draw_circle(t_data *data, t_vector2_d center, int color)
 {
 	t_vector2_d pos;
-	int radius = 50;
+	int radius = 5;
 
 	for (int y = center.y - radius; y < center.y + radius; y++)
 	{

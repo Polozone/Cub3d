@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 16:31:30 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:41:09 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 	i = -1;
 	j = 0;
 	x = 0;
-	// printf("LL == %d\n\n\n\n", longest_line);
 	while (++i < nbr_line)
 		data->maps->map[i] = malloc(sizeof(char) * (longest_line + 1));
-	i = 0;
-	while (i < nbr_line)
+	i = -1;
+	while (++i < nbr_line)
 	{
 		x = 0;
 		while (line[j] && line[j] != '\n')
 		{
-			// printf("test%d\n", x);
+			// printf("%c\n", line[j]);
 			data->maps->map[i][x++] = line[j];
 			j++;
 		}
@@ -38,7 +37,6 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 			data->maps->map[i][x++] = ' ';
 		data->maps->map[i][x] = 0;
 		j++;
-		i++;
 	}
 	// dprintf(2, "%s", data->maps->map[0]);
 	data->maps->map[i] = 0;
@@ -69,8 +67,9 @@ static void		str_to_map(t_data *data, int fd, char *tmp)
 	char	*line_clear;
 
 	tmp = data->map_line;
-	data->map_line = ft_strtrim(data->map_line, "\n");
+	data->map_line = ft_strtrim(data->map_line, "\n 	");
 	// free(tmp);
+	printf("%s", line_clear);
 	line_clear = clear_endmap(data->map_line);
 	data->maps->longest_line = get_longest_line(line_clear);
 	nbr_line = count_nl(line_clear);
@@ -98,9 +97,12 @@ int		init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 	if (is_one_player(data->map_line) == false)
 		return (-1);
 	str_to_map(data, fd, tmp);
-	if (is_valid_map(data) == false)
-		return (-1);
-	data->maps->height = len_2d_array(data->maps->map);
+	// if (is_valid_map(data->maps->map) == false)
+	// {
+	// 	// write(2, "Error\nInvalid map", 17);
+	// 	return (-1);
+	// }
+	// data->maps->height = len_2d_array(data->maps->map);
 	// print_map(data->maps->map);
 	return (0);
 }

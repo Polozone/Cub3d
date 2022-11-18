@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/16 16:34:30 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 11:34:30 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define MOV_SPD 5
 # define ROT_SPD 0.05
+# define HITBOX	15
 
 // Keycode
 	# define MOUSE_UP 4
@@ -99,12 +100,11 @@ struct s_img
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
+	int		precompute_bits_p_px;
 	int		size_line;
 	int		endian;
 	int		height;
 	int		width;
-
-	int		test;
 };
 
 struct s_data
@@ -207,8 +207,9 @@ int			get_y_player(t_data *data);
 int			contains_digit(char *str);
 int			len_2d_array(char **arr);
 void		free_2d_array(char **array);
-t_bool		is_valid_map(t_data *data);
+t_bool		is_valid_map(char **map);
 char		*map_to_line(char **arr);
+int print_minimap(t_data *data);
 
 /************RENDER****************/
 
@@ -232,11 +233,9 @@ int		len_2d_array(char **arr);
 void	free_2d_array(char **array);
 void	free_param_struct(t_data *data);
 t_bool	row_checker(char *str, int col);
-t_bool	is_valid_map(t_data *data);
 char	*map_to_line(char **arr);
 void 	my_mlx_pixel_put(t_render *render, int x, int y, int color);
 double	get_angle(t_vector2_d start, t_vector2_d end);
-void 	my_mlx_pixel_put(t_render *render, int x, int y, int color);
 
 /************MOVE.C****************/
 
@@ -259,6 +258,7 @@ void	init_data(t_data *data);
 float		ft_abs(float number);
 void		draw_circle(t_data *data, t_vector2_d center, int color);
 t_vector2_f	add_vect(t_vector2_f start, t_vector2_f end);
+t_vector2_f sub_vect(t_vector2_f start, t_vector2_f end);
 
 int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
 
@@ -275,10 +275,6 @@ void	rotate_right(t_data *data);
 
 int 	draw_player_1(t_data *data);
 void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right, int color);
-
-void	print_grid(t_data *dt, t_render *data);
-
-int		print_minimap(t_data *data);
 
 unsigned long	createRGB(t_data *data);
 
