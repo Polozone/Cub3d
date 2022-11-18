@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/18 11:34:30 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:15:50 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,8 @@ unsigned long	createRGB(t_data *data);
 
 int				ft_atoi_base(char *str, char *base);
 char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
+
+int		hitbox(t_data *data);
 
 
 int		init_imgs(t_data *data);

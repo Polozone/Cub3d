@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 09:38:01 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:15:55 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ int dda(t_data *data)
 {
 	for (int x = 0; x < 1200 ; x += 1)
 	{
-		double	delta = get_camera_X(1200, x);
+		double delta = get_camera_X(1200, x);
 		double rayDirX = data->render->dir.x + (data->render->plane.x * delta);
 		double rayDirY = data->render->dir.y + (data->render->plane.y * delta);
 
 		double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0f / rayDirX);
 		double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0f / rayDirY);
-
-		int stepX;
-		int stepY;
-
-		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
+                        
+		int stepX;       
+		int stepY;     
+					  
+		int hit = 0;
+		int side;
 
 		int mapX = (int)data->render->origin.x;
 		int mapY = (int)data->render->origin.y;
@@ -79,7 +79,7 @@ int dda(t_data *data)
 			}
 			if (data->maps->map[mapY / 40][mapX / 40] == '1')
 			{
-				_bresenham(data->render, (data->render->origin.x / 5), data->render->origin.y / 5, mapX / 5, mapY / 5);
+				_bresenham(data->render, (data->render->origin.x / 10), data->render->origin.y / 10, mapX / 10, mapY / 10);
 				render_wall(data, sideDistX, sideDistY, side, deltaDistX, deltaDistY, mapX, mapY, x, stepX, stepY);
 				hit = 1;
 			}

@@ -6,7 +6,7 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/18 08:51:59 by pmulin           ###   ########.fr        #
+#    Updated: 2022/11/18 14:15:08 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/rendering2/get_collision.c \
 			src/rendering2/rendering.c \
 			src/rendering2/minimap.c \
+			src/rendering2/hitbox.c \
 
 OBJS	= ${SRCS:.c=.o}
 

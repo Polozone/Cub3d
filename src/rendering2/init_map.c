@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 11:03:19 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:16:10 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,74 +27,6 @@ void	clear_img(t_data *data)
 		i++;
 	}
 	return ;
-}
-
-void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right, int color)
-{
-	int		tmp;
-
-	tmp = top_left.x;
-	while (top_left.y < bottom_right.y)
-	{
-		top_left.x = tmp;
-		while (top_left.x < bottom_right.x)
-		{
-			my_mlx_pixel_put(render, top_left.x, top_left.y, color);
-			top_left.x++;
-		}
-		top_left.y++;
-	}
-}
-
-void	print_grid(t_data *dt, t_render *data)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	while (dt->maps->map[y])
-	{
-		x = 0;
-		while (dt->maps->map[y][x])
-		{
-			t_vector2_d top_left;
-	 		t_vector2_d bottom_right;
-	 		top_left.x = x * (dt->render->cell_size / 5);
-	 		top_left.y = y * (dt->render->cell_size / 5);
-	 		bottom_right.x = top_left.x + (dt->render->cell_size / 5);
-	 		bottom_right.y = top_left.y + (dt->render->cell_size / 5);
-			if (dt->maps->map[y][x] == '1') // If the cell is a wall
-	 			draw_rect_color(data, top_left, bottom_right, 16711680);
-			else if (ft_strchr("NSWE0", dt->maps->map[y][x]))
-				draw_rect_color(data, top_left, bottom_right, 0);
-			x++;
-		}
-		y++;
-	}
-	t_vector2_d hit_left_d;
-	t_vector2_d hit_right_d;
-
-	t_vector2_f tmp;
-	t_vector2_d tmp2;
-	t_vector2_f hit_left;
-	t_vector2_f hit_right;
-
-	tmp = add_vect(dt->render->origin, dt->render->dir);
-	tmp2 = vect_f_to_d(tmp);
-	hit_left = sub_vect(tmp, dt->render->plane);
-	hit_right = add_vect(tmp, dt->render->plane);
-	hit_left_d = vect_f_to_d(hit_left);
-	hit_right_d = vect_f_to_d(hit_right);
-	hit_left_d.x /= 5;
-	hit_left_d.y /= 5;
-	hit_right_d.x /= 5;
-	hit_right_d.y /= 5;
-	draw_circle(dt, tmp2, 16521738);
-	// draw_circle(dt, hit_right_d, 0xFFFFFF);
-	// tmp2.x=  200;
-	// tmp2.y=  150;
-	// draw_circle(dt, tmp2, 125125);
-	mlx_put_image_to_window(dt->render->mlx, dt->render->mlx_win, dt->render->img, 0, 0);
 }
 
 void	init_win(t_data *data)
@@ -162,6 +94,8 @@ int	update(t_data *data)
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	print_minimap(data);
 	dda(data);
+	hitbox(data);
+	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	return (0);
 }
 
