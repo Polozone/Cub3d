@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 09:53:33 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 11:36:42 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 void	clear_img(t_data *data)
 {
 	int		i;
-	int		total = 1200 * 900;
-	int		size = data->render->bits_per_pixel / 8;
 
 	i = 0;
-	while (i < total)
+	while (i < data->render->nbr_px)
 	{
-		char *dst = data->render->addr + (i * size);
+		char *dst = data->render->addr + (i * data->render->precompute_bits_p_px);
 		*(unsigned int*)dst = 0x000000;
 		i++;
 	}
@@ -41,9 +39,8 @@ void	init_win(t_data *data)
 		write(2, "Error during initialization instance of mlx\n", 44);
 		exit (-1);
 	}
-	// data->render->mlx_win = mlx_new_window(data->render->mlx, (data->maps->longest_line * data->render->cell_size), (data->maps->height * data->render->cell_size), "My window");
-	data->render->mlx_win = mlx_new_window(data->render->mlx, 1200, 900, "My window");
-	data->render->img = mlx_new_image(data->render->mlx, 1200, 900);
+	data->render->mlx_win = mlx_new_window(data->render->mlx, WIDTH, HEIGHT, "My window");
+	data->render->img = mlx_new_image(data->render->mlx, WIDTH, HEIGHT);
 	data->render->addr = mlx_get_data_addr(data->render->img, &data->render->bits_per_pixel, &data->render->line_length, &data->render->endian);
 }
 
@@ -99,29 +96,50 @@ int	update(t_data *data)
 	return (0);
 }
 
-int		init_imgs(t_data *data)
+char	*get_path_imgs(t_data *data, char *orientation)
 {
-	data->east.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->east.width, &data->east.height);
-	if (data->east.img == NULL)
+	int		i;
+
+	i = 0;
+	while (data->params[i].stop != 1)
 	{
-		write(2, "Error while using xpm_file_to_image\n", 36);
+		if (ft_strcmp(data->params[i].coord, orientation) == 0)
+		{
+			return (data->params[i].path);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+void		init_img(t_data *data, t_img *img, char *orientation)
+{
+	char	*path_name_tmp;
+	char	*path_name;
+
+	path_name_tmp = get_path_imgs(data, orientation);
+	if (path_name_tmp == NULL)
+		write(2, "bite\n", 5);
+	path_name = ft_strjoin(path_name_tmp, ".xpm");
+	img->img = mlx_xpm_file_to_image(data->render->mlx, path_name, &img->width, &img->height);
+	if (img->img == NULL)
+	{
+		write(2, "Error\nwhen opening the texture ", 31);
+		write(2, orientation, ft_strlen(orientation));
+		free(path_name);
 		exit (0);
 	}
-	data->east.addr = mlx_get_data_addr(data->east.img, &data->east.bits_per_pixel, &data->east.size_line, &data->east.endian);
-	data->east.precompute_bits_p_px = data->east.bits_per_pixel / 8;
-	
-	data->west.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_west_texture.xpm", &data->west.width, &data->west.height);
-	data->west.addr = mlx_get_data_addr(data->west.img, &data->west.bits_per_pixel, &data->west.size_line, &data->west.endian);
-	data->west.precompute_bits_p_px = data->west.bits_per_pixel / 8;
-	
-	data->north.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_north_texture.xpm", &data->north.width, &data->north.height);
-	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bits_per_pixel, &data->north.size_line, &data->east.endian);
-	data->north.precompute_bits_p_px = data->north.bits_per_pixel / 8;
-	
-	data->south.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_south_texture.xpm", &data->south.width, &data->south.height);
-	data->south.addr = mlx_get_data_addr(data->south.img, &data->south.bits_per_pixel, &data->south.size_line, &data->south.endian);
-	data->south.precompute_bits_p_px = data->south.bits_per_pixel / 8;
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->size_line, &img->endian);
+	img->precompute_bits_p_px = img->bits_per_pixel / 8;
+	free(path_name);
+}
 
+int		init_imgs(t_data *data)
+{
+	init_img(data, &data->east, "EA");
+	init_img(data, &data->west, "WE");
+	init_img(data, &data->north, "SO");
+	init_img(data, &data->south, "NO");
 	return (0);
 }
 
@@ -130,4 +148,6 @@ void	init_mlx(t_data *data)
 	init_win(data);
 	init_data(data);
 	init_imgs(data);
+	data->render->precompute_bits_p_px = data->render->bits_per_pixel >> 3;
+	data->render->nbr_px = WIDTH * HEIGHT;
 }

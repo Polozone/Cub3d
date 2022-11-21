@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 14:15:55 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 10:13:21 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ double	get_camera_X(int width, int x)
 
 int dda(t_data *data)
 {
-	for (int x = 0; x < 1200 ; x += 1)
+	for (int x = 0; x < WIDTH ; x++)
 	{
-		double delta = get_camera_X(1200, x);
+		double delta = get_camera_X(WIDTH, x);
 		double rayDirX = data->render->dir.x + (data->render->plane.x * delta);
 		double rayDirY = data->render->dir.y + (data->render->plane.y * delta);
 
@@ -77,9 +77,8 @@ int dda(t_data *data)
 				mapY += stepY;
 				side = 1;
 			}
-			if (data->maps->map[mapY / 40][mapX / 40] == '1')
+			if (data->maps->map[mapY / data->render->cell_size][mapX / data->render->cell_size] == '1')
 			{
-				_bresenham(data->render, (data->render->origin.x / 10), data->render->origin.y / 10, mapX / 10, mapY / 10);
 				render_wall(data, sideDistX, sideDistY, side, deltaDistX, deltaDistY, mapX, mapY, x, stepX, stepY);
 				hit = 1;
 			}

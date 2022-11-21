@@ -12,6 +12,7 @@
 		"initializer_list": "c",
 		"unordered_map": "c",
 		"utility": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"libft.h": "c"
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 09:54:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 12:16:57 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	t_data		data;
 	t_map		map;
 	t_render	render;
-	t_prg		prg;
 	t_img		img;
 
     if (argc != 2)
@@ -37,7 +36,6 @@ int	main(int argc, char **argv)
         free(data.map_line);
         free_param_struct(&data);
     }
-	data.prg = &prg;
 	data.wall = &img;
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
 	{

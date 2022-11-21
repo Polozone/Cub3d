@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 15:00:12 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 10:12:53 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ void	render_ceil(t_data *data, int drawStart, int x)
 	i = 0;
 	while (i < drawStart)
 	{
-		if (x <= data->maps->longest_line * (data->render->cell_size / 5)
-			&& i <= (data->maps->height * data->render->cell_size / 5))
-			;
-		else
 		my_mlx_pixel_put(data->render, x, i, data->ceil_color);
 		i++;
 	}
@@ -42,27 +38,21 @@ void	render_walls(t_data *data, t_img *img, int drawStart, int drawEnd, int x, i
 
 	int sizeWall = drawEnd - drawStart;
 	float ratio = 64 / (float)sizeWall;
-	float hitX = (float)mapX / 40;
+	float hitX = (float)mapX / data->render->cell_size;
 	float ratioX = (hitX - (int)hitX);
-	float hitY = (float)mapY / 40;
+	float hitY = (float)mapY / data->render->cell_size;
 	float ratioY = (hitY - (int)hitY);
 	int	index_X = ratioX * 64;
 	int	index_Y = ratioY * 64;
 	while (drawStart < drawEnd)
 	{
-		if (drawStart <= (data->maps->height * data->render->cell_size / 5)
-			&& x <= data->maps->longest_line * (data->render->cell_size / 5))
-			drawStart = (data->maps->height * data->render->cell_size / 5);
-		else
+		if ((drawStart > 0 && drawStart < 900) || (drawEnd > 0 && drawEnd < 900))
 		{
-			if ((drawStart > 0 && drawStart < 900) || (drawEnd > 0 && drawEnd < 900))
-			{
-				if (side == 2)
-					color2 = get_color_from_xpm(img, index_X, (drawEnd - drawStart) * ratio);
-				if (side == 1)
-					color2 = get_color_from_xpm(img, index_Y, (drawEnd - drawStart) * ratio);
-				my_mlx_pixel_put(data->render, x, drawStart, color2);
-			}
+			if (side == 2)
+				color2 = get_color_from_xpm(img, index_X, (drawEnd - drawStart) * ratio);
+			if (side == 1)
+				color2 = get_color_from_xpm(img, index_Y, (drawEnd - drawStart) * ratio);
+			my_mlx_pixel_put(data->render, x, drawStart, color2);
 		}
 		drawStart++;
 	}
@@ -101,11 +91,7 @@ void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, dou
 		perpWallDist = 1;
 	lineHeight = (h / perpWallDist) * 40;
 	drawStart = (-lineHeight >> 1) + (h >> 1);
-    // if(drawStart < 0)
-	// 	drawStart = 0;
     drawEnd = (lineHeight >> 1) + (h >> 1);
-    // if(drawEnd >= h)
-		// drawEnd = h - 1;
 	if (side == 0) // E/W
 	{
 		if (stepX == 1)

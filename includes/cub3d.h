@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 09:53:18 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 11:35:33 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define MOV_SPD 5
 # define ROT_SPD 0.05
 # define HITBOX	15
+# define WIDTH 1200
+# define HEIGHT 900
 
 // Keycode
 	# define MOUSE_UP 4
@@ -87,11 +89,6 @@ struct s_params
 	int				stop; // to while
 };
 
-struct s_math
-{
-	float	H_PI;
-};
-
 struct s_img
 {
 	void	*img;
@@ -147,6 +144,8 @@ struct s_render {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
+	int		precompute_bits_p_px;
+	int		nbr_px;
 	int		line_length;
 	int		endian;
 	int		angle;
@@ -173,10 +172,6 @@ char    *_get_file(int fd);
 t_bool  parse_map_params(t_data *data, char *filename);
 t_bool	check_coordinate_param(char *param, int *i);
 t_bool	check_color_param(char *param, int *i);
-
-struct s_prg{
-	t_bool	*keyboard;
-};
 
 char    	**get_cub_file(t_data *data, char *filename);
 char    	*_get_file(int fd);

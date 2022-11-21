@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 13:51:24 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/01 11:22:32 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/21 10:30:05 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS	= ft_strlen.c \
 		ft_putnbr_fd.c \
 		get_next_line.c \
 		get_next_line_utils.c \
+		ft_strcmp.c
 
 SRCS_B =	ft_lstnew.c \
 			ft_lstadd_front.c \
