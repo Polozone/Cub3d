@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 13:54:37 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 09:45:55 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 		x = 0;
 		while (line[j] && line[j] != '\n')
 		{
-			// printf("%c\n", line[j]);
 			data->maps->map[i][x++] = line[j];
 			j++;
 		}
@@ -38,26 +37,25 @@ static void		convert_to_map(t_data *data, char *line, int longest_line, int nbr_
 		data->maps->map[i][x] = 0;
 		j++;
 	}
-	// dprintf(2, "%s", data->maps->map[0]);
 	data->maps->map[i] = 0;
 	free(line);
 }
 
 t_bool			check_charmap(char *line)
 {
-	// int		i;
+	int		i;
 
-	// i = 0;
-	// while (line[i])
-	// {
-	// 	if (is_charmap(line[i]) == false)
-	// 	{
-	// 		dprintf(2, "||%c||", line[i]);
-	// 		write(2, "Invalid char in the map\n", 24);
-	// 		return (false);
-	// 	}
-	// 	i++;
-	// }
+	i = 0;
+	while (line[i])
+	{
+		if (is_charmap(line[i]) == false)
+		{
+			dprintf(2, "||%c||", line[i]);
+			write(2, "Invalid char in the map\n", 24);
+			return (false);
+		}
+		i++;
+	}
 	return (true);
 }
 
@@ -67,6 +65,7 @@ static void		str_to_map(t_data *data, int fd, char *tmp)
 	char	*line_clear;
 
 	tmp = data->map_line;
+	// printf("%s", data->map_line);
 	data->map_line = ft_strtrim(data->map_line, "\n 	");
 	// free(tmp);
 	line_clear = clear_endmap(data->map_line);

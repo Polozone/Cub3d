@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/18 14:15:50 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 09:53:18 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,10 @@
 typedef struct	s_data t_data;
 typedef struct	s_params t_params;
 typedef struct	s_map t_map;
-typedef struct	s_rad t_rad;
 typedef struct	s_render t_render;
 typedef struct 	s_vector t_vector2_d;
 typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_prg t_prg;
-typedef struct	s_math t_math;
-typedef struct	s_minimap t_minimap;
 typedef struct	s_img t_img;
 typedef enum	s_bool t_bool;
 
@@ -114,8 +111,6 @@ struct s_data
 	t_map			*maps;
 	t_render		*render;
 	t_prg			*prg;
-	t_rad			*rad;
-	t_math			*math;
 	int				keytab[200];
 	t_img			*wall;
 	int				ceil_color;

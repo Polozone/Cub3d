@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 13:52:30 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 09:40:02 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ t_bool	is_valid_map(char **map)
 	while (map[i])
 	{
 		j = 0;
+		printf("%s\n", map[i]);
 		// printf("%s\n", map[i]);
 		while (map[i][j])
 		{
@@ -183,7 +184,6 @@ t_bool	is_valid_map(char **map)
 				}
 				if (get_first_char_y(map, j) || get_last_char_y(map, i, j))
 				{
-					// printf("line (%d) first char == %c last char == %c\n", i, get_first_char_y(map, j),  get_last_char_y(map, i, j));
 					return (false);
 				}
 			}
