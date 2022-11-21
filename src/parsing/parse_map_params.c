@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_params.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 10:18:09 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 12:18:32 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ t_bool  parse_map_params(t_data *data, char *filename)
 			}
 		}
 	}
-	data->map_line = map_to_line(&file[i]);
+	data->map_line = get_map_from_file(filename);
 	init_params(data, params);
 	createRGB(data);
 	free_2d_array(params);

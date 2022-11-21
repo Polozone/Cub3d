@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 09:45:55 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 11:01:26 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_bool			check_charmap(char *line)
 	{
 		if (is_charmap(line[i]) == false)
 		{
-			dprintf(2, "||%c||", line[i]);
+			write(2, "||%c||", line[i]);
 			write(2, "Invalid char in the map\n", 24);
 			return (false);
 		}
