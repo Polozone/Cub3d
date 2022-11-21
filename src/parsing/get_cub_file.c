@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cub_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/14 09:49:31 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 11:35:06 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,66 @@ t_bool  check_cub(char *file)
                         return (true);
     write(2, "Please, provide .cub file\n", 27);
     return (false);
+}
+
+int check_line(char *line)
+{
+    int i;
+
+    i = -1;
+    while(line[++i])
+    {
+        if (ft_strchr("NSEW", line[i]))
+            return (1);
+        if (ft_strchr("FC", line[i]))
+            return (1);
+    }
+    return (0);
+}
+
+char    *create_map_from_file(int fd, char *line)
+{
+    char    *tmp;
+    char    *tmp1;
+
+    tmp = NULL;
+    tmp1 = NULL;
+    while (line != NULL)
+    {
+        if (tmp)
+            tmp1 = tmp;
+        tmp = ft_strjoin(tmp, line);
+        if (tmp1)
+            free(tmp1);
+        line = get_next_line(fd);
+    }
+    return (tmp);
+}
+
+char	*get_map_from_file(char *filename)
+{
+	int     i;
+    int     fd;
+    int     count;
+    char    *line;
+    char    *map;
+
+    i = 0;
+    count = 0;
+    fd = open_file(filename);
+    if (fd == -1)
+        return (NULL);
+    line = get_next_line(fd);
+    while (line != NULL)
+    {
+        if (count == 6)
+            map = create_map_from_file(fd, line);
+        if (check_line(line) && count != 6)
+            count++;
+        line = get_next_line(fd);
+    }
+    close(fd);
+    return (map);
 }
 
 char    *_get_file(int fd)
@@ -64,21 +124,13 @@ char    **get_cub_file(t_data *data, char *filename)
     file = NULL;
     if (check_cub(filename) == false)
         return (NULL);
-    fd = open(filename, O_DIRECTORY);
-    if (fd != -1)
-    {
-        close(fd);
-        write(2, "Please, provide .cub FILE\n", 27);
-        return (NULL);
-    }
-    fd = open(filename, O_RDONLY);
+    fd = open_file(filename);
     if (fd == -1)
-    {
-        perror(filename);
         return (NULL);
-    }
     get_file = _get_file(fd);
     file = ft_split(get_file, '\n');
     free(get_file);
+    close(fd);
+    get_map_from_file(filename);
     return (file);
 }

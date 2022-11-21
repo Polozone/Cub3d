@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/18 14:35:35 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 11:36:11 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ t_bool  parse_map_params(t_data *data, char *filename)
 			}
 		}
 	}
-	data->map_line = map_to_line(&file[i]);
+	data->map_line = get_map_from_file(filename);
 	init_params(data, params);
 	createRGB(data);
 	free_2d_array(params);

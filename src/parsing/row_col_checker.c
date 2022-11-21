@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   row_col_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:28 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 09:40:02 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 11:01:42 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ t_bool	is_valid_map(char **map)
 	while (map[i])
 	{
 		j = 0;
-		printf("%s\n", map[i]);
+		// printf("%s\n", map[i]);
 		// printf("%s\n", map[i]);
 		while (map[i][j])
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 09:53:18 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 11:25:28 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,5 +280,8 @@ int		hitbox(t_data *data);
 
 
 int		init_imgs(t_data *data);
+
+int		open_file(char *filename);
+char	*get_map_from_file(char *filename);
 
 #endif
