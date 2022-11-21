@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 14:16:10 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 09:53:33 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,13 @@ int	update(t_data *data)
 }
 
 int		init_imgs(t_data *data)
-{	
+{
 	data->east.img = mlx_xpm_file_to_image(data->render->mlx, "path_to_the_east_texture.xpm", &data->east.width, &data->east.height);
+	if (data->east.img == NULL)
+	{
+		write(2, "Error while using xpm_file_to_image\n", 36);
+		exit (0);
+	}
 	data->east.addr = mlx_get_data_addr(data->east.img, &data->east.bits_per_pixel, &data->east.size_line, &data->east.endian);
 	data->east.precompute_bits_p_px = data->east.bits_per_pixel / 8;
 	
@@ -124,7 +129,5 @@ void	init_mlx(t_data *data)
 {
 	init_win(data);
 	init_data(data);
-	init_imgs(data);	
-	// dda(data);
-	// mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
+	init_imgs(data);
 }
