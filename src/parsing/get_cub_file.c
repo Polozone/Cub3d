@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 12:48:57 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 15:02:15 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int check_line(char *line)
     i = -1;
     while(line[++i])
     {
-        if (ft_strchr("NSEW", line[i]))
+        if (ft_strchr("NSEWFC", line[i]))
             return (1);
-        if (ft_strchr("FC", line[i]))
-            return (1);
+        if (!line[i])
+            break ;
     }
     return (0);
 }
@@ -50,11 +50,8 @@ char    *create_map_from_file(t_data *data, int fd, char *line)
     while (line != NULL)
     {
         tmp = gc_strjoin(&data->track, tmp, line);
-        free(line);
-        line = get_next_line(fd);
+        line = gc_get_next_line(&data->track, fd);
     }
-    if (line)
-        free(line);
     return (tmp);
 }
 
@@ -71,19 +68,15 @@ char	*get_map_from_file(t_data *data, char *filename)
     fd = open_file(filename);
     if (fd == -1)
         return (NULL);
-    line = get_next_line(fd);
+    line = gc_get_next_line(&data->track, fd);
     while (line != NULL)
     {
         if (count == 6)
             map = create_map_from_file(data, fd, line);
         if (check_line(line) && count != 6)
             count++;
-        if (line && count != 6)
-            free(line);
-        line = get_next_line(fd);
+        line = gc_get_next_line(&data->track, fd);
     }
-    if (line)
-        free(line);
     close(fd);
     return (map);
 }
@@ -93,16 +86,13 @@ char    *_get_file(t_data *data, int fd)
     char    *file;
     char    *line;
 
-    line = get_next_line(fd);
+    line = gc_get_next_line(&data->track, fd);
     file = NULL;
     while (line != NULL)
     {
         file = gc_strjoin(&data->track, file, line);
-        free(line);
-        line = get_next_line(fd);
+        line = gc_get_next_line(&data->track, fd);
     }
-    if (line)
-        free(line);
     return (file);
 }
 

@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/22 14:04:48 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/22 15:05:11 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 OBJS	= ${SRCS:.c=.o}
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra 
 LIBFLAGS= -framework OpenGL -framework AppKit
 
 all: maker ${NAME}
@@ -60,7 +60,7 @@ all: maker ${NAME}
 
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
-		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a
+		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a 
 
 maker:
 		${MAKE} -C ${LIBFT}
