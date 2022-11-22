@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:09:42 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 15:17:28 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:07:43 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_release(int key, t_data *data)
 void	player_input(t_data *data)
 {
 	if (data->keytab[KEY_ESC])
-		exit_program_from_escape(data);
+		exit_program(data);
 	if (data->keytab[KEY_W])
 		move_up(data);
 	if (data->keytab[KEY_Q] || data->keytab[KEY_LEFT])

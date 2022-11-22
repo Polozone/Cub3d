@@ -1,18 +1,19 @@
-NO ./path_to_the_Forth_texture
-WE ./path_to_the_Cest_texture
-SO ./path_to_the_Cast_texture
+NO ./path_to_the_north_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+
+SO ./path_to_the_south_texture
+
 F 41,40,38
+
+
 C 150,50,255
-SO ./path_to_the_Couth_texturee
-
-
                    
 
 								
           
 
-							          
-      
+		
                             1111111111
                             1000000011
 11111111111111111111111111111000000001
