@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 14:07:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 14:15:11 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	init_win(t_data *data)
 int	exit_program(t_data *data)
 {
 	gc_free_all(&data->track);
-	mlx_destroy_window(data->render->mlx, data->render->mlx_win);
 	exit(0);
 }
 
