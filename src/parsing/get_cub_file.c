@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:46:54 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 11:35:06 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 12:48:57 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,23 @@ int check_line(char *line)
     return (0);
 }
 
-char    *create_map_from_file(int fd, char *line)
+char    *create_map_from_file(t_data *data, int fd, char *line)
 {
     char    *tmp;
-    char    *tmp1;
 
     tmp = NULL;
-    tmp1 = NULL;
     while (line != NULL)
     {
-        if (tmp)
-            tmp1 = tmp;
-        tmp = ft_strjoin(tmp, line);
-        if (tmp1)
-            free(tmp1);
+        tmp = gc_strjoin(&data->track, tmp, line);
+        free(line);
         line = get_next_line(fd);
     }
+    if (line)
+        free(line);
     return (tmp);
 }
 
-char	*get_map_from_file(char *filename)
+char	*get_map_from_file(t_data *data, char *filename)
 {
 	int     i;
     int     fd;
@@ -78,34 +75,29 @@ char	*get_map_from_file(char *filename)
     while (line != NULL)
     {
         if (count == 6)
-            map = create_map_from_file(fd, line);
+            map = create_map_from_file(data, fd, line);
         if (check_line(line) && count != 6)
             count++;
+        if (line && count != 6)
+            free(line);
         line = get_next_line(fd);
     }
+    if (line)
+        free(line);
     close(fd);
     return (map);
 }
 
-char    *_get_file(int fd)
+char    *_get_file(t_data *data, int fd)
 {
     char    *file;
     char    *line;
-    char    *tmp;
 
     line = get_next_line(fd);
     file = NULL;
-    tmp = NULL;
     while (line != NULL)
     {
-        if (!file)
-            file = ft_strdup(line);
-        else
-        {
-            tmp = file;
-            file = ft_strjoin(file, line);
-            free(tmp);
-        }
+        file = gc_strjoin(&data->track, file, line);
         free(line);
         line = get_next_line(fd);
     }
@@ -127,10 +119,8 @@ char    **get_cub_file(t_data *data, char *filename)
     fd = open_file(filename);
     if (fd == -1)
         return (NULL);
-    get_file = _get_file(fd);
-    file = ft_split(get_file, '\n');
-    free(get_file);
+    get_file = _get_file(data, fd);
+    file = gc_split(&data->track, get_file, '\n');
     close(fd);
-    get_map_from_file(filename);
     return (file);
 }

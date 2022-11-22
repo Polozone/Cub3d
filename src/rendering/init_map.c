@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 09:34:57 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:07:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void	init_win(t_data *data)
 			&data->render->endian);
 }
 
-int	exit_program_from_escape(t_data *data)
+int	exit_program(t_data *data)
 {
+	gc_free_all(&data->track);
 	mlx_destroy_window(data->render->mlx, data->render->mlx_win);
 	exit(0);
 }

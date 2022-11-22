@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 15:32:04 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:05:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ struct s_data
 	int				keytab[200];
 	int				ceil_color;
 	int				floor_color;
+	int				initialized;
+	t_track			*track;
 	
 	t_img	east;
 	t_img	west;
@@ -168,14 +170,13 @@ struct s_col {
 	double	sideDistY;
 };
 
-
-char    *_get_file(int fd);
+char    *_get_file(t_data *data, int fd);
 t_bool  parse_map_params(t_data *data, char *filename);
 t_bool	check_coordinate_param(char *param, int *i);
 t_bool	check_color_param(char *param, int *i);
 
 char    	**get_cub_file(t_data *data, char *filename);
-char    	*_get_file(int fd);
+char    	*_get_file(t_data *data, int fd);
 t_bool  	parse_map_params(t_data *data, char *filename);
 t_bool		check_coordinate_param(char *param, int *i);
 t_bool		check_color_param(char *param, int *i);
@@ -292,10 +293,13 @@ int 	draw_player_1(t_data *data);
 unsigned long	createRGB(t_data *data);
 
 int				ft_atoi_base(char *str, char *base);
-char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
+char			*ft_convert_base(t_data *data, char *nbr, char *base_from, char *base_to);
 
+
+int		init_imgs(t_data *data);
 
 int		open_file(char *filename);
-char	*get_map_from_file(char *filename);
+char	*get_map_from_file(t_data *data, char *filename);
+int		exit_program(t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/18 13:40:12 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 10:20:11 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*rev_tab(char *tab)
 	return (tab);
 }
 
-char	*dec_to_hex_converter(unsigned long n, int caps)
+char	*dec_to_hex_converter(t_data *data, unsigned long n, int caps)
 {
 	char					*base;
 	char					*tab;
@@ -61,7 +61,7 @@ char	*dec_to_hex_converter(unsigned long n, int caps)
 	num = n;
 	if (n < 0)
 		num = -n;
-	tab = ft_calloc(int_length(num) + 1, sizeof(char));
+	tab = gc_calloc(int_length(num) + 1, sizeof(char), &data->track);
 	if (!tab)
 		return (0);
 	while (num >= 16)
@@ -88,83 +88,33 @@ int	int_len(int	n)
 	return (i + 1);
 }
 
-char	*fill_color(char *str)
-{
-	char	*new;
-	int		i;
-	int		j;
-	int		len;
-	
-	new = ft_calloc(4, sizeof(char));
-	i = 0;
-	j = 0;
-	len = int_len(ft_atoi(str));
-	while (i < (3 - len))
-	{
-		new[i] = '0';
-		i++;
-	}
-	j = 0;
-	while (i < 3)
-	{
-		new[i] = str[j];
-		i++;
-		j++;
-	}
-	return (new);
-}
-
-
 unsigned long createRGB(t_data *data)
 {   
 	int				i;
+	int				j;
 	unsigned long	rgb;
 	char			*tmp;
 	char			*tmp1;
-	char			*tmp0;
-	char			*tmpmem;
 
 	i = 0;
+	tmp = NULL;
 	while (data->params[i].stop == 0)
 	{
 		if (data->params[i].color != NULL)
 		{
-			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[0]), 0);
-			if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
+			j = -1;
+			while (++j < 3)
 			{
-				tmp0 = tmp1;
-				tmp1 = ft_strjoin(tmp1, "0");
-				free(tmp0);
+				tmp1 = dec_to_hex_converter(data, ft_atoi(data->params[i].rgb[j]), 0);
+				if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
+					tmp1 = gc_strjoin(&data->track, tmp1, "0");
+				tmp = gc_strjoin(&data->track, tmp, tmp1);
 			}
-			tmp = ft_strjoin(tmp, tmp1);
-			free(tmp1);
-			
-			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[1]), 0);
-			if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
-			{
-				tmp0 = tmp1;
-				tmp1 = ft_strjoin(tmp1, "0");
-				free(tmp0);
-			}
-			tmp = ft_strjoin(tmp, tmp1);
-			free(tmp1);
-
-			tmp1 = dec_to_hex_converter(ft_atoi(data->params[i].rgb[2]), 0);
-			if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
-			{
-				tmp0 = tmp1;
-				tmp1 = ft_strjoin(tmp1, "0");
-				free(tmp0);
-			}
-			tmp = ft_strjoin(tmp, tmp1);
-			tmp0 = ft_convert_base(tmp, "0123456789abcdef", "0123456789");
+			tmp1 = ft_convert_base(data, tmp, "0123456789abcdef", "0123456789");
 			if (!ft_strncmp("F", data->params[i].color, ft_strlen(data->params[i].color)))
-			{
-				data->floor_color = ft_atoi(tmp0);
-			}
+				data->floor_color = ft_atoi(tmp1);
 			else if (!ft_strncmp("C", data->params[i].color, ft_strlen(data->params[i].color)))
-				data->ceil_color = ft_atoi(tmp0);
-			free(tmp0); 
+				data->ceil_color = ft_atoi(tmp1);
 		}
 		tmp = NULL;
 		i++;

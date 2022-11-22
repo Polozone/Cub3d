@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
+#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/22 13:29:28 by pmulin           ###   ########.fr        #
+#    Updated: 2022/11/22 14:04:48 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ HEADER	= includes/cub3d.h \
 			mlx/mlx_int.h \
 			mlx/mlx_opengl.h \
 			mlx/mlx_png.h \
-			libft/libft.h
+			libft/gc.h \
+			libft/libft.h \
 
 LIBFT	= Libft
 MLX		= mlx
@@ -54,8 +55,8 @@ LIBFLAGS= -framework OpenGL -framework AppKit
 
 all: maker ${NAME}
 
-%.o : %.c	${HEADER}
-			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@  
+%.o : %.c	${HEADER} Makefile
+			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ 
 
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
