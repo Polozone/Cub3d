@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:38 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 14:44:32 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 16:18:18 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 		write(2, "Error opening map\n", 18);
 		return (-1);
 	}
+	data->col->h = 900;
 	data->render = render;
 	data->maps = map;
 	data->maps->map = NULL;

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 14:37:36 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:19:27 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,27 @@ int get_color_from_xpm(t_img *img, int x, int y)
 	return (*(unsigned int *)color);
 }
 
-void	render_walls(t_data *data, t_img *img, int drawStart, int drawEnd, int x, int mapX, int mapY, int side)
+void	render_walls(t_data *data, t_img *img, int drawStart, int drawEnd, int x, int mapX, int mapY, int side, t_col *col)
 {
 	int color2;
 
-	int sizeWall = drawEnd - drawStart;
-	float ratio = 64 / (float)sizeWall;
-	float hitX = (float)mapX / data->render->cell_size;
-	float ratioX = (hitX - (int)hitX);
-	float hitY = (float)mapY / data->render->cell_size;
-	float ratioY = (hitY - (int)hitY);
-	int	index_X = ratioX * 64;
-	int	index_Y = ratioY * 64;
-	while (drawStart < drawEnd)
+	col->sizeWall = col->drawEnd - col->drawStart;
+	float ratio = 64 / (float)col->sizeWall;
+	float hitX = (float)col->mapX / data->render->cell_size;
+	float hitY = (float)col->mapY / data->render->cell_size;
+	int	index_X = ((hitX - (int)hitX)) * 64;
+	int	index_Y = ((hitY - (int)hitY)) * 64;
+	while (col->drawStart < col->drawEnd)
 	{
-		if ((drawStart > 0 && drawStart < 900) || (drawEnd > 0 && drawEnd < 900))
+		if ((col->drawStart > 0 && col->drawStart < 900) || (col->drawEnd > 0 && col->drawEnd < 900))
 		{
-			if (side == 2)
-				color2 = get_color_from_xpm(img, index_X, (drawEnd - drawStart) * ratio);
-			if (side == 1)
-				color2 = get_color_from_xpm(img, index_Y, (drawEnd - drawStart) * ratio);
-			my_mlx_pixel_put(data->render, x, drawStart, color2);
+			if (col->side == 0)
+				color2 = get_color_from_xpm(img, index_Y, (col->drawEnd - col->drawStart) * ratio);
+			if (col->side == 1)
+				color2 = get_color_from_xpm(img, index_X, (col->drawEnd - col->drawStart) * ratio);
+			my_mlx_pixel_put(data->render, x, col->drawStart, color2);
 		}
-		drawStart++;
+		col->drawStart++;
 	}
 }
 
@@ -67,54 +65,49 @@ void	render_floor(t_data *data, int drawEnd, int x, int color, int h)
 	}
 }
 
-void	render_line(t_data *data, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side, int h)
+void	render_line(t_data *data, int x, t_img *img, t_col *col)
 {
-	render_ceil(data, drawStart, x);
-	render_walls(data, img, drawStart, drawEnd, x, mapX, mapY, side);
-	render_floor(data, drawEnd, x, data->floor_color, h);
+	// printf("start = %d end = %d\n", col->drawStart, col->drawEnd);
+	render_ceil(data, col->drawStart, x);
+	render_walls(data, img, col->drawStart, col->drawEnd, x, col->mapX, col->mapY, col->side, col);
+	render_floor(data, col->drawEnd, x, data->floor_color, col->h);
 	return ;
 }
 
-void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x, int stepX, int stepY)
+void	render_wall(t_data *data, t_col *col, int x)
 {
-	double	perpWallDist;
-	int		lineHeight;
-	int		h = 900;
-	int		drawStart;
-	int		drawEnd;
-
-	if (side == 0)
-		perpWallDist = (sideDistX - deltaDistX);
+	if (col->side == 0)
+		col->perpWallDist = (col->sideDistX - col->deltaDistX);
 	else
-		perpWallDist = (sideDistY - deltaDistY);
-	if (perpWallDist == 0)
-		perpWallDist = 1;
-	lineHeight = (h / perpWallDist) * 40;
-	drawStart = (-lineHeight >> 1) + (h >> 1);
-    drawEnd = (lineHeight >> 1) + (h >> 1);
-	if (side == 0)
+		col->perpWallDist = (col->sideDistY - col->deltaDistY);
+	if (col->perpWallDist == 0)
+		col->perpWallDist = 1;
+	col->lineHeight = (col->h / col->perpWallDist) * 40;
+	col->drawStart = (-col->lineHeight >> 1) + (col->h >> 1);
+    col->drawEnd = (col->lineHeight >> 1) + (col->h >> 1);
+	if (col->side == 0)
 	{
-		if (stepX == 1)
+		if (col->stepX == 1)
 		{
-			render_line(data, drawStart, drawEnd, x, &data->west, mapX, mapY, 1, h);
+			render_line(data, x, &data->west, col);
 			return ;
 		}
-		else if (stepX == -1)
+		else if (col->stepX == -1)
 		{
-			render_line(data, drawStart, drawEnd, x, &data->east, mapX, mapY, 1, h);
+			render_line(data, x, &data->east, col);
 			return ;
 		}
 	}
 	else
 	{
-		if (stepY == 1)
+		if (col->stepY == 1)
 		{
-			render_line(data, drawStart, drawEnd, x, &data->north, mapX, mapY, 2, h);
+			render_line(data, x, &data->north, col);
 			return ;
 		}
-		else if (stepY == -1)
+		else if (col->stepY == -1)
 		{
-			render_line(data, drawStart, drawEnd, x, &data->south, mapX, mapY, 2, h);
+			render_line(data, x, &data->south, col);
 			return ;
 		}
 	}

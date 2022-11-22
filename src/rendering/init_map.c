@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 14:15:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 15:28:42 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	update(t_data *data)
 		data->render->mlx,
 		data->render->mlx_win,
 		data->render->img, 0, 0);
-	dda(data);
+	dda(data, -1);
 	mlx_put_image_to_window(data->render->mlx,
 		data->render->mlx_win,
 		data->render->img, 0, 0);

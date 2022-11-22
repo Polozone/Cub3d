@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 15:06:21 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:18:20 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,12 @@ struct s_col {
 	int		mapY;
 	double	sideDistX;
 	double	sideDistY;
+	int		drawStart;
+	int		drawEnd;
+	double	perpWallDist;
+	int		lineHeight;
+	int		sizeWall;
+	int		h;
 };
 
 char    *_get_file(t_data *data, int fd);
@@ -228,9 +234,9 @@ int			exit_program_from_escape(t_data *data);
 
 /************RENDER****************/
 
-void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x, int stepX, int stepY);
+void	render_wall(t_data *data, t_col *col, int x);
 void	clear_img(t_data *data);
-void	render_line(t_data *data, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side, int h);
+void	render_line(t_data *data, int x, t_img *img, t_col *col);
 
 /************ROTATE_PLAYER.C****************/
 
@@ -239,7 +245,7 @@ void	rotate_right(t_data *data);
 
 /************DDA****************/
 
-int dda(t_data *data);
+int		dda(t_data *data, int i);
 
 /************INIT_MLX****************/
 
