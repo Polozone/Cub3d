@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/22 14:04:48 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/22 15:06:24 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ MLX		= mlx
 INCLUDES= ${addprefix -I, ${sort ${dir ${HEADER}}}}
 
 SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
+			src/parsing/get_cub_file2.c \
 			src/parsing/parsing_map.c \
 			src/parsing/utils_parsing_map.c \
 			src/parsing/check_colors_params.c \

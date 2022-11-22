@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors_params.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:54:31 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/21 11:20:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 14:29:47 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_bool	check_color_param(char *param, int *i)
 {
 	if (check_letter(param, (*i)) == false
 		&& param[(*i)] && param[(*i)] != ' ')
-			return (false);
+		return (false);
 	(*i) += 1;
 	while (param[(*i)] == ' ' && param[(*i)])
 		(*i)++;

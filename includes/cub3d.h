@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 14:05:49 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 15:06:21 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,6 @@ t_bool	check_color_param(char *param, int *i);
 
 char    	**get_cub_file(t_data *data, char *filename);
 char    	*_get_file(t_data *data, int fd);
-t_bool  	parse_map_params(t_data *data, char *filename);
 t_bool		check_coordinate_param(char *param, int *i);
 t_bool		check_color_param(char *param, int *i);
 
@@ -198,6 +197,8 @@ t_bool		check_charmap(char *line);
 t_bool		is_not_wall(char c);
 t_bool		col_checker(t_data *data, char **map, char *str);
 char		get_first_char_x(char *line);
+t_bool		check_cub(char *file);
+
 
 /*********INIT_PARSING_MAP*************/
 
