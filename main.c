@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 09:54:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 10:00:53 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	loops_and_hooks(t_data *data)
 {
 	mlx_hook(data->render->mlx_win, 2, (1L << 0), deal_key, data);
 	mlx_hook(data->render->mlx_win, 3, (1L << 1), key_release, data);
+	mlx_hook(data->render->mlx_win, 17, 0, exit_program, &data);
 	mlx_loop_hook(data->render->mlx, update, data);
 	mlx_loop(data->render->mlx);
 }
@@ -33,19 +34,16 @@ int	main(int argc, char **argv)
 	data.ceil_color = 0;
 	data.floor_color = 0;
     if (parse_map_params(&data, argv[1]) == false)
-    {
-        free(data.map_line);
-        free_param_struct(&data);
-    }
+		return (1);
 	data.prg = &prg;
 	data.wall = &img;
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
 	{
-		// free
+		gc_free_all(&data.track);
+		free(data.params);
 		return (-1);
 	}
 	init_mlx(&data);
 	loops_and_hooks(&data);
-	free_2d_array(map.map);
     return (0);
 }

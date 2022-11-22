@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/21 10:15:01 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/22 09:45:30 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ HEADER	= includes/cub3d.h \
 			mlx/mlx_int.h \
 			mlx/mlx_opengl.h \
 			mlx/mlx_png.h \
-			libft/libft.h
+			libft/gc.h \
+			libft/libft.h \
 
 LIBFT	= Libft
 MLX		= mlx
@@ -42,7 +43,7 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/rendering/get_collision.c \
 			src/rendering/rendering.c \
 			src/rendering/minimap.c \
-			src/rendering/hitbox.c \
+			
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -52,7 +53,7 @@ LIBFLAGS= -framework OpenGL -framework AppKit
 
 all: maker ${NAME}
 
-%.o : %.c	${HEADER}
+%.o : %.c	${HEADER} Makefile
 			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ 
 
 

@@ -6,12 +6,15 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 13:51:24 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/01 11:22:32 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/22 12:46:42 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
+HEADER	=	gc.h		\
+			libft.h
+			
 SRCS	= ft_strlen.c \
 		ft_bzero.c \
 		ft_isalnum.c \
@@ -48,7 +51,21 @@ SRCS	= ft_strlen.c \
 		ft_putnbr_fd.c \
 		get_next_line.c \
 		get_next_line_utils.c \
-
+		ft_gc/gc_add_mal.c			\
+		ft_gc/gc_lstadd_front.c		\
+		ft_gc/gc_lstdelone.c		\
+		ft_gc/gc_lstnew.c			\
+		ft_gc/gc_free_all.c			\
+		ft_gc/gc_free_malloc.c		\
+		ft_gc/gc_free_malloc_split.c\
+		gc_split.c \
+		gc_strjoin.c \
+		gc_substr.c \
+		gc_strtrim.c \
+		gc_strdup.c \
+		gc_calloc.c \
+		gc_get_next_line.c \
+	
 SRCS_B =	ft_lstnew.c \
 			ft_lstadd_front.c \
 			ft_lstsize.c \
@@ -68,7 +85,7 @@ CFLAGS	= #-Wall -Werror -Wextra
 
 all: ${NAME} bonus
 
-%.o : %.c	libft.h	Makefile
+%.o : %.c	${HEADER}	Makefile 
 			${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}

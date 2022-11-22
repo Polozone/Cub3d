@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 11:36:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 14:03:32 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	params_find_type(char *param)
 	return (0);
 }
 
-char	*get_coord(char *arg)
+char	*get_coord(t_data *data, char *arg)
 {
 	int	i;
 
@@ -85,12 +85,12 @@ char	*get_coord(char *arg)
 	{
 		while (arg[i] && arg[i] == ' ')
 			i++;
-		return (ft_substr(arg, i, 2));
+		return (gc_substr(&data->track, arg, i, 2));
 	}
 	return (0);
 }
 
-char	*get_path(char *arg)
+char	*get_path(t_data *data, char *arg)
 {
 	int	i;
 	int	j;
@@ -103,12 +103,12 @@ char	*get_path(char *arg)
 			i++;
 		while (arg[i + j] && arg[i + j] != ' ')
 			j++;
-		return (ft_substr(arg, i, j));
+		return (gc_substr(&data->track, arg, i, j));
 	}
 	return (0);
 }
 
-char	*get_color(char *arg)
+char	*get_color(t_data *data, char *arg)
 {
 	int	i;
 
@@ -117,12 +117,12 @@ char	*get_color(char *arg)
 	{
 		while (arg[i] && arg[i] == ' ')
 			i++;
-		return (ft_substr(arg, i, 1));
+		return (gc_substr(&data->track, arg, i, 1));
 	}
 	return (0);
 }
 
-char	**get_rgb(char *arg)
+char	**get_rgb(t_data *data, char *arg)
 {
 	int		i;
 	char	**new;
@@ -135,18 +135,13 @@ char	**get_rgb(char *arg)
 	{
 		while (arg[i] && !ft_isalpha(arg[i]))
 			i++;
-		tmp = ft_substr(arg, i + 1, ft_strlen(&arg[i + 1]));
-		new = ft_split(tmp, ',');
-		free(tmp);
+		tmp = gc_substr(&data->track, arg, i + 1, ft_strlen(&arg[i + 1]));
+		new = gc_split(&data->track, tmp, ',');
 		break ;
 	}
 	i = -1;
 	while (new[++i])
-	{
-		tmp = new[i];
-		new[i] = ft_strtrim(new[i], " ");
-		free(tmp);
-	}
+		new[i] = gc_strtrim(&data->track, new[i], " ");
 	return (new);
 }
 
@@ -160,13 +155,13 @@ void	fill_params(t_data *data, char **params)
 		data->params[i].type = 0;
 		if (params_find_type(params[i]) == 1)
 		{
-			data->params[i].coord = get_coord(params[i]);
-			data->params[i].path = get_path(params[i]);
+			data->params[i].coord = get_coord(data, params[i]);
+			data->params[i].path = get_path(data, params[i]);
 		}
 		else if (params_find_type(params[i]) == 2)
 		{
-			data->params[i].color = get_color(params[i]);
-			data->params[i].rgb = get_rgb(params[i]);
+			data->params[i].color = get_color(data, params[i]);
+			data->params[i].rgb = get_rgb(data, params[i]);
 			data->params[i].type = 1;
 		}
 	}
@@ -193,42 +188,55 @@ int	init_params(t_data *data, char **params)
 	return (0);
 }
 
+// void	init_param_checker(t_data *data, char ***params_check)
+// {
+// 	*params_check = {
+// 		"N0",
+// 		"S0",
+// 		"E0",
+// 		"W0",
+// 		"F0",
+// 		"C0"
+// 	};
+// }
+
 t_bool  parse_map_params(t_data *data, char *filename)
 {
 	char    **file;
 	char    **params;
+	int		count;
+	char	**params_check;
 	int		i;
 	int		k;
 
 	i = -1;
 	k = -1;
+	count = 0;
 	file = get_cub_file(data, filename);
 	if (!file)
 		return (false);
-	params = ft_calloc(7, sizeof(char *));
+	params = gc_calloc(7, sizeof(char *), &data->track);
 	while (file[++i])
 	{
 		if (skip_space_params(file[i]))
 		{
-			if (check_param(file[i]) == true)
+			if (check_param(file[i]) == true && count < 6)
 			{
-				params[++k] = ft_strdup(file[i]);
+				params[++k] = gc_strdup(&data->track, file[i]);
+				count++;
 			}
 			else
 			{
-				if (len_2d_array(params) == 6)
+				if (count == 6)
 					break ;
-				printf("error\n");
-				free_2d_array(params);
-				free_2d_array(file);
+				write(2, "error\n", 7);
+				gc_free_all(&data->track);
 				return (false);
 			}
 		}
 	}
-	data->map_line = get_map_from_file(filename);
+	data->map_line = get_map_from_file(data, filename);
 	init_params(data, params);
 	createRGB(data);
-	free_2d_array(params);
-	free_2d_array(file);
 	return (true);
 }

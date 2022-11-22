@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 11:25:28 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 10:39:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ struct s_data
 	t_img			*wall;
 	int				ceil_color;
 	int				floor_color;
+	int				initialized;
+	t_track			*track;
 	
 	t_img	east;
 	t_img	west;
@@ -169,7 +171,7 @@ struct s_rad{
 	int		degree;
 };
 
-char    *_get_file(int fd);
+char    *_get_file(t_data *data, int fd);
 t_bool  parse_map_params(t_data *data, char *filename);
 t_bool	check_coordinate_param(char *param, int *i);
 t_bool	check_color_param(char *param, int *i);
@@ -179,7 +181,7 @@ struct s_prg{
 };
 
 char    	**get_cub_file(t_data *data, char *filename);
-char    	*_get_file(int fd);
+char    	*_get_file(t_data *data, int fd);
 t_bool  	parse_map_params(t_data *data, char *filename);
 t_bool		check_coordinate_param(char *param, int *i);
 t_bool		check_color_param(char *param, int *i);
@@ -274,14 +276,13 @@ void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_
 unsigned long	createRGB(t_data *data);
 
 int				ft_atoi_base(char *str, char *base);
-char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
-
-int		hitbox(t_data *data);
+char			*ft_convert_base(t_data *data, char *nbr, char *base_from, char *base_to);
 
 
 int		init_imgs(t_data *data);
 
 int		open_file(char *filename);
-char	*get_map_from_file(char *filename);
+char	*get_map_from_file(t_data *data, char *filename);
+int		exit_program(t_data *data);
 
 #endif

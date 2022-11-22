@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:47:45 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 09:53:33 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 10:44:29 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void	init_win(t_data *data)
 	data->render->addr = mlx_get_data_addr(data->render->img, &data->render->bits_per_pixel, &data->render->line_length, &data->render->endian);
 }
 
-int	exit_program_from_escape(t_data *data)
+int	exit_program(t_data *data)
 {
+	gc_free_all(&data->track);
 	mlx_destroy_window(data->render->mlx, data->render->mlx_win);
 	exit(0);
 }
@@ -72,7 +73,7 @@ int	key_release(int	key, t_data *data)
 void	player_input(t_data *data)
 {
 	if (data->keytab[KEY_ESC])
-		exit_program_from_escape(data);
+		exit_program(data);
 	if (data->keytab[KEY_W])
 		move_up(data);
 	if (data->keytab[KEY_Q] || data->keytab[KEY_LEFT])
@@ -94,7 +95,6 @@ int	update(t_data *data)
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	print_minimap(data);
 	dda(data);
-	hitbox(data);
 	mlx_put_image_to_window(data->render->mlx, data->render->mlx_win, data->render->img, 0, 0);
 	return (0);
 }

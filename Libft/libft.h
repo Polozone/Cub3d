@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:51:22 by tdeville          #+#    #+#             */
-/*   Updated: 2022/02/22 11:05:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/22 09:35:37 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "gc.h"
 # define BUFFER_SIZE 1
 
 typedef struct s_list

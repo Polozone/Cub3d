@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:54:08 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/01 11:06:36 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 14:11:29 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	free_2d_array(char **array)
 			free(array[i]);
 			i++;
 		}
+		free(array);
 	}
-	free(array);
 	return ;
 }
 
