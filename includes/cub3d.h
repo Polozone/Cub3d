@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 12:18:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 15:32:04 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@
 	# define KEY_PLUS 69
 	# define KEY_MINUS 78
 
-typedef struct	s_data t_data;
 typedef struct	s_params t_params;
+typedef struct	s_img t_img;
+typedef struct	s_data t_data;
+typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_map t_map;
 typedef struct	s_render t_render;
 typedef struct 	s_vector t_vector2_d;
-typedef struct 	s_vector_2f t_vector2_f;
-typedef struct	s_prg t_prg;
-typedef struct	s_img t_img;
+typedef struct	s_col	t_col;
 typedef enum	s_bool t_bool;
 
 enum s_bool
@@ -104,12 +104,11 @@ struct s_img
 struct s_data
 {
 	t_params		*params;
-	char			*map_line;
 	t_map			*maps;
 	t_render		*render;
-	t_prg			*prg;
+	t_col			*col;
+	char			*map_line;
 	int				keytab[200];
-	t_img			*wall;
 	int				ceil_color;
 	int				floor_color;
 	
@@ -123,12 +122,6 @@ struct s_vector_2f
 {
 	double		x;
 	double		y;
-};
-
-struct s_vector
-{
-	int		x;
-	int		y;
 };
 
 struct s_map
@@ -159,14 +152,22 @@ struct s_render {
 	t_vector2_f origin;
 };
 
-struct s_rad{
-	int		center_x;
-	int		center_y;
-	int		last_x;
-	int		last_y;
-	int		rad;
-	int		degree;
+struct s_col {
+	double	delta;
+	double	rayDirX;
+	double	rayDirY;
+	double	deltaDistX;
+	double	deltaDistY;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
 };
+
 
 char    *_get_file(int fd);
 t_bool  parse_map_params(t_data *data, char *filename);
@@ -191,6 +192,28 @@ t_bool		is_charmap(char c);
 t_bool		is_one_player(char	*map);
 int			get_x_player(t_data *data);
 int			get_y_player(t_data *data);
+void		str_to_map(t_data *data, int fd, char *tmp);
+t_bool		check_charmap(char *line);
+t_bool		is_not_wall(char c);
+t_bool		col_checker(t_data *data, char **map, char *str);
+char		get_first_char_x(char *line);
+
+/*********INIT_PARSING_MAP*************/
+
+int	init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv);
+
+/*********IMAGE_HANDLER.C*************/
+
+char	*get_path_imgs(t_data *data, char *orientation);
+void	init_img(t_data *data, t_img *img, char *orientation);
+int		init_imgs(t_data *data);
+void	clear_img(t_data *data);
+
+/*********KEY_HANDLER.C*************/
+
+int	deal_key(int key, t_data *data);
+int	key_release(int key, t_data *data);
+void	player_input(t_data *data);
 
 /************UTILS****************/
 
@@ -199,14 +222,18 @@ int			len_2d_array(char **arr);
 void		free_2d_array(char **array);
 t_bool		is_valid_map(char **map);
 char		*map_to_line(char **arr);
-int print_minimap(t_data *data);
+int			exit_program_from_escape(t_data *data);
 
 /************RENDER****************/
 
-int		_bresenham_c(t_render *data, t_vector2_d start, t_vector2_d end, int color);
 void	render_wall(t_data *data, double sideDistX, double sideDistY, int side, double deltaDistX, double deltaDistY, int mapX, int mapY, int x, int stepX, int stepY);
 void	clear_img(t_data *data);
-void	render_line(t_data *data, int color, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side, int h);
+void	render_line(t_data *data, int drawStart, int drawEnd, int x, t_img *img, int mapX, int mapY, int side, int h);
+
+/************ROTATE_PLAYER.C****************/
+
+void	rotate_left(t_data *data);
+void	rotate_right(t_data *data);
 
 /************DDA****************/
 
@@ -250,11 +277,8 @@ void		draw_circle(t_data *data, t_vector2_d center, int color);
 t_vector2_f	add_vect(t_vector2_f start, t_vector2_f end);
 t_vector2_f sub_vect(t_vector2_f start, t_vector2_f end);
 
-int _bresenham(t_render *data, int x0, int y0, int x1, int y1);
-
-
-
 /************EVENTS****************/
+
 int		update(t_data *data);
 int		key_release(int	key, t_data *data);
 int		deal_key(int key, t_data *data);
@@ -264,17 +288,12 @@ void	rotate_right(t_data *data);
 // THEO
 
 int 	draw_player_1(t_data *data);
-void	draw_rect_color(t_render *render, t_vector2_d top_left, t_vector2_d bottom_right, int color);
 
 unsigned long	createRGB(t_data *data);
 
 int				ft_atoi_base(char *str, char *base);
 char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
-int		hitbox(t_data *data);
-
-
-int		init_imgs(t_data *data);
 
 int		open_file(char *filename);
 char	*get_map_from_file(char *filename);

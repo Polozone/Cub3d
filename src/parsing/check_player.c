@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 09:40:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/16 09:26:34 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/21 13:11:31 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_bool	is_one_player(char	*map)
 	return (true);
 }
 
-int		get_x_player(t_data *data)
+int	get_x_player(t_data *data)
 {
 	int		i;
 	int		j;
@@ -58,7 +58,7 @@ int		get_x_player(t_data *data)
 	return (-1);
 }
 
-int		get_y_player(t_data *data)
+int	get_y_player(t_data *data)
 {
 	int		i;
 	int		j;

@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 12:16:57 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 13:28:16 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,21 @@ int	main(int argc, char **argv)
 	t_map		map;
 	t_render	render;
 	t_img		img;
+	t_col		col;
 
-    if (argc != 2)
+	if (argc != 2)
+	{
 		write(2, "Program need exactly two arguments\n", 35);
+		exit (-1);
+	}
+	data.col = &col;
 	data.ceil_color = 0;
 	data.floor_color = 0;
-    if (parse_map_params(&data, argv[1]) == false)
-    {
-        free(data.map_line);
-        free_param_struct(&data);
-    }
-	data.wall = &img;
+	if (parse_map_params(&data, argv[1]) == false)
+	{
+		free(data.map_line);
+		free_param_struct(&data);
+	}
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
 	{
 		// free
@@ -45,5 +49,5 @@ int	main(int argc, char **argv)
 	init_mlx(&data);
 	loops_and_hooks(&data);
 	free_2d_array(map.map);
-    return (0);
+	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/21 10:15:01 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/22 13:29:28 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,20 +29,22 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/check_colors_params.c \
 			src/parsing/check_coordinate_params.c \
 			src/parsing/row_col_checker.c \
+			src/parsing/row_col_checker2.c \
 			src/parsing/check_player.c \
 			src/parsing/ft_convert_base.c \
 			src/parsing/ft_convert_base2.c \
+			src/parsing/init_parsing_map.c \
 			src/utils/free_utils.c src/utils/string_utils.c src/utils/open_utils.c \
 			src/rendering/init_map.c \
 			src/rendering/move.c \
+			src/rendering/rotate_player.c \
 			src/rendering/init_struct_rendering.c \
-			src/rendering/convert_vect.c \
-			src/rendering/breshenam.c \
+			src/rendering/pixelput.c \
 			src/rendering/utils_math.c \
 			src/rendering/get_collision.c \
 			src/rendering/rendering.c \
-			src/rendering/minimap.c \
-			src/rendering/hitbox.c \
+			src/rendering/image_handler.c \
+			src/rendering/key_handler.c \
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -53,11 +55,11 @@ LIBFLAGS= -framework OpenGL -framework AppKit
 all: maker ${NAME}
 
 %.o : %.c	${HEADER}
-			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ 
+			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@  
 
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
-		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a 
+		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a
 
 maker:
 		${MAKE} -C ${LIBFT}

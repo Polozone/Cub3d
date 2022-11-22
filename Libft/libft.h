@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:51:22 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/21 10:23:56 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/22 10:39:59 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_strcmp(const char *s1, const char *s2);
+char		*ft_strtrim_lastnl(char const *s1, char const *set, size_t cmpt);
 
 // GNL
 char		*get_next_line(int fd);
