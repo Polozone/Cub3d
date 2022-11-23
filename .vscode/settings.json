@@ -13,6 +13,7 @@
 		"unordered_map": "c",
 		"utility": "c",
 		"cstdlib": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"ostream": "c"
 	}
 }

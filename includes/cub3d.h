@@ -6,15 +6,15 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 11:51:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 13:25:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
-# include "mlx.h"
+# include "../Libft/libft.h"
+# include "../mlx/mlx.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
@@ -270,14 +270,16 @@ int				dda(t_data *data, int i);
 void			init_mlx(t_data *data);
 
 /************UTILS****************/
-int				contains_digit(char *str);
-int				len_2d_array(char **arr);
-void			free_2d_array(char **array);
-void			free_param_struct(t_data *data);
-t_bool			row_checker(char *str);
-char			*map_to_line(char **arr);
-void			my_mlx_pixel_put(t_render *render, int x, int y, int color);
-double			get_angle(t_vector2_d start, t_vector2_d end);
+
+int		contains_digit(char *str);
+int		len_2d_array(char **arr);
+void	free_2d_array(char **array);
+void	free_param_struct(t_data *data);
+t_bool	row_checker(char *str, int col);
+char	*map_to_line(char **arr);
+void 	my_mlx_pixel_put(t_render *render, int x, int y, int color);
+double	get_angle(t_vector2_d start, t_vector2_d end);
+void	free_arr_from_end(t_data *data, char **arr, int i);
 
 /************ORIENTATION_CHECKER****************/
 void			orientation_checker_we_ea(t_data *data, int x, t_col *col);

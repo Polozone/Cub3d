@@ -6,83 +6,122 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/23 11:15:21 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/23 13:24:23 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= cub3D
-HEADER	= includes/cub3d.h \
-			mlx/mlx.h \
-			mlx/mlx_new_window.h \
-			mlx/mlx_int.h \
-			mlx/mlx_opengl.h \
-			mlx/mlx_png.h \
-			libft/gc.h \
-			libft/libft.h \
+GREEN	:=	\033[32m
+BLUE	:=	\033[34m
+PINK	:=	\033[35m
+END		:=	\033[0m
 
-LIBFT	= Libft
-MLX		= mlx
-INCLUDES= ${addprefix -I, ${sort ${dir ${HEADER}}}}
+NAME		:= cub3D
 
-SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
-			src/parsing/get_cub_file2.c \
-			src/parsing/parsing_map.c \
-			src/parsing/check_colors_params.c \
-			src/parsing/check_coordinate_params.c \
-			src/parsing/row_col_checker.c \
-			src/parsing/row_col_checker2.c \
-			src/parsing/check_player.c \
-			src/parsing/ft_convert_base.c \
-			src/parsing/ft_convert_base2.c \
-			src/parsing/check_params.c \
-			src/parsing/get_params.c \
-			src/parsing/init_parsing_map.c \
-			src/utils/utils_parsing_map.c \
-			src/utils/utils_parsing2.c \
-			src/utils/free_utils.c src/utils/string_utils.c src/utils/open_utils.c \
-			src/rendering/init_map.c \
-			src/rendering/move.c \
-			src/rendering/rotate_player.c \
-			src/rendering/init_struct_rendering.c \
-			src/rendering/pixelput.c \
-			src/rendering/utils_math.c \
-			src/rendering/get_collision.c \
-			src/rendering/rendering.c \
-			src/rendering/orientation_checker.c \
-			src/rendering/image_handler.c \
-			src/rendering/key_handler.c \
+CC			:= cc
 
-OBJS	= ${SRCS:.c=.o}
+# CFLAGS		:= -Wall -Werror -Wextra -I mlx
+CFLAGS		:= -I mlx
 
-CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra 
-LIBFLAGS= -framework OpenGL -framework AppKit
-FSANIT	= #-fsanitize=address -g3
+RM			:=	rm -f
 
-all: maker ${NAME}
+LIBFT_DIR	:= Libft
 
-%.o : %.c	${HEADER} Makefile
-			${CC} ${INCLUDES} ${CFLAGS} ${FSANIT} -c $< -o $@ 
+MLX_DIR		:= mlx
 
+INCS_DIR	:= includes
 
-${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
-		${CC} ${OBJS} ${LIBFLAGS} ${CFLAGS} ${INCLUDES} ${FSANIT} -o $@ Libft/libft.a mlx/libmlx.a 
+SRCS_DIR	:= src
 
-maker:
-		${MAKE} -C ${LIBFT}
-		${MAKE} bonus -C ${LIBFT}
-		${MAKE}	-C ${MLX}
+OBJS_DIR	:= .objs
+
+INCS_LST	:= 	cub3d.h \
+				../mlx/mlx.h \
+				../mlx/mlx_new_window.h \
+				../mlx/mlx_int.h \
+				../mlx/mlx_opengl.h \
+				../mlx/mlx_png.h \
+
+SRCS_LST		:=	main/main.c \
+					parsing/get_cub_file.c \
+					parsing/parse_map_params.c \
+					parsing/get_cub_file2.c \
+					parsing/parsing_map.c \
+					parsing/check_colors_params.c \
+					parsing/check_coordinate_params.c \
+					parsing/row_col_checker.c \
+					parsing/row_col_checker2.c \
+					parsing/check_player.c \
+					parsing/ft_convert_base.c \
+					parsing/ft_convert_base2.c \
+					parsing/check_params.c \
+					parsing/get_params.c \
+					parsing/init_parsing_map.c \
+					utils/utils_parsing_map.c \
+					utils/utils_parsing2.c \
+					utils/free_utils.c \
+					utils/string_utils.c \
+					utils/open_utils.c \
+					rendering/init_map.c \
+					rendering/move.c \
+					rendering/rotate_player.c \
+					rendering/init_struct_rendering.c \
+					rendering/pixelput.c \
+					rendering/utils_math.c \
+					rendering/get_collision.c \
+					rendering/rendering.c \
+					rendering/orientation_checker.c \
+					rendering/image_handler.c \
+					rendering/key_handler.c \
+
+SUBDIR_LST	:=	main	\
+				parsing \
+				utils	\
+				rendering	\
+
+OBJS_LST	:= ${SRCS_LST:.c=.o}
+
+LIBFT_AR	:= $(LIBFT_DIR)/libft.a
+
+MLX_AR		:= $(MLX_DIR)/libmlx.a
+
+INCS		:=	$(addprefix $(INCS_DIR)/, $(INCS_LST))
+
+SRCS		:=	$(addprefix $(SRCS_DIR)/, $(SRCS_LST))
+
+OBJS		:=	$(addprefix $(OBJS_DIR)/, $(OBJS_LST))
+
+LIBFLAGS	:= -framework OpenGL -framework AppKit
+
+# .SILENT:
+
+all: libft mlx ${NAME}
+
+libft:
+	make -C $(LIBFT_DIR)
+
+mlx:
+	make -C $(MLX_DIR)
+
+${NAME}: ${OBJS} ${LIBFT_AR} ${MLX_AR}
+			${CC} ${OBJS} ${LIBFT_AR} ${MLX_AR} ${LIBFLAGS} -o $@ 
+
+$(OBJS_DIR):
+	mkdir -p $(addprefix $(OBJS_DIR)/, $(SUBDIR_LST))
+
+${OBJS_DIR}/%.o : ${SRCS_DIR}/%.c ${INCS} Makefile | ${OBJS_DIR}
+		${CC} ${CFLAGS} -I ${INCS_DIR} -c $< -o $@
 
 clean:
-		rm -f ${OBJS}
-		${MAKE} clean -C ${LIBFT}
-		${MAKE} clean -C ${MLX}
+		${MAKE} clean -C ${LIBFT_DIR}
+		${MAKE} clean -C ${MLX_DIR}
+		${RM} ${OBJS}
+		rm -rf ${OBJS_DIR}
 
 fclean:	clean
-		rm -f ${NAME}
-		${MAKE} fclean -C ${LIBFT}
-		${MAKE} clean -C ${MLX}
+		${RM} ${LIBFT_AR}
+		${RM} ${MLX_AR}
+		${RM} ${NAME}
 
 re:		fclean all
 
-.PHONY: all clean fclean re maker
+.PHONY: all libft mlx clean fclean re 

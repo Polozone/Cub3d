@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:15:27 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 09:24:55 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 11:12:31 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_color_from_xpm(t_img *img, int x, int y)
 	char	*color;
 
 	if (y == 64)
-		y = 63;
+		y--;
 	color = (img->addr + (x * img->precompute_bits_p_px)
 			+ (y * img->size_line));
 	return (*(unsigned int *)color);
@@ -50,13 +50,13 @@ void	render_walls(t_data *data, t_img *img, int x, t_col *col)
 			|| (col->drawEnd > 0 && col->drawEnd < 900))
 		{
 			if (col->side == 0)
-				color2 = get_color_from_xpm(img, ((hity - (int)hity)) * 64,
-						((col->drawEnd - col->drawStart) << 6)
-						/ (float)col->sizeWall);
+				color2 = get_color_from_xpm(img, ((hity - (int)hity))
+						* img->height, ((col->drawEnd - col->drawStart)
+							* img->height) / (float)col->sizeWall);
 			else
-				color2 = get_color_from_xpm(img, ((hitx - (int)hitx)) * 64,
-						((col->drawEnd - col->drawStart) << 6)
-						/ (float)col->sizeWall);
+				color2 = get_color_from_xpm(img, ((hitx - (int)hitx))
+						* img->width, ((col->drawEnd - col->drawStart)
+							* img->width) / (float)col->sizeWall);
 			my_mlx_pixel_put(data->render, x, col->drawStart, color2);
 		}
 		col->drawStart++;

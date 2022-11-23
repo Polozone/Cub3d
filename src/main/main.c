@@ -6,11 +6,11 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 11:31:14 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 13:26:48 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	loops_and_hooks(t_data *data)
 {

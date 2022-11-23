@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 09:40:27 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 13:27:09 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,10 @@ void	str_to_map(t_data *data, int fd, char *tmp)
 				* (data->maps->longest_line + 1));
 	if (data->maps->map[i] == NULL)
 	{
-		free(data->maps->map);
-		exit (1);
+		data->maps->map[i] = malloc(sizeof(char)
+				* (data->maps->longest_line + 1));
+		if (data->maps->map[i] == NULL)
+			free_arr_from_end(data, data->maps->map, i);
 	}
 	convert_to_map(data, line_clear, data->maps->longest_line, nbr_line);
 	close(fd);
