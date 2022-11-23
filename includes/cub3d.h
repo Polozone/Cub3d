@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 15:06:21 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 09:25:10 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ typedef struct 	s_vector_2f t_vector2_f;
 typedef struct	s_map t_map;
 typedef struct	s_render t_render;
 typedef struct 	s_vector t_vector2_d;
-typedef struct	s_col	t_col;
+typedef struct	s_col t_col;
+typedef struct	s_parse_params t_parse_params;
 typedef enum	s_bool t_bool;
 
 enum s_bool
@@ -118,6 +119,15 @@ struct s_data
 	t_img	west;
 	t_img	north;
 	t_img	south;
+};
+
+struct s_parse_params
+{
+	int		count;
+	int		k;
+	int		i;
+	char	**params;
+	char	**file;
 };
 
 struct s_vector_2f
@@ -291,7 +301,7 @@ void	rotate_right(t_data *data);
 
 int 	draw_player_1(t_data *data);
 
-unsigned long	createRGB(t_data *data);
+unsigned long	create_rgb(t_data *data);
 
 int				ft_atoi_base(char *str, char *base);
 char			*ft_convert_base(t_data *data, char *nbr, char *base_from, char *base_to);
@@ -302,5 +312,11 @@ int		init_imgs(t_data *data);
 int		open_file(char *filename);
 char	*get_map_from_file(t_data *data, char *filename);
 int		exit_program(t_data *data);
+
+void	fill_params(t_data *data, char **params);
+int		skip_space_params(char *param);
+t_bool	check_param(char *param);
+int		params_find_type(char *param);
+char	*dec_to_hex_converter(t_data *data, unsigned long n, int caps);
 
 #endif

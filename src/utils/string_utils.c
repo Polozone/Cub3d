@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:20:17 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/18 13:51:51 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 09:00:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	contains_digit(char *str)
 
 int	len_2d_array(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])

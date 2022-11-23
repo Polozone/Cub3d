@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/22 15:07:55 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/23 09:27:53 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ INCLUDES= ${addprefix -I, ${sort ${dir ${HEADER}}}}
 SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/get_cub_file2.c \
 			src/parsing/parsing_map.c \
-			src/parsing/utils_parsing_map.c \
 			src/parsing/check_colors_params.c \
 			src/parsing/check_coordinate_params.c \
 			src/parsing/row_col_checker.c \
@@ -35,7 +34,11 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/parsing/check_player.c \
 			src/parsing/ft_convert_base.c \
 			src/parsing/ft_convert_base2.c \
+			src/parsing/check_params.c \
+			src/parsing/get_params.c \
 			src/parsing/init_parsing_map.c \
+			src/utils/utils_parsing_map.c \
+			src/utils/utils_parsing2.c \
 			src/utils/free_utils.c src/utils/string_utils.c src/utils/open_utils.c \
 			src/rendering/init_map.c \
 			src/rendering/move.c \

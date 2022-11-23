@@ -6,123 +6,56 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 10:20:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 09:27:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-unsigned long long	int_length(unsigned long long n)
+static void	create_rgb_utils(t_data *data, int i, char *tmp)
 {
-	unsigned long long	i;
+	char	*tmp1;
 
-	i = 0;
-	if (n < 0)
-		n = -n;
-	while (n > 9)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i + 1);
+	tmp1 = NULL;
+	tmp1 = ft_convert_base(data, tmp, "0123456789abcdef", "0123456789");
+	if (!ft_strncmp("F", data->params[i].color,
+			ft_strlen(data->params[i].color)))
+		data->floor_color = ft_atoi(tmp1);
+	else if (!ft_strncmp("C", data->params[i].color,
+			ft_strlen(data->params[i].color)))
+		data->ceil_color = ft_atoi(tmp1);
 }
 
-char	*rev_tab(char *tab)
+unsigned long	create_rgb(t_data *data)
 {
-	size_t	i;
-	size_t	j;
-	char	tmp;
-
-	i = -1;
-	j = ft_strlen(tab) - 1;
-	if (tab[0] == '-')
-		i = 0;
-	while (++i < (ft_strlen(tab) / 2))
-	{
-		tmp = tab[j];
-		tab[j] = tab[i];
-		tab[i] = tmp;
-		j--;
-	}
-	return (tab);
-}
-
-char	*dec_to_hex_converter(t_data *data, unsigned long n, int caps)
-{
-	char					*base;
-	char					*tab;
-	int						i;
-	unsigned long long		num;
-
-	base = "0123456789ABCDEF";
-	if (caps == 0 || caps == 2)
-		base = "0123456789abcdef";
-	i = 0;
-	num = n;
-	if (n < 0)
-		num = -n;
-	tab = gc_calloc(int_length(num) + 1, sizeof(char), &data->track);
-	if (!tab)
-		return (0);
-	while (num >= 16)
-	{
-		tab[i++] = base[num % 16];
-		num /= 16;
-	}
-	tab[i] = base[num % 16];
-	return (rev_tab(tab));
-}
-
-int	int_len(int	n)
-{
-	int i;
-	
-	i = 0;
-	if (n < 0)
-		n = -n;
-	while (n > 9)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i + 1);
-}
-
-unsigned long createRGB(t_data *data)
-{   
 	int				i;
 	int				j;
-	unsigned long	rgb;
 	char			*tmp;
 	char			*tmp1;
 
 	i = 0;
 	tmp = NULL;
-	while (data->params[i].stop == 0)
+	while (data->params[++i].stop == 0)
 	{
 		if (data->params[i].color != NULL)
 		{
 			j = -1;
 			while (++j < 3)
 			{
-				tmp1 = dec_to_hex_converter(data, ft_atoi(data->params[i].rgb[j]), 0);
+				tmp1 = dec_to_hex_converter(data,
+						ft_atoi(data->params[i].rgb[j]), 0);
 				if (!ft_strncmp(tmp1, "0", ft_strlen(tmp1)))
 					tmp1 = gc_strjoin(&data->track, tmp1, "0");
 				tmp = gc_strjoin(&data->track, tmp, tmp1);
 			}
-			tmp1 = ft_convert_base(data, tmp, "0123456789abcdef", "0123456789");
-			if (!ft_strncmp("F", data->params[i].color, ft_strlen(data->params[i].color)))
-				data->floor_color = ft_atoi(tmp1);
-			else if (!ft_strncmp("C", data->params[i].color, ft_strlen(data->params[i].color)))
-				data->ceil_color = ft_atoi(tmp1);
+			create_rgb_utils(data, i, tmp);
 		}
 		tmp = NULL;
-		i++;
 	}
 	return (0);
 }
 
-int		get_longest_line(char *line)
+int	get_longest_line(char *line)
 {
 	int		i;
 	int		longest;
@@ -145,21 +78,13 @@ int		get_longest_line(char *line)
 		if (tmp > longest)
 			longest = tmp;
 		if (i >= max)
-		 	return (longest);
+			return (longest);
 		i++;
 	}
 	return (longest);
 }
 
-int				is_map(char c)
-{
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (true);
-	else
-		return (false);
-}
-
-char		*clear_endmap(char	*line)
+char	*clear_endmap(char	*line)
 {
 	int		sep;
 	int		len;
@@ -182,7 +107,7 @@ char		*clear_endmap(char	*line)
 	return (NULL);
 }
 
-int		count_nl(char *line)
+int	count_nl(char *line)
 {
 	int		i;
 	int		cmpt;

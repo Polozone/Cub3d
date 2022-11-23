@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   row_col_checker2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:22:02 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 14:15:08 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 09:08:46 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	get_last_char_x(char *line)
 
 int	get_first_char_y(char **array, int i, int j)
 {
-	while ((i >= 0) && ((array[i][j] == '0' || array[i][j] == '1' || array[i][j] == 'S' || array[i][j] == 'N' || array[i][j] == 'W' || array[i][j] == 'E')))
+	while ((i >= 0) && ft_strchr("NSEW01", array[i][j]))
 	{
 		i--;
 	}
@@ -43,7 +43,7 @@ int	get_first_char_y(char **array, int i, int j)
 
 int	get_last_char_y(char **array, int i, int j)
 {
-	while (array[i] && (array[i][j] == '0' || array[i][j] == '1' || array[i][j] == 'S' || array[i][j] == 'N' || array[i][j] == 'W' || array[i][j] == 'E'))
+	while (array[i] && ft_strchr("NSEW01", array[i][j]))
 		i++;
 	if (array[--i][j] != '1')
 	{
@@ -68,13 +68,9 @@ t_bool	is_valid_map(char **map)
 			{
 				if (get_last_char_x(map[i]) != '1'
 					|| get_first_char_x(map[i]) != '1')
-				{
 					return (false);
-				}
 				if (get_first_char_y(map, i, j) || get_last_char_y(map, i, j))
-				{
 					return (false);
-				}
 			}
 			j++;
 		}

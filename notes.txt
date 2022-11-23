@@ -3,7 +3,8 @@ A VOIR
     NSEW peut etre en minuscules ?
     Checker tout les relink de Makefile
     Check que chaque param est bien la (NSEW FC) (eventuellement creer un 2d array N0 S0 E0 W0 F0 C0)
-
+    Tester les leaks avec une erreur d'open (directory, file not found, permission denied)
+    Voir commentaire dans parsing_map.c ligne 115 et 121
 
 
     
