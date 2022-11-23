@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 14:29:08 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 09:32:53 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,21 +105,19 @@ void	str_to_map(t_data *data, int fd, char *tmp)
 	i = -1;
 	tmp = data->map_line;
 	data->map_line = ft_strtrim_lastnl(data->map_line, "\n 	", 0);
-	// printf("%s", data->map_line);
 	is_consecutive_nl(data->map_line);
 	line_clear = clear_endmap(data->map_line);
 	data->maps->longest_line = get_longest_line(line_clear);
 	nbr_line = count_nl(line_clear);
 	data->maps->map = malloc(sizeof(char *) * (nbr_line + 1));
 	if (data->maps->map == NULL)
-	{
-		// free and return ;
-	}
+		exit (1);
 	while (++i < nbr_line)
-	data->maps->map[i] = malloc(sizeof(char) * (data->maps->longest_line + 1));
+		data->maps->map[i] = malloc(sizeof(char) * (data->maps->longest_line + 1));
 	if (data->maps->map[i] == NULL)
 	{
-		// free and exit;
+		free(data->maps->map);
+		exit (1);
 	}
 	convert_to_map(data, line_clear, data->maps->longest_line, nbr_line);
 	close(fd);

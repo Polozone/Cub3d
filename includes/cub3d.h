@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 17:18:20 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 09:26:04 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,12 @@ t_bool	row_checker(char *str, int col);
 char	*map_to_line(char **arr);
 void 	my_mlx_pixel_put(t_render *render, int x, int y, int color);
 double	get_angle(t_vector2_d start, t_vector2_d end);
+
+/************ORIENTATION_CHECKER****************/
+
+void	orientation_checker_we_ea(t_data *data, int x, t_col *col);
+void	orientation_checker_no_so(t_data *data, int x, t_col *col);
+void	render_wall(t_data *data, t_col *col, int x);
 
 /************MOVE.C****************/
 
