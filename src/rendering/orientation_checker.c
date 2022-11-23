@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 09:24:57 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 09:27:52 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:42:55 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	orientation_checker_no_so(t_data *data, int x, t_col *col)
 void	render_wall(t_data *data, t_col *col, int x)
 {
 	if (col->side == 0)
-		col->perpWallDist = (col->sideDistX - col->deltaDistX);
+		col->perpwalldist = (col->sidedistx - col->deltadistx);
 	else
-		col->perpWallDist = (col->sideDistY - col->deltaDistY);
-	if (col->perpWallDist == 0)
-		col->perpWallDist = 1;
-	col->lineHeight = (col->h / col->perpWallDist) * 40;
-	col->drawStart = (-col->lineHeight >> 1) + (col->h >> 1);
-	col->drawEnd = (col->lineHeight >> 1) + (col->h >> 1);
+		col->perpwalldist = (col->sidedisty - col->deltadisty);
+	if (col->perpwalldist == 0)
+		col->perpwalldist = 1;
+	col->lineheight = (col->h / col->perpwalldist) * 40;
+	col->drawStart = (-col->lineheight >> 1) + (col->h >> 1);
+	col->drawEnd = (col->lineheight >> 1) + (col->h >> 1);
 	if (col->side == 0)
 		orientation_checker_we_ea(data, x, col);
 	else

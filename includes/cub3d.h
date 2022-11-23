@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 13:25:44 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 13:40:29 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,20 +168,20 @@ struct s_col {
 	double	delta;
 	double	rayDirX;
 	double	rayDirY;
-	double	deltaDistX;
-	double	deltaDistY;
+	double	deltadistx;
+	double	deltadisty;
 	int		stepX;
 	int		stepY;
 	int		hit;
 	int		side;
 	int		mapX;
 	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
+	double	sidedistx;
+	double	sidedisty;
 	int		drawStart;
 	int		drawEnd;
-	double	perpWallDist;
-	int		lineHeight;
+	double	perpwalldist;
+	int		lineheight;
 	int		sizeWall;
 	int		h;
 };
@@ -224,7 +224,7 @@ t_bool			is_charmap(char c);
 t_bool			is_one_player(char	*map);
 int				get_x_player(t_data *data);
 int				get_y_player(t_data *data);
-void			str_to_map(t_data *data, int fd, char *tmp);
+void			str_to_map(t_data *data, int fd, char *tmp, int i);
 t_bool			check_charmap(char *line);
 t_bool			is_not_wall(char c);
 t_bool			col_checker(t_data *data, char **map, char *str);

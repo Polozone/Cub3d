@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:38 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 13:26:58 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 13:37:39 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int	init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 	tmp = NULL;
 	fd = open(argv, O_RDWR);
 	if (fd < 0)
-	{
 		write(2, "Error opening map\n", 18);
-		return (-1);
-	}
+	if (fd < 0)
+		exit (1);
 	init_data_parse(data, render, map);
 	if (check_charmap(data->map_line) == false
 		|| is_one_player(data->map_line) == false)
@@ -40,7 +39,7 @@ int	init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 		gc_free_all(&data->track);
 		exit (-1);
 	}
-	str_to_map(data, fd, tmp);
+	str_to_map(data, fd, tmp, -1);
 	if (is_valid_map(data->maps->map) == false)
 	{
 		free_2d_array(data->maps->map);

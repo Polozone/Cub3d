@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:34:41 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 09:27:10 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:40:10 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ static void	loop_get_coll(t_data *data, t_col *col, int i)
 {
 	while (col->hit == 0)
 	{
-		if (col->sideDistX < col->sideDistY)
+		if (col->sidedistx < col->sidedisty)
 		{
-			col->sideDistX += col->deltaDistX;
+			col->sidedistx += col->deltadistx;
 			col->mapX += col->stepX;
 			col->side = 0;
 		}
 		else
 		{
-			col->sideDistY += col->deltaDistY;
+			col->sidedisty += col->deltadisty;
 			col->mapY += col->stepY;
 			col->side = 1;
 		}
@@ -50,26 +50,26 @@ static void	init_loop_get_coll(t_data *data, t_col *col, int i)
 	if (col->rayDirX < 0)
 	{
 		col->stepX = -1;
-		col->sideDistX = (data->render->origin.x - col->mapX)
-			* col->deltaDistX;
+		col->sidedistx = (data->render->origin.x - col->mapX)
+			* col->deltadistx;
 	}
 	else
 	{
 		col->stepX = 1;
-		col->sideDistX = (col->mapX + 1.0 - data->render->origin.x)
-			* col->deltaDistX;
+		col->sidedistx = (col->mapX + 1.0 - data->render->origin.x)
+			* col->deltadistx;
 	}
 	if (col->rayDirY < 0)
 	{
 		col->stepY = -1;
-		col->sideDistY = (data->render->origin.y - col->mapY)
-			* col->deltaDistY;
+		col->sidedisty = (data->render->origin.y - col->mapY)
+			* col->deltadisty;
 	}
 	else
 	{
 		col->stepY = 1;
-		col->sideDistY = (col->mapY + 1.0 - data->render->origin.y)
-			* col->deltaDistY;
+		col->sidedisty = (col->mapY + 1.0 - data->render->origin.y)
+			* col->deltadisty;
 	}
 	loop_get_coll(data, col, i);
 }
@@ -84,13 +84,13 @@ int	dda(t_data *data, int i)
 		data->col->rayDirY = data->render->dir.y
 			+ (data->render->plane.y * data->col->delta);
 		if (data->col->rayDirX == 0)
-			data->col->deltaDistX = 1e30;
+			data->col->deltadistx = 1e30;
 		else
-			data->col->deltaDistX = ft_abs(1.0f / data->col->rayDirX);
+			data->col->deltadistx = ft_abs(1.0f / data->col->rayDirX);
 		if (data->col->rayDirY == 0)
-			data->col->deltaDistY = 1e30;
+			data->col->deltadisty = 1e30;
 		else
-			data->col->deltaDistY = ft_abs(1.0f / data->col->rayDirY);
+			data->col->deltadisty = ft_abs(1.0f / data->col->rayDirY);
 		data->col->hit = 0;
 		data->col->mapX = (int)data->render->origin.x;
 		data->col->mapY = (int)data->render->origin.y;

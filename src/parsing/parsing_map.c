@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:20:13 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 13:27:09 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 13:37:32 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,11 @@ static t_bool	is_consecutive_nl(char *map)
 	return (true);
 }
 
-void	str_to_map(t_data *data, int fd, char *tmp)
+void	str_to_map(t_data *data, int fd, char *tmp, int i)
 {
 	int		nbr_line;
 	char	*line_clear;
-	int		i;
 
-	i = -1;
 	tmp = data->map_line;
 	data->map_line = ft_strtrim_lastnl(data->map_line, "\n 	", 0);
 	is_consecutive_nl(data->map_line);
