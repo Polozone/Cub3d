@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/23 09:37:55 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/23 11:35:19 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,22 +54,21 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 
 OBJS	= ${SRCS:.c=.o}
 
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Werror -Wextra 
 LIBFLAGS= -framework OpenGL -framework AppKit
 
 all: maker ${NAME}
 
 %.o : %.c	${HEADER} Makefile
-			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ 
-
+			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
 		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a 
 
 maker:
 		${MAKE} -C ${LIBFT}
-		${MAKE}	-C ${MLX}
+		${MAKE} -C ${MLX}
 
 clean:
 		rm -f ${OBJS}

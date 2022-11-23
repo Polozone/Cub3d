@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:06:20 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 14:11:49 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 10:22:57 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	init_img(t_data *data, t_img *img, char *orientation)
 	char	*path_name;
 
 	path_name_tmp = get_path_imgs(data, orientation);
-	if (path_name_tmp == NULL)
-		write(2, "bite\n", 5);
 	path_name = ft_strjoin(path_name_tmp, ".xpm");
 	img->img = mlx_xpm_file_to_image(data->render->mlx,
 			path_name,

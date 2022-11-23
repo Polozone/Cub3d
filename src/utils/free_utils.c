@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:54:08 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 14:11:29 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 09:56:58 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ void	free_2d_array(char **array)
 		free(array);
 	}
 	return ;
+}
+
+void	free_arr_from_end(t_data *data, char **arr, int i)
+{
+	while (i >= 0)
+	{
+		free(arr[i]);
+		i--;
+	}
+	free(arr);
+	exit (1);
 }
 
 void	free_param_struct(t_data *data)
