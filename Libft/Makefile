@@ -3,17 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 13:51:24 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/22 14:06:12 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/23 13:20:51 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
-HEADER	=	gc.h		\
-			libft.h
+# HEADER	=	gc.h		\
+# 			libft.h
+
+HEADER	=	libft.h
 			
 SRCS	= ft_strlen.c \
 		ft_bzero.c \
@@ -66,34 +68,43 @@ SRCS	= ft_strlen.c \
 		gc_strdup.c \
 		gc_calloc.c \
 		gc_get_next_line.c \
-	
-SRCS_B =	ft_lstnew.c \
-			ft_lstadd_front.c \
-			ft_lstsize.c \
-			ft_lstlast.c \
-			ft_lstadd_back.c \
-			ft_lstdelone.c \
-			ft_lstclear.c \
-			ft_lstiter.c \
-			ft_lstmap.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c \
+
+# SRCS_B =	ft_lstnew.c \
+# 			ft_lstadd_front.c \
+# 			ft_lstsize.c \
+# 			ft_lstlast.c \
+# 			ft_lstadd_back.c \
+# 			ft_lstdelone.c \
+# 			ft_lstclear.c \
+# 			ft_lstiter.c \
+# 			ft_lstmap.c \
 
 OBJS	= ${SRCS:.c=.o}
-OBJS_B	= ${SRCS_B:.c=.o}
-
+# OBJS_B	= ${SRCS_B:.c=.o}
 
 CC		= gcc
 CFLAGS	= #-Wall -Werror -Wextra
 
-all: ${NAME} bonus
+# all: ${NAME} bonus
+all: ${NAME}
 
-%.o : %.c	${HEADER}	Makefile 
-			${CC} ${CFLAGS} -c $< -o $@
+%.o : %.c	${HEADER} Makefile 
+			${CC} ${CFLAGS} -I ${HEADER} -c $< -o $@
 
 ${NAME}:	${OBJS}
 	ar rcs ${NAME} ${OBJS}
 
-bonus:	${OBJS} ${OBJS_B}
-	ar rcs ${NAME} ${OBJS} ${OBJS_B}
+# bonus:	${OBJS} ${OBJS_B}
+# 	ar rcs ${NAME} ${OBJS} ${OBJS_B}
 
 
 clean:

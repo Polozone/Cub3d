@@ -6,15 +6,15 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 10:23:15 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 12:36:12 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# include "libft.h"
-# include "mlx.h"
+# include "../Libft/libft.h"
+# include "../mlx/mlx.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>

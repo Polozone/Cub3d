@@ -6,15 +6,21 @@
 #    By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/23 12:08:33 by pmulin           ###   ########.fr        #
+#    Updated: 2022/11/23 12:43:28 by pmulin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+GREEN	:=	\033[32m
+BLUE	:=	\033[34m
+PINK	:=	\033[35m
+END		:=	\033[0m
 
 NAME		:= cub3D
 
 CC			:= cc
 
-CFLAGS		:= -Wall -Werror -Wextra -I mlx
+# CFLAGS		:= -Wall -Werror -Wextra -I mlx
+CFLAGS		:= -I mlx
 
 RM			:=	rm -f
 
@@ -35,7 +41,7 @@ INCS_LST	:= 	cub3d.h \
 				../mlx/mlx_opengl.h \
 				../mlx/mlx_png.h \
 
-SRCS_LST		:=	main.c \
+SRCS_LST		:=	main/main.c \
 					parsing/get_cub_file.c \
 					parsing/parse_map_params.c \
 					parsing/get_cub_file2.c \
@@ -67,15 +73,16 @@ SRCS_LST		:=	main.c \
 					rendering/image_handler.c \
 					rendering/key_handler.c \
 
-SUBDIR_LST	:=	parsing \
-				utils \
-				rendering \
+SUBDIR_LST	:=	main	\
+				parsing \
+				utils	\
+				rendering	\
 
-OBJS		:= ${SRCS:.c=.o}
+OBJS_LST	:= ${SRCS_LST:.c=.o}
 
 LIBFT_AR	:= $(LIBFT_DIR)/libft.a
 
-MLX_AR		:= $(MLX_DIR)/mlx.a
+MLX_AR		:= $(MLX_DIR)/libmlx.a
 
 INCS		:=	$(addprefix $(INCS_DIR)/, $(INCS_LST))
 
@@ -85,26 +92,30 @@ OBJS		:=	$(addprefix $(OBJS_DIR)/, $(OBJS_LST))
 
 LIBFLAGS	:= -framework OpenGL -framework AppKit
 
-all: maker ${NAME}
+# .SILENT:
 
-maker:
-		${MAKE} -C ${LIBFT_DIR}
-		${MAKE} -C ${MLX_DIR}
+all: libft mlx ${NAME}
 
-${NAME}: ${OBJS} ${LIBFT_AR} ${MLX_AR} 
-		${CC} ${OBJS} ${LIBFT_AR} ${MLX_AR} ${LIBFLAGS} -o $@ 
+libft:
+	make -C $(LIBFT_DIR)
+
+mlx:
+	make -C $(MLX_DIR)
+
+${NAME}: ${OBJS} ${LIBFT_AR} ${MLX_AR}
+			${CC} ${OBJS} ${LIBFT_AR} ${MLX_AR} ${LIBFLAGS} -o $@ 
 
 $(OBJS_DIR):
-	mkdir -p $(addprefix $(OBJS_DIR)/, $(SUBDIRS_LST))
+	mkdir -p $(addprefix $(OBJS_DIR)/, $(SUBDIR_LST))
 
-${OBJS_DIR}/%.o : ${SRCS_DIR}/%. ${INCS} Makefile | ${OBJS_DIR}
-		${CC} ${INCLUDES} ${FSANIT} -c $< -o $@
+${OBJS_DIR}/%.o : ${SRCS_DIR}/%.c ${INCS} Makefile | ${OBJS_DIR}
+		${CC} ${CFLAGS} -I ${INCS_DIR} -c $< -o $@
 
 clean:
 		${MAKE} clean -C ${LIBFT_DIR}
 		${MAKE} clean -C ${MLX_DIR}
 		${RM} ${OBJS}
-		${RM} ${OBJS_DIR}
+		rm -rf ${OBJS_DIR}
 
 fclean:	clean
 		${RM} ${LIBFT_AR}
@@ -113,4 +124,4 @@ fclean:	clean
 
 re:		fclean all
 
-.PHONY: all maker clean fclean re 
+.PHONY: all libft mlx clean fclean re 

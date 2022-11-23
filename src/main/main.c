@@ -6,11 +6,11 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 10:11:25 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:22:14 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	loops_and_hooks(t_data *data)
 {
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	data.col = &col;
 	data.ceil_color = 0;
 	data.floor_color = 0;
-    if (parse_map_params(&data, argv[1]) == false)
+	if (parse_map_params(&data, argv[1]) == false)
 		return (1);
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
 	{
@@ -47,5 +47,5 @@ int	main(int argc, char **argv)
 	}
 	init_mlx(&data);
 	loops_and_hooks(&data);
-    return (0);
+	return (0);
 }
