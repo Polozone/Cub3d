@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/23 09:37:55 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/23 11:15:21 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,18 +57,20 @@ OBJS	= ${SRCS:.c=.o}
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra 
 LIBFLAGS= -framework OpenGL -framework AppKit
+FSANIT	= #-fsanitize=address -g3
 
 all: maker ${NAME}
 
 %.o : %.c	${HEADER} Makefile
-			${CC} ${INCLUDES} ${FSANIT} -c $< -o $@ 
+			${CC} ${INCLUDES} ${CFLAGS} ${FSANIT} -c $< -o $@ 
 
 
 ${NAME}: ${OBJS} libft/libft.a mlx/libmlx.a 
-		${CC} ${OBJS} ${LIBFLAGS} ${INCLUDES} -o $@ Libft/libft.a mlx/libmlx.a 
+		${CC} ${OBJS} ${LIBFLAGS} ${CFLAGS} ${INCLUDES} ${FSANIT} -o $@ Libft/libft.a mlx/libmlx.a 
 
 maker:
 		${MAKE} -C ${LIBFT}
+		${MAKE} bonus -C ${LIBFT}
 		${MAKE}	-C ${MLX}
 
 clean:

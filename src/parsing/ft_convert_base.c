@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:46:01 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 14:41:35 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 10:53:00 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	ft_int_lenght(int nb, char *base_to)
 	int	len;
 
 	len = 0;
-	while (nb > ft_strlen(base_to))
+	while ((size_t)nb > ft_strlen(base_to))
 	{
-		nb = nb / ft_strlen(base_to);
+		nb = (size_t)nb / ft_strlen(base_to);
 		len++;
 	}
 	len++;
@@ -96,7 +96,7 @@ static char	*ft_putnbr_base_ts(t_data *data, int nb, char *base_to, int i)
 	else
 		tab = gc_calloc(sizeof(char),
 				ft_int_lenght(nb, base_to) + 1, &data->track);
-	while (n >= ft_strlen(base_to))
+	while ((size_t)n >= ft_strlen(base_to))
 	{	
 		tab[i++] = base_to[n % ft_strlen(base_to)];
 		n = n / ft_strlen(base_to);

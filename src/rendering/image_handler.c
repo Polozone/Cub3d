@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:06:20 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/21 14:11:49 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 10:32:19 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ char	*get_path_imgs(t_data *data, char *orientation)
 	i = 0;
 	while (data->params[i].stop != 1)
 	{
-		if (ft_strcmp(data->params[i].coord, orientation) == 0)
+		if (data->params[i].type == 0)
 		{
-			return (data->params[i].path);
+			if (ft_strcmp(data->params[i].coord, orientation) == 0)
+			{
+				return (data->params[i].path);
+			}
 		}
 		i++;
 	}

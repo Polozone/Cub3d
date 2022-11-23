@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_parsing_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:38 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/22 16:18:18 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 10:54:03 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv)
 	int		fd;
 	char	*tmp;
 
+	tmp = NULL;
 	fd = open(argv, O_RDWR);
 	if (fd < 0)
 	{

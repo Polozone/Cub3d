@@ -6,14 +6,14 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 13:51:24 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/22 14:06:12 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/23 11:06:43 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
 HEADER	=	gc.h		\
-			libft.h
+			libft.h		\
 			
 SRCS	= ft_strlen.c \
 		ft_bzero.c \
@@ -82,11 +82,11 @@ OBJS_B	= ${SRCS_B:.c=.o}
 
 
 CC		= gcc
-CFLAGS	= #-Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 
-all: ${NAME} bonus
+all: ${NAME}
 
-%.o : %.c	${HEADER}	Makefile 
+%.o : %.c	${HEADER} Makefile 
 			${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}

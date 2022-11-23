@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:26:52 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 15:45:13 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 11:31:14 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 	t_data		data;
 	t_map		map;
 	t_render	render;
-	t_img		img;
 	t_col		col;
 
 	if (argc != 2)
@@ -37,7 +36,7 @@ int	main(int argc, char **argv)
 	data.col = &col;
 	data.ceil_color = 0;
 	data.floor_color = 0;
-    if (parse_map_params(&data, argv[1]) == false)
+	if (parse_map_params(&data, argv[1]) == false)
 		return (1);
 	if (init_parsing_map(&data, &map, &render, argv[1]) == -1)
 	{
@@ -47,5 +46,5 @@ int	main(int argc, char **argv)
 	}
 	init_mlx(&data);
 	loops_and_hooks(&data);
-    return (0);
+	return (0);
 }

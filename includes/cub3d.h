@@ -6,12 +6,12 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 09:38:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 11:42:55 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "libft.h"
 # include "mlx.h"
@@ -28,50 +28,50 @@
 # define HEIGHT 900
 
 // Keycode
-	# define MOUSE_UP 4
-	# define MOUSE_DOWN 5
-	# define MOUSE_WHELL 3
-	# define LMB 1
-	# define RMB 2
-	# define KEY_C 8
-	# define KEY_V 9
-	# define KEY_B 11
-	# define KEY_Q 12
-	# define KEY_R 15
-	# define KEY_O 31
-	# define KEY_P 35
-	# define KEY_TAB 48
-	# define KEY_ESC 53
-	# define KEY_UP 126
-	# define KEY_DOWN 125
-	# define KEY_LEFT 123
-	# define KEY_RIGHT 124
-	# define KEY_W 13
-	# define KEY_E 14
-	# define KEY_S 1
-	# define KEY_A 0
-	# define KEY_D 2
-	# define KEY_1 83
-	# define KEY_2 84
-	# define KEY_4 86
-	# define KEY_5 87
-	# define KEY_7 89
-	# define KEY_8 91
-	# define KEY_PLUS 69
-	# define KEY_MINUS 78
+# define MOUSE_UP 4
+# define MOUSE_DOWN 5
+# define MOUSE_WHELL 3
+# define LMB 1
+# define RMB 2
+# define KEY_C 8
+# define KEY_V 9
+# define KEY_B 11
+# define KEY_Q 12
+# define KEY_R 15
+# define KEY_O 31
+# define KEY_P 35
+# define KEY_TAB 48
+# define KEY_ESC 53
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_W 13
+# define KEY_E 14
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_1 83
+# define KEY_2 84
+# define KEY_4 86
+# define KEY_5 87
+# define KEY_7 89
+# define KEY_8 91
+# define KEY_PLUS 69
+# define KEY_MINUS 78
 
-typedef struct	s_params t_params;
-typedef struct	s_img t_img;
-typedef struct	s_data t_data;
-typedef struct 	s_vector_2f t_vector2_f;
-typedef struct	s_map t_map;
-typedef struct	s_render t_render;
-typedef struct 	s_vector t_vector2_d;
-typedef struct	s_col t_col;
-typedef struct	s_parse_params t_parse_params;
-typedef enum	s_bool t_bool;
+typedef struct s_params			t_params;
+typedef struct s_img			t_img;
+typedef struct s_data			t_data;
+typedef struct s_vector_2f		t_vector2_f;
+typedef struct s_map			t_map;
+typedef struct s_render			t_render;
+typedef struct s_vector			t_vector2_d;
+typedef struct s_col			t_col;
+typedef struct s_parse_params	t_parse_params;
+typedef enum e_bool				t_bool;
 
-enum s_bool
+enum e_bool
 {
 	false,
 	true
@@ -82,12 +82,12 @@ enum s_bool
 struct s_params
 {
 	int				type;
-	char			*coord; // orientation of the texture
-	char			*path; // path of the texture
-	char			*color; // F or C
-	char			**rgb; // rgc color of the "color" variable
+	char			*coord;
+	char			*path;
+	char			*color;
+	char			**rgb;
 	int				hexa_rgb;
-	int				stop; // to while
+	int				stop;
 };
 
 struct s_img
@@ -114,11 +114,11 @@ struct s_data
 	int				floor_color;
 	int				initialized;
 	t_track			*track;
-	
-	t_img	east;
-	t_img	west;
-	t_img	north;
-	t_img	south;
+
+	t_img			east;
+	t_img			west;
+	t_img			north;
+	t_img			south;
 };
 
 struct s_parse_params
@@ -144,24 +144,24 @@ struct s_map
 };
 
 struct s_render {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		precompute_bits_p_px;
-	int		nbr_px;
-	int		line_length;
-	int		endian;
-	int		angle;
-	int		cell_size;
-	void	*walls;
-	int		width;
-	int		height;
-	
-	t_vector2_f dir;
-	t_vector2_f plane;
-	t_vector2_f origin;
+	void		*mlx;
+	void		*mlx_win;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			precompute_bits_p_px;
+	int			nbr_px;
+	int			line_length;
+	int			endian;
+	int			angle;
+	int			cell_size;
+	void		*walls;
+	int			width;
+	int			height;
+
+	t_vector2_f	dir;
+	t_vector2_f	plane;
+	t_vector2_f	origin;
 };
 
 struct s_col {
@@ -267,7 +267,7 @@ int		contains_digit(char *str);
 int		len_2d_array(char **arr);
 void	free_2d_array(char **array);
 void	free_param_struct(t_data *data);
-t_bool	row_checker(char *str, int col);
+t_bool	row_checker(char *str);
 char	*map_to_line(char **arr);
 void 	my_mlx_pixel_put(t_render *render, int x, int y, int color);
 double	get_angle(t_vector2_d start, t_vector2_d end);

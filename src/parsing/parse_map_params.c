@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:31:55 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 09:21:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 10:13:53 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parse_params_utils(t_data *data, t_parse_params *p)
 	{
 		if (p->count == 6)
 			return (1);
-		write(2, "error\n", 7);
+		write(2, "error\n", 6);
 		gc_free_all(&data->track);
 		return (-1);
 	}

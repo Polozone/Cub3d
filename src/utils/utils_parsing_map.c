@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:07:23 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 09:27:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 10:43:33 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ unsigned long	create_rgb(t_data *data)
 	char			*tmp;
 	char			*tmp1;
 
-	i = 0;
+	i = -1;
 	tmp = NULL;
 	while (data->params[++i].stop == 0)
 	{

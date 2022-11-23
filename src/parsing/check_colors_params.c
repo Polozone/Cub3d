@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors_params.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:54:31 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 14:29:47 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 10:17:47 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ static t_bool	check_color(char *param, int *i)
 	{
 		if (ft_strchr(colors[j], ' '))
 			trim_spaces(&colors[j]);
-		if (!contains_digit(colors[j]))
+		if (!contains_digit(colors[j])
+			|| ft_atoi(colors[j]) < 0 || ft_atoi(colors[j]) > 255)
+		{
+			free_2d_array(colors);
 			return (false);
-		if (ft_atoi(colors[j]) < 0 || ft_atoi(colors[j]) > 255)
-			return (false);
+		}
 		j++;
 	}
 	(*i) = ft_strlen(param);

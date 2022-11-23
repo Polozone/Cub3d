@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:51:22 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/22 14:05:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 11:23:23 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_join
+{
+	int		i;
+	int		j;
+	char	*str;
+}			t_join;
 
 int			ft_tolower(int c);
 int			ft_toupper(int c);
