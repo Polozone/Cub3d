@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 09:24:57 by pmulin            #+#    #+#             */
-/*   Updated: 2022/11/23 13:42:55 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:47:48 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	orientation_checker_we_ea(t_data *data, int x, t_col *col)
 {
-	if (col->stepX == 1)
+	if (col->stepx == 1)
 	{
 		render_line(data, x, &data->west, col);
 		return ;
 	}
-	else if (col->stepX == -1)
+	else if (col->stepx == -1)
 	{
 		render_line(data, x, &data->east, col);
 		return ;
@@ -28,12 +28,12 @@ void	orientation_checker_we_ea(t_data *data, int x, t_col *col)
 
 void	orientation_checker_no_so(t_data *data, int x, t_col *col)
 {
-	if (col->stepY == 1)
+	if (col->stepy == 1)
 	{
 		render_line(data, x, &data->north, col);
 		return ;
 	}
-	else if (col->stepY == -1)
+	else if (col->stepy == -1)
 	{
 		render_line(data, x, &data->south, col);
 		return ;
@@ -49,8 +49,8 @@ void	render_wall(t_data *data, t_col *col, int x)
 	if (col->perpwalldist == 0)
 		col->perpwalldist = 1;
 	col->lineheight = (col->h / col->perpwalldist) * 40;
-	col->drawStart = (-col->lineheight >> 1) + (col->h >> 1);
-	col->drawEnd = (col->lineheight >> 1) + (col->h >> 1);
+	col->drawstart = (-col->lineheight >> 1) + (col->h >> 1);
+	col->drawend = (col->lineheight >> 1) + (col->h >> 1);
 	if (col->side == 0)
 		orientation_checker_we_ea(data, x, col);
 	else

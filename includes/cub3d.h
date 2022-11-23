@@ -6,7 +6,7 @@
 /*   By: pmulin <pmulin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 13:44:04 by pmulin           ###   ########.fr       */
+/*   Updated: 2022/11/23 13:55:32 by pmulin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,37 +166,33 @@ struct s_render {
 
 struct s_col {
 	double	delta;
-	double	rayDirX;
-	double	rayDirY;
+	double	raydirx;
+	double	raydiry;
 	double	deltadistx;
 	double	deltadisty;
-	int		stepX;
-	int		stepY;
+	int		stepx;
+	int		stepy;
 	int		hit;
 	int		side;
-	int		mapX;
-	int		mapY;
+	int		mapx;
+	int		mapy;
 	double	sidedistx;
 	double	sidedisty;
-	int		drawStart;
-	int		drawEnd;
+	int		drawstart;
+	int		drawend;
 	double	perpwalldist;
 	int		lineheight;
-	int		sizeWall;
+	int		sizewall;
 	int		h;
 };
 
-char			*_get_file(t_data *data, int fd);
 t_bool			parse_map_params(t_data *data, char *filename);
-t_bool			check_coordinate_param(char *param, int *i);
-t_bool			check_color_param(char *param, int *i);
 
 char			**get_cub_file(t_data *data, char *filename);
 char			*_get_file(t_data *data, int fd);
 t_bool			check_coordinate_param(char *param, int *i);
 t_bool			check_color_param(char *param, int *i);
 
-int				draw_player_1(t_data *data);
 unsigned long	create_rgb(t_data *data);
 int				ft_atoi_base(char *str, char *base);
 char			*ft_convert_base(t_data *data,
@@ -238,13 +234,14 @@ int				init_parsing_map(t_data *data,
 /*********IMAGE_HANDLER.C*************/
 char			*get_path_imgs(t_data *data, char *orientation);
 void			init_img(t_data *data, t_img *img, char *orientation);
-int				init_imgs(t_data *data);
 void			clear_img(t_data *data);
+void			render_line(t_data *data, int x, t_img *img, t_col *col);
 
 /*********KEY_HANDLER.C*************/
 int				deal_key(int key, t_data *data);
 int				key_release(int key, t_data *data);
 void			player_input(t_data *data);
+int				update(t_data *data);
 
 /************UTILS****************/
 int				contains_digit(char *str);
@@ -252,12 +249,10 @@ int				len_2d_array(char **arr);
 void			free_2d_array(char **array);
 t_bool			is_valid_map(char **map);
 char			*map_to_line(char **arr);
-int				exit_program_from_escape(t_data *data);
-
-/************RENDER****************/
-void			render_wall(t_data *data, t_col *col, int x);
-void			clear_img(t_data *data);
-void			render_line(t_data *data, int x, t_img *img, t_col *col);
+void			my_mlx_pixel_put(t_render *render, int x, int y, int color);
+void			free_arr_from_end(t_data *data, char **arr, int i);
+void			free_param_struct(t_data *data);
+t_bool			row_checker(char *str);
 
 /************ROTATE_PLAYER.C****************/
 void			rotate_left(t_data *data);
@@ -268,18 +263,6 @@ int				dda(t_data *data, int i);
 
 /************INIT_MLX****************/
 void			init_mlx(t_data *data);
-
-/************UTILS****************/
-
-int				contains_digit(char *str);
-int				len_2d_array(char **arr);
-void			free_2d_array(char **array);
-void			free_param_struct(t_data *data);
-t_bool			row_checker(char *str);
-char			*map_to_line(char **arr);
-void 			my_mlx_pixel_put(t_render *render, int x, int y, int color);
-double			get_angle(t_vector2_d start, t_vector2_d end);
-void			free_arr_from_end(t_data *data, char **arr, int i);
 
 /************ORIENTATION_CHECKER****************/
 void			orientation_checker_we_ea(t_data *data, int x, t_col *col);
@@ -301,13 +284,5 @@ void			init_data(t_data *data);
 
 /************UTILS_MATH.C****************/
 float			ft_abs(float number);
-void			draw_circle(t_data *data, t_vector2_d center, int color);
-t_vector2_f		add_vect(t_vector2_f start, t_vector2_f end);
-t_vector2_f		sub_vect(t_vector2_f start, t_vector2_f end);
-
-/************EVENTS****************/
-int				update(t_data *data);
-int				key_release(int key, t_data *data);
-int				deal_key(int key, t_data *data);
 
 #endif
