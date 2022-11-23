@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 11:52:14 by tdeville          #+#    #+#              #
-#    Updated: 2022/11/23 09:27:53 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/11/23 09:37:55 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS	=	main.c src/parsing/get_cub_file.c src/parsing/parse_map_params.c \
 			src/rendering/utils_math.c \
 			src/rendering/get_collision.c \
 			src/rendering/rendering.c \
+			src/rendering/orientation_checker.c \
 			src/rendering/image_handler.c \
 			src/rendering/key_handler.c \
 
