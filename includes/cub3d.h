@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:42:34 by tdeville          #+#    #+#             */
-/*   Updated: 2022/11/23 11:42:55 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/11/23 11:51:11 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,149 +186,126 @@ struct s_col {
 	int		h;
 };
 
-char    *_get_file(t_data *data, int fd);
-t_bool  parse_map_params(t_data *data, char *filename);
-t_bool	check_coordinate_param(char *param, int *i);
-t_bool	check_color_param(char *param, int *i);
+char			*_get_file(t_data *data, int fd);
+t_bool			parse_map_params(t_data *data, char *filename);
+t_bool			check_coordinate_param(char *param, int *i);
+t_bool			check_color_param(char *param, int *i);
 
-char    	**get_cub_file(t_data *data, char *filename);
-char    	*_get_file(t_data *data, int fd);
-t_bool		check_coordinate_param(char *param, int *i);
-t_bool		check_color_param(char *param, int *i);
+char			**get_cub_file(t_data *data, char *filename);
+char			*_get_file(t_data *data, int fd);
+t_bool			check_coordinate_param(char *param, int *i);
+t_bool			check_color_param(char *param, int *i);
+
+int				draw_player_1(t_data *data);
+unsigned long	create_rgb(t_data *data);
+int				ft_atoi_base(char *str, char *base);
+char			*ft_convert_base(t_data *data,
+					char *nbr, char *base_from, char *base_to);
+int				init_imgs(t_data *data);
+int				open_file(char *filename);
+char			*get_map_from_file(t_data *data, char *filename);
+int				exit_program(t_data *data);
+void			fill_params(t_data *data, char **params);
+int				skip_space_params(char *param);
+t_bool			check_param(char *param);
+int				params_find_type(char *param);
+char			*dec_to_hex_converter(t_data *data, unsigned long n, int caps);
 
 /*********PARSING_MAP*************/
 
-int			init_parsing_map(t_data *data, t_map *map, t_render	*render, char *argv);
-int			get_longest_line(char *line);
-int			is_map(char c);
-char		*clear_endmap(char	*line);
-int			count_nl(char *line);
-void		print_map(char **map);
-t_bool		is_charmap(char c);
-t_bool		is_one_player(char	*map);
-int			get_x_player(t_data *data);
-int			get_y_player(t_data *data);
-void		str_to_map(t_data *data, int fd, char *tmp);
-t_bool		check_charmap(char *line);
-t_bool		is_not_wall(char c);
-t_bool		col_checker(t_data *data, char **map, char *str);
-char		get_first_char_x(char *line);
-t_bool		check_cub(char *file);
-
+int				init_parsing_map(t_data *data,
+					t_map *map, t_render	*render, char *argv);
+int				get_longest_line(char *line);
+int				is_map(char c);
+char			*clear_endmap(char	*line);
+int				count_nl(char *line);
+void			print_map(char **map);
+t_bool			is_charmap(char c);
+t_bool			is_one_player(char	*map);
+int				get_x_player(t_data *data);
+int				get_y_player(t_data *data);
+void			str_to_map(t_data *data, int fd, char *tmp);
+t_bool			check_charmap(char *line);
+t_bool			is_not_wall(char c);
+t_bool			col_checker(t_data *data, char **map, char *str);
+char			get_first_char_x(char *line);
+t_bool			check_cub(char *file);
 
 /*********INIT_PARSING_MAP*************/
-
-int	init_parsing_map(t_data *data, t_map *map, t_render *render, char *argv);
+int				init_parsing_map(t_data *data,
+					t_map *map, t_render *render, char *argv);
 
 /*********IMAGE_HANDLER.C*************/
-
-char	*get_path_imgs(t_data *data, char *orientation);
-void	init_img(t_data *data, t_img *img, char *orientation);
-int		init_imgs(t_data *data);
-void	clear_img(t_data *data);
+char			*get_path_imgs(t_data *data, char *orientation);
+void			init_img(t_data *data, t_img *img, char *orientation);
+int				init_imgs(t_data *data);
+void			clear_img(t_data *data);
 
 /*********KEY_HANDLER.C*************/
-
-int	deal_key(int key, t_data *data);
-int	key_release(int key, t_data *data);
-void	player_input(t_data *data);
+int				deal_key(int key, t_data *data);
+int				key_release(int key, t_data *data);
+void			player_input(t_data *data);
 
 /************UTILS****************/
-
-int			contains_digit(char *str);
-int			len_2d_array(char **arr);
-void		free_2d_array(char **array);
-t_bool		is_valid_map(char **map);
-char		*map_to_line(char **arr);
-int			exit_program_from_escape(t_data *data);
+int				contains_digit(char *str);
+int				len_2d_array(char **arr);
+void			free_2d_array(char **array);
+t_bool			is_valid_map(char **map);
+char			*map_to_line(char **arr);
+int				exit_program_from_escape(t_data *data);
 
 /************RENDER****************/
-
-void	render_wall(t_data *data, t_col *col, int x);
-void	clear_img(t_data *data);
-void	render_line(t_data *data, int x, t_img *img, t_col *col);
+void			render_wall(t_data *data, t_col *col, int x);
+void			clear_img(t_data *data);
+void			render_line(t_data *data, int x, t_img *img, t_col *col);
 
 /************ROTATE_PLAYER.C****************/
-
-void	rotate_left(t_data *data);
-void	rotate_right(t_data *data);
+void			rotate_left(t_data *data);
+void			rotate_right(t_data *data);
 
 /************DDA****************/
-
-int		dda(t_data *data, int i);
+int				dda(t_data *data, int i);
 
 /************INIT_MLX****************/
-
-void	init_mlx(t_data *data);
+void			init_mlx(t_data *data);
 
 /************UTILS****************/
-
-int		contains_digit(char *str);
-int		len_2d_array(char **arr);
-void	free_2d_array(char **array);
-void	free_param_struct(t_data *data);
-t_bool	row_checker(char *str);
-char	*map_to_line(char **arr);
-void 	my_mlx_pixel_put(t_render *render, int x, int y, int color);
-double	get_angle(t_vector2_d start, t_vector2_d end);
+int				contains_digit(char *str);
+int				len_2d_array(char **arr);
+void			free_2d_array(char **array);
+void			free_param_struct(t_data *data);
+t_bool			row_checker(char *str);
+char			*map_to_line(char **arr);
+void			my_mlx_pixel_put(t_render *render, int x, int y, int color);
+double			get_angle(t_vector2_d start, t_vector2_d end);
 
 /************ORIENTATION_CHECKER****************/
-
-void	orientation_checker_we_ea(t_data *data, int x, t_col *col);
-void	orientation_checker_no_so(t_data *data, int x, t_col *col);
-void	render_wall(t_data *data, t_col *col, int x);
+void			orientation_checker_we_ea(t_data *data, int x, t_col *col);
+void			orientation_checker_no_so(t_data *data, int x, t_col *col);
+void			render_wall(t_data *data, t_col *col, int x);
 
 /************MOVE.C****************/
-
-int		move_left(t_data *data);
-int		move_right(t_data *data);
-int		move_up(t_data *data);
-int		move_down(t_data *data);
+int				move_left(t_data *data);
+int				move_right(t_data *data);
+int				move_up(t_data *data);
+int				move_down(t_data *data);
 
 /************CONVERT_VECT.C****************/
-
-t_vector2_f vect_d_to_f(t_vector2_d vect);
-t_vector2_d vect_f_to_d(t_vector2_f vect);
+t_vector2_f		vect_d_to_f(t_vector2_d vect);
+t_vector2_d		vect_f_to_d(t_vector2_f vect);
 
 /************INIT_STRUCT_RENDERING.C****************/
-
-void	init_data(t_data *data);
+void			init_data(t_data *data);
 
 /************UTILS_MATH.C****************/
-
-float		ft_abs(float number);
-void		draw_circle(t_data *data, t_vector2_d center, int color);
-t_vector2_f	add_vect(t_vector2_f start, t_vector2_f end);
-t_vector2_f sub_vect(t_vector2_f start, t_vector2_f end);
+float			ft_abs(float number);
+void			draw_circle(t_data *data, t_vector2_d center, int color);
+t_vector2_f		add_vect(t_vector2_f start, t_vector2_f end);
+t_vector2_f		sub_vect(t_vector2_f start, t_vector2_f end);
 
 /************EVENTS****************/
-
-int		update(t_data *data);
-int		key_release(int	key, t_data *data);
-int		deal_key(int key, t_data *data);
-
-void	rotate_left(t_data *data);
-void	rotate_right(t_data *data);
-// THEO
-
-int 	draw_player_1(t_data *data);
-
-unsigned long	create_rgb(t_data *data);
-
-int				ft_atoi_base(char *str, char *base);
-char			*ft_convert_base(t_data *data, char *nbr, char *base_from, char *base_to);
-
-
-int		init_imgs(t_data *data);
-
-int		open_file(char *filename);
-char	*get_map_from_file(t_data *data, char *filename);
-int		exit_program(t_data *data);
-
-void	fill_params(t_data *data, char **params);
-int		skip_space_params(char *param);
-t_bool	check_param(char *param);
-int		params_find_type(char *param);
-char	*dec_to_hex_converter(t_data *data, unsigned long n, int caps);
+int				update(t_data *data);
+int				key_release(int key, t_data *data);
+int				deal_key(int key, t_data *data);
 
 #endif
